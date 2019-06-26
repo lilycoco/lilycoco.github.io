@@ -1,0 +1,64 @@
+{
+  "name": "my_page",
+  "version": "0.1.0",
+  "description": "lilycoco's homepage",
+  "repository": "https://github.com/lilycoco/my_app",
+  "private": true,
+  "scripts": {
+    "dev": "next",
+    "build": "next build",
+    "start": "next start",
+    "precommit": "lint-staged"
+  },
+  "dependencies": {
+    "@types/jest": "24.0.15",
+    "@types/node": "12.0.10",
+    "@types/react": "16.8.22",
+    "@types/react-dom": "16.8.4",
+    "@zeit/next-typescript": "^1.1.1",
+    "babel-cli": "^6.26.0",
+    "next": "^8.1.0",
+    "react": "^16.8.6",
+    "react-dom": "^16.8.6",
+    "react-scripts": "3.0.1"
+  },
+  "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^1.11.0",
+    "@typescript-eslint/parser": "^1.11.0",
+    "awesome-typescript-loader": "^5.2.1",
+    "eslint": "^6.0.1",
+    "eslint-config-prettier": "^5.0.0",
+    "eslint-plugin-prettier": "^3.1.0",
+    "husky": "^2.5.0",
+    "lint-staged": "^8.2.1",
+    "prettier": "^1.18.2",
+    "source-map-loader": "^0.2.4",
+    "typescript": "^3.5.2",
+    "webpack": "4.29.6"
+  },
+  "lint-staged": {
+    "*.{ts,tsx}": [
+      "eslint --fix",
+      "git add"
+    ],
+    "*.{css,json,yml,md}": [
+      "prettier --write",
+      "git add"
+    ]
+  },
+  "eslintConfig": {
+    "extends": "react-app"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  }
+}
