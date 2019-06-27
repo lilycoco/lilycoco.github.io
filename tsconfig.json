@@ -2,7 +2,7 @@
   "compilerOptions": {
     /* Basic Options */
     "outDir": "./build",
-    "target": "es5",
+    "target": "esnext",
     "incremental": true,
     "removeComments": false,
     "downlevelIteration": true,
@@ -27,6 +27,7 @@
     /* Additional Checks */
     "noUnusedLocals": true,
     "noUnusedParameters": true,
+    "noFallthroughCasesInSwitch": true,
 
     /* Module Resolution Options */
     "esModuleInterop": true,
@@ -38,5 +39,6 @@
     /* Source Map Options */
     "sourceMap": true
   },
-  "include": ["src"]
+  "exclude": ["node_modules"],
+  "include": ["**/*.ts", "**/*.tsx"]
 }
