@@ -6,6 +6,6 @@ export const MainContent = styled.main`
 `
 
 export const MainTitle = styled.h2`
-  color: #e65100;
+  color: #778899;
   font-size: 16px;
 `

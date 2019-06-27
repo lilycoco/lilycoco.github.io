@@ -1,17 +1,17 @@
 import styled from 'styled-components'
 import Link from 'next/link'
 
-const HeadComponent = styled.header`
+const HeaderWrapper = styled.header`
   align-items: center;
   display: flex;
-  height: 50px;
+  height: 80px;
   padding: 0 24px;
-  background-color: #5a170e;
+  background-color: #dda0dd;
 `
-
-const Title = styled.h1`
-  font-size: 20px;
-  color: #e65100;
+const Title = styled.a`
+  font-size: 30px;
+  color: #fff;
+  cursor: pointer;
 `
 
 const Nav = styled.nav`
@@ -22,6 +22,7 @@ const Nav = styled.nav`
 const Ul = styled.ul`
   align-items: center;
   display: flex;
+  list-style: none;
 `
 
 const Li = styled.li`
@@ -29,23 +30,20 @@ const Li = styled.li`
 `
 
 const LinkText = styled.span`
-  color: #ffd202;
+  color: #fff;
   cursor: pointer;
-  font-size: 12px;
-  padding: 4px 8px;
+  font-size: 20px;
+  padding: 0px 18px;
   user-select: none;
 `
 
 export const Header = () => (
-  <HeadComponent>
-    <Title>Lilycoco</Title>
+  <HeaderWrapper>
+    <Link href='/'>
+      <Title>Lilycoco</Title>
+    </Link>
     <Nav>
       <Ul>
-        <Li>
-          <Link href='/'>
-            <LinkText>Home</LinkText>
-          </Link>
-        </Li>
         <Li>
           <Link href='/blog'>
             <LinkText>My Blog</LinkText>
@@ -53,5 +51,5 @@ export const Header = () => (
         </Li>
       </Ul>
     </Nav>
-  </HeadComponent>
+  </HeaderWrapper>
 )

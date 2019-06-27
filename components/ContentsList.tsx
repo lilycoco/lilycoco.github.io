@@ -20,7 +20,7 @@ const Img = styled.img`
 `
 
 const Name = styled.span`
-  color: #e65100;
+  color: #778899;
   font-size: 14px;
 `
 
