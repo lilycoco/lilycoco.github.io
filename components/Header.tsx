@@ -1,5 +1,6 @@
 import styled from 'styled-components'
 import Link from 'next/link'
+import Button from 'react-bootstrap/Button'
 
 const HeaderWrapper = styled.header`
   align-items: center;
@@ -8,7 +9,7 @@ const HeaderWrapper = styled.header`
   padding: 0 24px;
   background-color: #dda0dd;
 `
-const Title = styled.a`
+const Title = styled.h1`
   font-size: 30px;
   color: #fff;
   cursor: pointer;
@@ -48,6 +49,9 @@ export const Header = () => (
           <Link href='/blog'>
             <LinkText>My Blog</LinkText>
           </Link>
+        </Li>
+        <Li>
+          <Button variant='secondary'>Click</Button>
         </Li>
       </Ul>
     </Nav>
