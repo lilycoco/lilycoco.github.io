@@ -3,5 +3,13 @@
     "next/babel",
     "@zeit/next-typescript/babel"
   ],
-  "plugins": []
+  "plugins": [
+    [
+      "module-resolver", {
+        "alias": {
+          "~": "./src"
+        }
+      }
+    ]
+  ]
 }

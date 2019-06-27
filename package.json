@@ -6,8 +6,9 @@
   "private": true,
   "scripts": {
     "dev": "next",
+    "start": "next start",
     "build": "next build",
-    "start": "next start"
+    "export": "npm run build && next export"
   },
   "dependencies": {
     "@types/jest": "24.0.15",
@@ -16,6 +17,7 @@
     "@types/react-dom": "16.8.4",
     "@zeit/next-typescript": "^1.1.1",
     "babel-cli": "^6.26.0",
+    "babel-plugin-module-resolver": "^3.2.0",
     "next": "^8.1.0",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
@@ -67,5 +69,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "_moduleAliases": {
+    "~": "src"
   }
 }
