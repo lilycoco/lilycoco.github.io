@@ -7,8 +7,7 @@
   "scripts": {
     "dev": "next",
     "build": "next build",
-    "start": "next start",
-    "precommit": "lint-staged"
+    "start": "next start"
   },
   "dependencies": {
     "@types/jest": "24.0.15",
@@ -50,6 +49,11 @@
   },
   "eslintConfig": {
     "extends": "react-app"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
   },
   "browserslist": {
     "production": [
