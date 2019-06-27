@@ -2,7 +2,7 @@
   "name": "my_page",
   "version": "0.1.0",
   "description": "lilycoco's homepage",
-  "repository": "https://github.com/lilycoco/my_app",
+  "repository": "https://github.com/lilycoco/lilycoco.github.io",
   "private": true,
   "scripts": {
     "dev": "next",
@@ -20,11 +20,13 @@
     "next": "^8.1.0",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
-    "react-scripts": "3.0.1"
+    "react-scripts": "3.0.1",
+    "styled-components": "^4.3.2"
   },
   "devDependencies": {
+    "@types/next": "^8.0.5",
     "@typescript-eslint/eslint-plugin": "^1.11.0",
-    "@typescript-eslint/parser": "^1.11.0",
+    "@typescript-eslint/parser": "canary",
     "awesome-typescript-loader": "^5.2.1",
     "eslint": "^6.0.1",
     "eslint-config-prettier": "^5.0.0",

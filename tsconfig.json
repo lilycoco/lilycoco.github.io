@@ -12,12 +12,7 @@
     "isolatedModules": true,
     "jsx": "preserve",
     "noEmit": true,
-    "lib": [
-      "es2019",
-      "dom",
-      "dom.iterable",
-      "esnext"
-    ],
+    "lib": ["es2019", "dom", "dom.iterable", "esnext"],
 
     /* Strict Type-Checking Options */
     "strict": true,
@@ -27,7 +22,11 @@
     "strictBindCallApply": true,
     "strictPropertyInitialization": true,
     "noImplicitThis": true,
-    "alwaysStrict": true ,
+    "alwaysStrict": true,
+
+    /* Additional Checks */
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
 
     /* Module Resolution Options */
     "esModuleInterop": true,
@@ -39,7 +38,5 @@
     /* Source Map Options */
     "sourceMap": true
   },
-  "include": [
-    "src"
-  ]
+  "include": ["src"]
 }

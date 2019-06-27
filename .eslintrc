@@ -17,12 +17,6 @@
     "project": "./tsconfig.json"
   },
   "rules": {
-    "prettier/prettier": [
-      "error",
-      {
-        "singleQuote": true,
-        "trailingComma": "es5"
-      }
-    ]
+    "@typescript-eslint/explicit-member-accessibility": "off"
   }
 }
