@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 import Link from 'next/link'
 
-const Header = styled.header`
+const HeadComponent = styled.header`
   align-items: center;
   display: flex;
   height: 50px;
@@ -36,22 +36,22 @@ const LinkText = styled.span`
   user-select: none;
 `
 
-export const GlobalNav = () => (
-  <Header>
-    <Title>Curry World</Title>
+export const Header = () => (
+  <HeadComponent>
+    <Title>Lilycoco</Title>
     <Nav>
       <Ul>
         <Li>
           <Link href='/'>
-            <LinkText>印度</LinkText>
+            <LinkText>Home</LinkText>
           </Link>
         </Li>
         <Li>
-          <Link href='/thai'>
-            <LinkText>泰國</LinkText>
+          <Link href='/blog'>
+            <LinkText>My Blog</LinkText>
           </Link>
         </Li>
       </Ul>
     </Nav>
-  </Header>
+  </HeadComponent>
 )

@@ -1,12 +1,10 @@
+// サーバーサイド側とクライアント側、両方で実行される
+// https://nextjs.org/docs/#custom-app
+
 import React from 'react'
 import App, { Container } from 'next/app'
-import { GlobalNav } from '../components/GlobalNav'
+import { Header } from '../components/Header'
 
-/* 
-  カスタム共通処理
-  ※ サーバーサイド側とクライアント側、両方で実行される
-  ※ https://nextjs.org/docs/#custom-app
-*/
 export default class MyApp extends App {
   static async getInitialProps(ctx: any) {
     let pageProps = {}
@@ -23,7 +21,7 @@ export default class MyApp extends App {
 
     return (
       <Container>
-        <GlobalNav />
+        <Header />
         <Component {...pageProps} />
       </Container>
     )

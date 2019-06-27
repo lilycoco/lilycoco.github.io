@@ -1,23 +1,15 @@
 import * as React from 'react'
-import { ECurry } from '../models/Curry'
-import { CurryList } from '../components/CurryList'
+import { Content } from '../models/Content'
+import { ContentsList } from '../components/ContentsList'
 import { MainContent, MainTitle } from '../styled/Page'
-// import fetch from "isomorphic-unfetch";
 
 interface EProps {
-  curries: ECurry[]
+  contents: Content[]
 }
 export default class BlogsPage extends React.Component<EProps> {
   static async getInitialProps() {
     try {
-      // const response = await fetch('https://??????.???/curries/thailand');
-      // const json = await response.json();
-
-      // 通常では上記のように外部APIサーバーに対してデータを取得しにいきますが、今回は簡潔に済ますために
-      // static async getInitialProps() で直接データを returnすることにします。
-      // 下記のデータがAPIサーバーから返ってくると想定して、進めます。
-
-      const json: ECurry[] = [
+      const json: Content[] = [
         {
           id: 7,
           name: 'Curry7',
@@ -36,12 +28,12 @@ export default class BlogsPage extends React.Component<EProps> {
       ]
 
       return {
-        curries: json,
+        contents: json,
       }
     } catch (e) {
       console.error(e)
       return {
-        curries: [],
+        contents: [],
       }
     }
   }
@@ -50,7 +42,7 @@ export default class BlogsPage extends React.Component<EProps> {
     return (
       <MainContent>
         <MainTitle>Thailand Curries</MainTitle>
-        <CurryList curries={this.props.curries} />
+        <ContentsList contents={this.props.contents} />
       </MainContent>
     )
   }

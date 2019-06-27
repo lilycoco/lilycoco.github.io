@@ -9,7 +9,7 @@
     "allowJs": true,
     "skipLibCheck": true,
     "module": "esnext",
-    "isolatedModules": false,
+    "isolatedModules": true,
     "jsx": "preserve",
     "noEmit": true,
     "lib": ["es2019", "dom", "dom.iterable", "esnext"],
@@ -39,6 +39,6 @@
     /* Source Map Options */
     "sourceMap": true
   },
-  "exclude": ["node_modules", "next.config.js"],
+  "exclude": ["node_modules", "next.config.js", "webpack.config.js", "out", ".next"],
   "include": ["**/*.ts", "**/*.tsx"]
 }
