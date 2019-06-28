@@ -14,7 +14,7 @@ const nav = {
 }
 
 export const Header = () => (
-  <Navbar bg='light' expand='lg' variant='light'>
+  <Navbar bg='light' fixed='top' expand='lg' variant='light'>
     <Navbar.Brand href='/home'>Lilycoco</Navbar.Brand>
     <Navbar.Toggle aria-controls='basic-navbar-nav' />
     <Navbar.Collapse id='basic-navbar-nav'>
@@ -35,7 +35,7 @@ export const Header = () => (
           <NavDropdown.Item href='https://lilycoco-spaceinvaders.netlify.com/' target='_blank'>
             Space Invaders
           </NavDropdown.Item>
-          <NavDropdown.Item href='https://lilicoco-tetris.netlify.com/' target='_blank'>
+          <NavDropdown.Item href='https://lilycoco-tetris.netlify.com/' target='_blank'>
             Tetris
           </NavDropdown.Item>
           <NavDropdown.Divider />

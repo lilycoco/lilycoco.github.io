@@ -1,11 +1,11 @@
 import * as React from 'react'
-import { Content } from '../models/Content'
-import { ContentsList } from '../components/ContentsList'
+import { Tron } from '../models/Tron'
+import { Products } from '../components/Products'
 import { MainTitle, MainContent } from '../styled/Page'
 // import fetch from "isomorphic-unfetch";
 
 interface EProps {
-  contents: Content[]
+  contents: Tron[]
 }
 
 export default class BlogsPage extends React.Component<EProps> {
@@ -14,21 +14,33 @@ export default class BlogsPage extends React.Component<EProps> {
       // const response = await fetch('https://pixabay.com/ja');
       // const json = await response.json();
 
-      const json: Content[] = [
+      const json: Tron[] = [
         {
           id: 1,
-          name: 'Contents 1',
-          imageUrl: '/static/img.jpg',
+          right: true,
+          name: 'Space Invader',
+          text:
+            'I created this with jQuery and Campus over about a week, 1 months later since when I started learning programming',
+          url: 'https://lilycoco-spaceinvaders.netlify.com/',
+          imageUrl: '/static/invaders.png',
         },
         {
           id: 2,
-          name: 'Contents 2',
-          imageUrl: '/static/img.jpg',
+          right: false,
+          name: 'Tetris',
+          text:
+            'Probably you know this is the Tetris which is the game used to be very popular in the world. I also created this with jQuery only',
+          url: 'https://lilycoco-tetris.netlify.com/',
+          imageUrl: '/static/tetris.png',
         },
         {
           id: 3,
-          name: 'Contents 3',
-          imageUrl: '/static/img.jpg',
+          right: true,
+          name: 'Mugen Sweeper',
+          text:
+            'This is unusual minesweeper which has unlimited field and enable to play with multiple players, developed with Node.js, Nuxt.js and Vue.js',
+          url: 'https://mugensweeper.netlify.com/',
+          imageUrl: '/static/mugen.png',
         },
       ]
 
@@ -46,8 +58,8 @@ export default class BlogsPage extends React.Component<EProps> {
   public render() {
     return (
       <MainContent>
-        <MainTitle>Welcome to my page!</MainTitle>
-        <ContentsList contents={this.props.contents} />
+        <MainTitle>What's New?</MainTitle>
+        <Products contents={this.props.contents} />
       </MainContent>
     )
   }
