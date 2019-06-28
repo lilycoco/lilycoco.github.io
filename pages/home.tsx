@@ -18,9 +18,9 @@ export default class BlogsPage extends React.Component<EProps> {
         {
           id: 1,
           right: true,
-          name: 'Space Invader',
+          name: 'Space Invaders',
           text:
-            'I created this with jQuery and Campus over about a week, 1 months later since when I started learning programming',
+            'I developed this with jQuery and Campus over about a week, 1 months later since when I started learning programming',
           url: 'https://lilycoco-spaceinvaders.netlify.com/',
           imageUrl: '/static/invaders.png',
         },
