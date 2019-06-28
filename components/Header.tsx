@@ -1,59 +1,44 @@
 import styled from 'styled-components'
-import Link from 'next/link'
-import Button from 'react-bootstrap/Button'
+import { Navbar, Nav, NavDropdown, Form, FormControl, Button } from 'react-bootstrap'
 
-const HeaderWrapper = styled.header`
-  align-items: center;
-  display: flex;
-  height: 80px;
-  padding: 0 24px;
-  background-color: #dda0dd;
-`
-const Title = styled.h1`
-  font-size: 30px;
-  color: #fff;
-  cursor: pointer;
-`
-
-const Nav = styled.nav`
-  flex-grow: 1;
-  padding: 0 40px;
-`
-
-const Ul = styled.ul`
-  align-items: center;
-  display: flex;
-  list-style: none;
-`
-
-const Li = styled.li`
-  margin: 0 8px;
-`
-
-const LinkText = styled.span`
-  color: #fff;
-  cursor: pointer;
-  font-size: 20px;
-  padding: 0px 18px;
-  user-select: none;
+const Img = styled.img`
+  display: block;
+  width: 20px;
+  height: 20px;
+  object-fit: cover;
 `
 
 export const Header = () => (
-  <HeaderWrapper>
-    <Link href='/'>
-      <Title>Lilycoco</Title>
-    </Link>
-    <Nav>
-      <Ul>
-        <Li>
-          <Link href='/blog'>
-            <LinkText>My Blog</LinkText>
-          </Link>
-        </Li>
-        <Li>
-          <Button variant='secondary'>Click</Button>
-        </Li>
-      </Ul>
-    </Nav>
-  </HeaderWrapper>
+  <Navbar bg='light' expand='lg' variant='light'>
+    <Navbar.Brand href='/'>Lilycoco</Navbar.Brand>
+    <Navbar.Toggle aria-controls='basic-navbar-nav' />
+    <Navbar.Collapse id='basic-navbar-nav'>
+      <Nav className='mr-auto'>
+        <Nav.Link href='https://github.com/lilycoco' target='_blank'>
+          <Img src='/static/github.png' />
+        </Nav.Link>
+        <Nav.Link href='https://twitter.com/llccr27' target='_blank'>
+          <Img src='/static/twitter.png' />
+        </Nav.Link>
+        <Nav.Link href='/'>Home</Nav.Link>
+        <Nav.Link href='/blog'>Blog</Nav.Link>
+        <NavDropdown title='Play Game' id='basic-nav-dropdown'>
+          <NavDropdown.Item href='https://lilycoco-spaceinvaders.netlify.com/' target='_blank'>
+            Space Invaders
+          </NavDropdown.Item>
+          <NavDropdown.Item href='https://lilicoco-tetris.netlify.com/' target='_blank'>
+            Tetris
+          </NavDropdown.Item>
+          <NavDropdown.Divider />
+          <NavDropdown.Item href='https://mugensweeper.netlify.com/' target='_blank'>
+            Mugen Sweeper
+          </NavDropdown.Item>
+        </NavDropdown>
+      </Nav>
+      <Form inline>
+        <FormControl type='text' placeholder='Search' className='mr-sm-2' />
+        <Button variant='outline-success'>Search</Button>
+      </Form>
+    </Navbar.Collapse>
+  </Navbar>
 )
