@@ -49,7 +49,9 @@ export default class BlogsPage extends React.Component<EProps> {
         <Opacity>
           <TytleWrapper>
             <Title>Welcome to my page!</Title>
-            <Text>This is Lilycoco's website who is React.js, Node.js, TypeScript diveloper.</Text>
+            <Text>
+              This is Lilycoco's website, who is React.js, Node.js and TypeScript developer.
+            </Text>
             <p>
               <Button variant='primary' href='/home'>
                 Explore More
