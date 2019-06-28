@@ -13,17 +13,17 @@ export default class BlogsPage extends React.Component<EProps> {
       const json: Content[] = [
         {
           id: 7,
-          name: 'Curry7',
+          name: 'Blog 1',
           imageUrl: '/static/img.jpg',
         },
         {
           id: 8,
-          name: 'Curry8',
+          name: 'Blog 2',
           imageUrl: '/static/img.jpg',
         },
         {
           id: 9,
-          name: 'Curry9',
+          name: 'Blog 3',
           imageUrl: '/static/img.jpg',
         },
       ]
