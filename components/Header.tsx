@@ -10,7 +10,6 @@ const Img = styled.img`
 
 const nav = {
   display: 'flex',
-  justifyContent: 'center',
   alignItems: 'center',
 }
 
