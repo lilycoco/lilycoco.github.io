@@ -1,54 +1,63 @@
 import * as React from 'react'
-import { Content } from '../models/Content'
-import { ContentsList } from '../components/ContentsList'
-import { MainTitle, MainContent } from '../styled/Page'
-// import fetch from "isomorphic-unfetch";
+import styled from 'styled-components'
+import { Button } from 'react-bootstrap'
+
+const Cover = styled.div`
+  background-image: url('/static/monet_water_lilies.jpg');
+  height: 700px;
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
+`
+
+const Opacity = styled.div`
+  background: rgba(255, 255, 255, 0.3);
+  height: 700px;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+`
+
+const TytleWrapper = styled.div`
+  width: 600px;
+  text-align: center;
+  margin: auto;
+  height: 200px;
+  color: #37548f;
+`
+
+const Title = styled.h1`
+  font-size: 45px;
+  margin: 20px;
+  font-weight: bold;
+`
+
+const Text = styled.h1`
+  font-size: 15px;
+  margin: 10px 0 30px;
+`
 
 interface EProps {
-  contents: Content[]
+  contents: any
 }
 
 export default class BlogsPage extends React.Component<EProps> {
-  static async getInitialProps() {
-    try {
-      // const response = await fetch('https://pixabay.com/ja');
-      // const json = await response.json();
-
-      const json: Content[] = [
-        {
-          id: 1,
-          name: 'Contents 1',
-          imageUrl: '/static/img.jpg',
-        },
-        {
-          id: 2,
-          name: 'Contents 2',
-          imageUrl: '/static/img.jpg',
-        },
-        {
-          id: 3,
-          name: 'Contents 3',
-          imageUrl: '/static/img.jpg',
-        },
-      ]
-
-      return {
-        contents: json,
-      }
-    } catch (e) {
-      console.error(e)
-      return {
-        contents: [],
-      }
-    }
-  }
-
   public render() {
     return (
-      <MainContent>
-        <MainTitle>Welcome to my page!</MainTitle>
-        <ContentsList contents={this.props.contents} />
-      </MainContent>
+      <Cover>
+        <Opacity>
+          <TytleWrapper>
+            <Title>Welcome to my page!</Title>
+            <Text>This is Lilycoco's website who is React.js, Node.js, TypeScript diveloper.</Text>
+            <p>
+              <Button variant='primary' href='/home'>
+                Explore More
+              </Button>
+            </p>
+          </TytleWrapper>
+        </Opacity>
+      </Cover>
     )
   }
 }

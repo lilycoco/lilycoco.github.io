@@ -8,9 +8,15 @@ const Img = styled.img`
   object-fit: cover;
 `
 
+const nav = {
+  display: 'flex',
+  justifyContent: 'center',
+  alignItems: 'center',
+}
+
 export const Header = () => (
   <Navbar bg='light' expand='lg' variant='light'>
-    <Navbar.Brand href='/'>Lilycoco</Navbar.Brand>
+    <Navbar.Brand href='/home'>Lilycoco</Navbar.Brand>
     <Navbar.Toggle aria-controls='basic-navbar-nav' />
     <Navbar.Collapse id='basic-navbar-nav'>
       <Nav className='mr-auto'>
@@ -20,9 +26,13 @@ export const Header = () => (
         <Nav.Link href='https://twitter.com/llccr27' target='_blank'>
           <Img src='/static/twitter.png' />
         </Nav.Link>
-        <Nav.Link href='/'>Home</Nav.Link>
-        <Nav.Link href='/blog'>Blog</Nav.Link>
-        <NavDropdown title='Play Game' id='basic-nav-dropdown'>
+        <Nav.Link href='/home' style={nav}>
+          Home
+        </Nav.Link>
+        <Nav.Link href='/blog' style={nav}>
+          Blog
+        </Nav.Link>
+        <NavDropdown title='Play Game' id='basic-nav-dropdown' style={nav}>
           <NavDropdown.Item href='https://lilycoco-spaceinvaders.netlify.com/' target='_blank'>
             Space Invaders
           </NavDropdown.Item>

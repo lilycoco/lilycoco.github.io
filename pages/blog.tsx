@@ -2,6 +2,7 @@ import * as React from 'react'
 import { Content } from '../models/Content'
 import { ContentsList } from '../components/ContentsList'
 import { MainContent, MainTitle } from '../styled/Page'
+// import fetch from "isomorphic-unfetch";
 
 interface EProps {
   contents: Content[]
@@ -41,7 +42,7 @@ export default class BlogsPage extends React.Component<EProps> {
   public render() {
     return (
       <MainContent>
-        <MainTitle>Thailand Curries</MainTitle>
+        <MainTitle>My Blog</MainTitle>
         <ContentsList contents={this.props.contents} />
       </MainContent>
     )
