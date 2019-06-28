@@ -15,13 +15,12 @@ const Li = styled.li`
 `
 
 const Img = styled.img`
-  display: block;
   width: 40%;
-  height: 300px;
-  object-fit: cover;
+  height: auto;
+  object-fit: contain;
 `
 const Content = styled.div`
-  width: 100%;
+  width: 60%;
   display: flex;
   justify-content: flex-start;
   align-items: center;
@@ -41,8 +40,23 @@ const Text = styled.div`
   margin-bottom: 20px;
   line-height: 160%;
 `
+const BtnWrapper = styled.div`
+  display: flex;
+  align-items: center;
+`
+const Icon = styled.img`
+  width: 27px;
+  height: 27px;
+  display: block;
+  margin-left: 15px;
+`
+const Num = styled.div`
+  font-size: 23px;
+  text-align: center;
+  width: 35px;
+`
 const Btn = {
-  marginLeft: '75%',
+  marginLeft: '40%',
   width: '70px',
 }
 
@@ -55,9 +69,15 @@ export const Products = (props: { contents: Tron[] }) => (
           <TextWrapper>
             <H1>{c.name}</H1>
             <Text>{c.text}</Text>
-            <Button variant='info' href={c.url} style={Btn}>
-              Play
-            </Button>
+            <BtnWrapper>
+              <Icon src='/static/like_off.png' />
+              <Num>{c.like}</Num>
+              <Icon src='/static/heart_off.png' />
+              <Num>{c.heart}</Num>
+              <Button variant='primary' href={c.url} target='_blank' style={Btn}>
+                Play
+              </Button>
+            </BtnWrapper>
           </TextWrapper>
         </Content>
       </Li>

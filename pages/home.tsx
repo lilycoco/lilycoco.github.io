@@ -23,6 +23,8 @@ export default class BlogsPage extends React.Component<EProps> {
             'I developed this with jQuery and Campus over about a week, 1 months later since when I started learning programming',
           url: 'https://lilycoco-spaceinvaders.netlify.com/',
           imageUrl: '/static/invaders.png',
+          heart: 0,
+          like: 0,
         },
         {
           id: 2,
@@ -32,6 +34,8 @@ export default class BlogsPage extends React.Component<EProps> {
             'Probably you know this is the Tetris which is the game used to be very popular in the world. I also created this with jQuery only',
           url: 'https://lilycoco-tetris.netlify.com/',
           imageUrl: '/static/tetris.png',
+          heart: 0,
+          like: 0,
         },
         {
           id: 3,
@@ -41,6 +45,8 @@ export default class BlogsPage extends React.Component<EProps> {
             'This is unusual minesweeper which has unlimited field and enable to play with multiple players, developed with Node.js, Nuxt.js and Vue.js',
           url: 'https://mugensweeper.netlify.com/',
           imageUrl: '/static/mugen.png',
+          heart: 0,
+          like: 0,
         },
       ]
 
