@@ -1,19 +1,18 @@
 import { Tron } from '../models/Tron'
 import styled from 'styled-components'
-import { Button } from 'react-bootstrap'
+import Link from 'next/link'
 
 const Ul = styled.ul`
   list-style: none;
 `
-const Li = styled.li`
+const Li = styled.li<{ primary: boolean }>`
   margin: auto;
   display: flex;
   width: 80%;
-  border-bottom: solid 1px #6e6e6e;
+  border-top: solid 1px #6e6e6e;
   padding: 50px;
   flex-direction: ${(props) => (props.primary ? 'row-reverse' : 'row')};
 `
-
 const Img = styled.img`
   width: 40%;
   height: auto;
@@ -55,7 +54,7 @@ const Num = styled.div`
   text-align: center;
   width: 35px;
 `
-const Btn = {
+const btnStyle: React.CSSProperties = {
   marginLeft: '40%',
   width: '70px',
 }
@@ -74,9 +73,11 @@ export const Products = (props: { contents: Tron[] }) => (
               <Num>{c.like}</Num>
               <Icon src='/static/heart_off.png' />
               <Num>{c.heart}</Num>
-              <Button variant='primary' href={c.url} target='_blank' style={Btn}>
-                Play
-              </Button>
+              <Link href={c.url}>
+                <a className='btn btn-primary' style={btnStyle}>
+                  Play
+                </a>
+              </Link>
             </BtnWrapper>
           </TextWrapper>
         </Content>

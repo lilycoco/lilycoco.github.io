@@ -7,9 +7,8 @@
   "scripts": {
     "dev": "next",
     "start": "next start",
-    "build": "next build",
-    "export": "npm run build && next export",
-    "deploy": "npm run export && sh scripts/deploy.sh"
+    "build": "next build && next export",
+    "deploy": "npm run build && sh scripts/deploy.sh"
   },
   "dependencies": {
     "@types/jest": "24.0.15",
@@ -17,8 +16,6 @@
     "@types/react": "16.8.22",
     "@types/react-dom": "16.8.4",
     "@zeit/next-typescript": "^1.1.1",
-    "babel-cli": "^6.26.0",
-    "babel-plugin-module-resolver": "^3.2.0",
     "bootstrap": "^4.3.1",
     "next": "^8.1.0",
     "react": "^16.8.6",
@@ -32,16 +29,13 @@
     "@types/styled-components": "^4.1.16",
     "@typescript-eslint/eslint-plugin": "^1.11.0",
     "@typescript-eslint/parser": "canary",
-    "awesome-typescript-loader": "^5.2.1",
     "eslint": "^6.0.1",
     "eslint-config-prettier": "^5.0.0",
     "eslint-plugin-prettier": "^3.1.0",
     "husky": "^2.5.0",
     "lint-staged": "^8.2.1",
     "prettier": "^1.18.2",
-    "source-map-loader": "^0.2.4",
-    "typescript": "^3.5.2",
-    "webpack": "4.29.6"
+    "typescript": "^3.5.2"
   },
   "lint-staged": {
     "*.{ts,tsx}": [

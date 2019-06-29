@@ -2,6 +2,7 @@ import * as React from 'react'
 import { Tron } from '../models/Tron'
 import { Products } from '../components/Products'
 import { MainTitle, MainContent } from '../styled/Page'
+import { Layout } from '../components/Layout'
 // import fetch from "isomorphic-unfetch";
 
 interface EProps {
@@ -20,7 +21,7 @@ export default class BlogsPage extends React.Component<EProps> {
           right: true,
           name: 'Space Invaders',
           text:
-            'I developed this with jQuery and Campus over about a week, 1 months later since when I started learning programming',
+            'I developed this with jQuery and Canvas over about a week, 1 months later since when I started learning programming',
           url: 'https://lilycoco-spaceinvaders.netlify.com/',
           imageUrl: '/static/invaders.png',
           heart: 0,
@@ -28,7 +29,7 @@ export default class BlogsPage extends React.Component<EProps> {
         },
         {
           id: 2,
-          right: false,
+          right: true,
           name: 'Tetris',
           text:
             'Probably you know this is the Tetris which is the game used to be very popular in the world. I also created this with jQuery only',
@@ -63,10 +64,12 @@ export default class BlogsPage extends React.Component<EProps> {
 
   public render() {
     return (
-      <MainContent>
-        <MainTitle>What's New?</MainTitle>
-        <Products contents={this.props.contents} />
-      </MainContent>
+      <Layout>
+        <MainContent>
+          <MainTitle>What's New?</MainTitle>
+          <Products contents={this.props.contents} />
+        </MainContent>
+      </Layout>
     )
   }
 }

@@ -1,6 +1,7 @@
 import * as React from 'react'
 import styled from 'styled-components'
 import { Button } from 'react-bootstrap'
+import { Layout } from '../components/Layout'
 
 const Cover = styled.div`
   background-image: url('/static/monet_water_lilies.jpg');
@@ -41,21 +42,23 @@ interface EProps {
 export default class BlogsPage extends React.Component<EProps> {
   public render() {
     return (
-      <Cover>
-        <Opacity>
-          <TytleWrapper>
-            <Title>Welcome to my page!</Title>
-            <Text>
-              This is Lilycoco's website, who is a React.js, Node.js and TypeScript developer.
-            </Text>
-            <p>
-              <Button variant='primary' href='/home'>
-                Explore More
-              </Button>
-            </p>
-          </TytleWrapper>
-        </Opacity>
-      </Cover>
+      <Layout>
+        <Cover>
+          <Opacity>
+            <TytleWrapper>
+              <Title>Welcome to my page!</Title>
+              <Text>
+                This is Lilycoco's website, who is a React.js, Node.js and TypeScript developer.
+              </Text>
+              <p>
+                <Button variant='primary' href='/home'>
+                  Explore More
+                </Button>
+              </p>
+            </TytleWrapper>
+          </Opacity>
+        </Cover>
+      </Layout>
     )
   }
 }
