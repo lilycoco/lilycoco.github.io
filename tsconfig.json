@@ -41,6 +41,6 @@
     /* Source Map Options */
     "sourceMap": true
   },
-  "exclude": ["node_modules", "next.config.js", "webpack.config.js", "out", ".next"],
+  "exclude": ["node_modules", "next.config.js", "webpack.config.js", "out", ".next", "server.js"],
   "include": ["**/*.ts", "**/*.tsx"]
 }

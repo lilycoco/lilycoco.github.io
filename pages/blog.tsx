@@ -1,50 +1,25 @@
 import * as React from 'react'
-import { Content } from '../models/Content'
-import { ContentsList } from '../components/ContentsList'
-import { MainContent, MainTitle } from '../styled/Page'
-// import fetch from "isomorphic-unfetch";
+import { MainTitle } from '../styled/Page'
+import { Layout } from '../components/Layout'
+import Link from 'next/link'
 
-interface EProps {
-  contents: Content[]
-}
-export default class BlogsPage extends React.Component<EProps> {
-  static async getInitialProps() {
-    try {
-      const json: Content[] = [
-        {
-          id: 7,
-          name: 'Blog 1',
-          imageUrl: '/static/img.jpg',
-        },
-        {
-          id: 8,
-          name: 'Blog 2',
-          imageUrl: '/static/img.jpg',
-        },
-        {
-          id: 9,
-          name: 'Blog 3',
-          imageUrl: '/static/img.jpg',
-        },
-      ]
+const ArticleLink = (props: { id: number; title: string }) => (
+  <li key={props.id}>
+    <Link as={`/blog/${props.id}`} href={`/article?id=${props.id}`}>
+      <a>{props.title}</a>
+    </Link>
+  </li>
+)
 
-      return {
-        contents: json,
-      }
-    } catch (e) {
-      console.error(e)
-      return {
-        contents: [],
-      }
-    }
-  }
-
-  public render() {
-    return (
-      <MainContent>
-        <MainTitle>My Blog</MainTitle>
-        <ContentsList contents={this.props.contents} />
-      </MainContent>
-    )
-  }
+export default function Blog() {
+  return (
+    <Layout>
+      <MainTitle>My Blog</MainTitle>
+      <ul>
+        <ArticleLink id={1} title='Hello Next.js' />
+        <ArticleLink id={2} title='Learn Next.js is awesome' />
+        <ArticleLink id={3} title='Deploy apps with Zeit' />
+      </ul>
+    </Layout>
+  )
 }

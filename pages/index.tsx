@@ -2,6 +2,7 @@ import * as React from 'react'
 import styled from 'styled-components'
 import { Button } from 'react-bootstrap'
 import { Layout } from '../components/Layout'
+import Link from 'next/link'
 
 const Cover = styled.div`
   background-image: url('/static/monet_water_lilies.jpg');
@@ -39,7 +40,7 @@ interface EProps {
   contents: any
 }
 
-export default class BlogsPage extends React.Component<EProps> {
+export default class CoverPage extends React.Component<EProps> {
   public render() {
     return (
       <Layout>
@@ -51,9 +52,9 @@ export default class BlogsPage extends React.Component<EProps> {
                 This is Lilycoco's website, who is a React.js, Node.js and TypeScript developer.
               </Text>
               <p>
-                <Button variant='primary' href='/home'>
-                  Explore More
-                </Button>
+                <Link href='/home'>
+                  <Button variant='primary'>Explore More</Button>
+                </Link>
               </p>
             </TytleWrapper>
           </Opacity>
