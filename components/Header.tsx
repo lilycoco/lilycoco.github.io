@@ -28,7 +28,7 @@ export const Header = () => (
   <Navbar bg='light' fixed='top' expand='lg' variant='light'>
     <Navbar.Brand href='/home' style={nav}>
       <span style={{ paddingRight: '3px' }}>
-        <Img src='/static/water_lily.png' />
+        <Img src='/static/icon/water_lily.png' />
       </span>
       Lilycoco
     </Navbar.Brand>
@@ -45,11 +45,12 @@ export const Header = () => (
           <NavDropDownItem href='https://lilycoco-tetris.netlify.com/' children='Tetris' />
           <NavDropDownItem href='https://mugensweeper.netlify.com/' children='Mugen Sweeper' />
           <NavDropdown.Divider />
-          <NavDropDownItem href='/TicTacToe' children='Tic Tac Toe' />
+          <NavDropDownItem href='/ticTacToe' children='Tic Tac Toe' />
+          <NavDropDownItem href='/tetris' children='Tetris with React' />
         </NavDropdown>
       </Nav>
-      <SocialIcon href='https://github.com/lilycoco' src='/static/github.png' />
-      <SocialIcon href='https://twitter.com/llccr27' src='/static/twitter.png' />
+      <SocialIcon href='https://github.com/lilycoco' src='/static/icon/github.png' />
+      <SocialIcon href='https://twitter.com/llccr27' src='/static/icon/twitter.png' />
     </Navbar.Collapse>
   </Navbar>
 )

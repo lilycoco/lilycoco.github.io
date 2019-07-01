@@ -5,7 +5,7 @@ import { Layout } from '../components/Layout'
 import Link from 'next/link'
 
 const Cover = styled.div`
-  background-image: url('/static/monet_water_lilies.jpg');
+  background-image: url('/static/pic/monet_water_lilies.jpg');
   height: 800px;
   background-position: center center;
   background-repeat: no-repeat;

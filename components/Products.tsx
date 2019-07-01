@@ -55,6 +55,7 @@ const Icon = styled.img`
   width: 27px;
   height: 27px;
   display: block;
+  user-select: none;
   &:hover {
     width: 30px;
     height: 30px;
@@ -72,11 +73,11 @@ const btnStyle: React.CSSProperties = {
 }
 
 const likeAction = (like: number) => {
-  return like ? '/static/like_on.png' : '/static/like_off.png'
+  return like ? '/static/icon/like_on.png' : '/static/icon/like_off.png'
 }
 
 const heartAction = (heart: number) => {
-  return heart ? '/static/heart_on.png' : '/static/heart_off.png'
+  return heart ? '/static/icon/heart_on.png' : '/static/icon/heart_off.png'
 }
 
 export const Products: React.SFC<{ contents: Tron[]; onClick: any }> = (props) => (

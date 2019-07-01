@@ -4,7 +4,7 @@ export interface Tron {
   name: string
   text: string
   url: string
-  imageUrl: string
+  imgSrc: string
   heart: number
   like: number
 }
