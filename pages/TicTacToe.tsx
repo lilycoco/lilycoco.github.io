@@ -13,12 +13,16 @@ const BoardRow = styled.div`
     display: table;
   }
 `
+interface EProps {
+  className: 'highlight' | undefined
+  onClick: React.MouseEventHandler
+  value: string
+}
 
-function Square(props: { className: string; onClick: React.MouseEventHandler; value: string }) {
-  const { className, onClick, value } = props
+function Square(props: EProps) {
   return (
-    <button className={'square ' + className} onClick={onClick}>
-      {value}
+    <button className={'square ' + props.className} onClick={props.onClick}>
+      {props.value}
       <style>
         {`
         .square {
@@ -49,8 +53,13 @@ function Square(props: { className: string; onClick: React.MouseEventHandler; va
 
 function Board(props: { squares: any; onClick: any; highlight: any }) {
   const renderSquare = (i: number) => {
-    const { squares, onClick, highlight } = props
-    return <Square value={squares[i]} onClick={() => onClick(i)} className={highlight(i)} />
+    return (
+      <Square
+        value={props.squares[i]}
+        onClick={() => props.onClick(i)}
+        className={props.highlight(i)}
+      />
+    )
   }
 
   return (
@@ -93,13 +102,11 @@ function calculateWinner(squares: string[]): any[] | void {
     [2, 4, 6],
   ]
   lines.forEach((i) => {
-    let line = null
     let [a, b, c] = i
     let [markA, markB, markC] = [squares[a], squares[b], squares[c]]
     if (markA && markA === markB && markA === markC) {
       console.log('match', [markA, i])
-      line = [markA, i]
-      return line
+      return [markA, i]
     }
   })
 }
@@ -170,6 +177,7 @@ function Game() {
   })
 
   function win(i: number) {
+    console.log(winner)
     if (winner) {
       const [a, b, c] = winner[1]
       if (i === a || i === b || i === c) {

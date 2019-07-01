@@ -3,6 +3,7 @@ import { Tron } from '../models/Tron'
 import { Products } from '../components/Products'
 import { MainTitle } from '../styled/Page'
 import { Layout } from '../components/Layout'
+import { S_IFCHR } from 'constants'
 // import fetch from "isomorphic-unfetch";
 
 interface EProps {
@@ -17,7 +18,8 @@ const Content: Tron[] = [
     text:
       'I developed this with jQuery and Canvas over about a week, 1 months later since when I started learning programming',
     url: 'https://lilycoco-spaceinvaders.netlify.com/',
-    imageUrl: '/static/invaders.png',
+    imgSrc: '/static/invaders.png',
+
     heart: 0,
     like: 0,
   },
@@ -28,7 +30,7 @@ const Content: Tron[] = [
     text:
       'Probably you know this is the Tetris which is the game used to be very popular in the world. I also created this with jQuery only',
     url: 'https://lilycoco-tetris.netlify.com/',
-    imageUrl: '/static/tetris.png',
+    imgSrc: '/static/tetris.png',
     heart: 0,
     like: 0,
   },
@@ -39,32 +41,30 @@ const Content: Tron[] = [
     text:
       'This is unusual minesweeper which has unlimited field and enable to play with multiple players, developed with Node.js, Nuxt.js and Vue.js',
     url: 'https://mugensweeper.netlify.com/',
-    imageUrl: '/static/mugen.png',
+    imgSrc: '/static/mugen.png',
     heart: 0,
     like: 0,
   },
 ]
 
 export default class Home extends React.Component<EProps> {
-  static async getInitialProps() {
-    try {
-      const json = Content
-      return {
-        contents: json,
-      }
-    } catch (e) {
-      console.error(e)
-      return {
-        contents: [],
-      }
+  state = { content: Content }
+
+  addCount = (i: number) => {
+    const current = this.state.content.slice()
+    if (i >= 10) {
+      current[i - 10].heart += 1
+    } else {
+      current[i].like += 1
     }
+    this.setState({ content: current })
   }
 
   public render() {
     return (
       <Layout>
         <MainTitle>What's New?</MainTitle>
-        <Products contents={this.props.contents} />
+        <Products contents={this.state.content} onClick={(i: any) => this.addCount(i)} />
       </Layout>
     )
   }
