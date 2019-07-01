@@ -90,7 +90,7 @@ function Board(props: { squares: any; onClick: any; highlight: any }) {
   )
 }
 
-function calculateWinner(squares: string[]): any[] | void {
+function calculateWinner(squares: string[]): { valid: boolean; mark?: string; numbers?: number } {
   const lines = [
     [0, 1, 2],
     [3, 4, 5],
@@ -101,14 +101,16 @@ function calculateWinner(squares: string[]): any[] | void {
     [0, 4, 8],
     [2, 4, 6],
   ]
+
   lines.forEach((i) => {
     let [a, b, c] = i
     let [markA, markB, markC] = [squares[a], squares[b], squares[c]]
     if (markA && markA === markB && markA === markC) {
       console.log('match', [markA, i])
-      return [markA, i]
+      return { valid: true, mark: markA, numbers: i }
     }
   })
+  return { valid: false }
 }
 
 function Game() {
@@ -126,7 +128,7 @@ function Game() {
     const current = history[history.length - 1]
     const squares = current.squares.slice()
     console.log(calculateWinner(squares))
-    if (calculateWinner(squares) || squares[i]) {
+    if (calculateWinner(squares).valid || squares[i]) {
       return
     }
     squares[i] = xIsNext ? 'X' : 'O'
@@ -176,19 +178,23 @@ function Game() {
     )
   })
 
-  function win(i: number) {
+  function win(i: number): string {
     console.log(winner)
-    if (winner) {
-      const [a, b, c] = winner[1]
-      if (i === a || i === b || i === c) {
-        return 'highlight'
-      }
+
+    if (winner.valid) {
+      const { numbers }: number[] = winner
+      numbers.map((n) => {
+        if (i === n) {
+          return 'highlight'
+        }
+      })
     }
+    return 'nocolor'
   }
 
   let status
-  if (winner) {
-    status = 'Winner: ' + winner[0]
+  if (winner.valid) {
+    status = 'Winner: ' + winner.mark
   } else {
     status = stepNumber < 9 ? 'Next player: ' + (xIsNext ? 'X' : 'O') : 'Draw'
   }
