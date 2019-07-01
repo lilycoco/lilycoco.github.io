@@ -45,7 +45,7 @@ export const Header = () => (
           <NavDropDownItem href='https://lilycoco-tetris.netlify.com/' children='Tetris' />
           <NavDropDownItem href='https://mugensweeper.netlify.com/' children='Mugen Sweeper' />
           <NavDropdown.Divider />
-          <NavDropDownItem href='/tictactoe' children='Tic Tac Toe' />
+          <NavDropDownItem href='/tictac' children='Tic Tac Toe' />
           <NavDropDownItem href='/tetris' children='Tetris with React' />
         </NavDropdown>
       </Nav>
