@@ -101,10 +101,8 @@ function calculateWinner(squares: string[]): { valid: boolean; mark?: string; nu
     [0, 4, 8],
     [2, 4, 6],
   ]
-
-  lines.forEach((i) => {
-    const [a, b, c] = i
-    const [markA, markB, markC] = [squares[a], squares[b], squares[c]]
+  lines.map((i) => {
+    const [markA, markB, markC] = [squares[i[0]], squares[i[1]], squares[i[3]]]
     if (markA && markA === markB && markA === markC) {
       console.log('match', [markA, i])
       return { valid: true, mark: markA, numbers: i }
