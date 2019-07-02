@@ -90,7 +90,7 @@ function Board(props: { squares: any; onClick: any; highlight: any }) {
   )
 }
 
-function calculateWinner(squares: string[]): { valid: boolean; mark?: string; numbers?: number } {
+function calculateWinner(squares: string[]): { valid: boolean; mark?: string; numbers?: number[] } {
   const lines = [
     [0, 1, 2],
     [3, 4, 5],
@@ -103,8 +103,8 @@ function calculateWinner(squares: string[]): { valid: boolean; mark?: string; nu
   ]
 
   lines.forEach((i) => {
-    let [a, b, c] = i
-    let [markA, markB, markC] = [squares[a], squares[b], squares[c]]
+    const [a, b, c] = i
+    const [markA, markB, markC] = [squares[a], squares[b], squares[c]]
     if (markA && markA === markB && markA === markC) {
       console.log('match', [markA, i])
       return { valid: true, mark: markA, numbers: i }
@@ -123,12 +123,14 @@ function Game() {
   const [xIsNext, setXIsNext] = useState(true)
   const [asc, setAsc] = useState(true)
 
+  const history = historys.slice(0, stepNumber + 1)
+  const current = history[history.length - 1]
+  const squares = current.squares.slice()
+  const winner = calculateWinner(squares)
+
+  const sortOrder = () => setAsc(!asc)
   const handleClick = (i: number) => {
-    const history = historys.slice(0, stepNumber + 1)
-    const current = history[history.length - 1]
-    const squares = current.squares.slice()
-    console.log(calculateWinner(squares))
-    if (calculateWinner(squares).valid || squares[i]) {
+    if (winner.valid || squares[i]) {
       return
     }
     squares[i] = xIsNext ? 'X' : 'O'
@@ -142,20 +144,10 @@ function Game() {
     setXIsNext(step % 2 === 0)
   }
 
-  const sortOrder = () => {
-    setAsc(!asc)
-  }
-
-  const sort = () => {
-    return <button onClick={() => sortOrder()}>Sort order</button>
-  }
-
   useEffect(() => {
     document.title = `You clicked ${stepNumber} times`
   }, [stepNumber])
 
-  const current = historys[stepNumber]
-  const winner = calculateWinner(current.squares)
   const moves = historys.map((step, move) => {
     if (!asc) {
       move = historys.length - move - 1
@@ -178,26 +170,15 @@ function Game() {
     )
   })
 
-  function win(i: number): string {
-    console.log(winner)
+  const win = (i: number, w: any) =>
+    w.valid ? w.numbers.map((n: number) => (i === n ? 'highlight' : 'nocolor')) : 'nocolor'
 
-    if (winner.valid) {
-      const { numbers }: number[] = winner
-      numbers.map((n) => {
-        if (i === n) {
-          return 'highlight'
-        }
-      })
-    }
-    return 'nocolor'
-  }
-
-  let status
-  if (winner.valid) {
-    status = 'Winner: ' + winner.mark
-  } else {
-    status = stepNumber < 9 ? 'Next player: ' + (xIsNext ? 'X' : 'O') : 'Draw'
-  }
+  const status = (w: any) =>
+    w.valid
+      ? 'Winner: ' + w.mark
+      : stepNumber < 9
+      ? 'Next player: ' + (xIsNext ? 'X' : 'O')
+      : 'Draw'
 
   return (
     <div
@@ -210,12 +191,14 @@ function Game() {
         <Board
           squares={current.squares}
           onClick={(i: number) => handleClick(i)}
-          highlight={(i: number) => win(i)}
+          highlight={(i: number) => win(i, winner)}
         />
       </div>
       <div style={{ marginLeft: '20px' }}>
-        <div>{status}</div>
-        <div>{sort()}</div>
+        <div>{status(winner)}</div>
+        <div>
+          <button onClick={() => sortOrder()}>Sort order</button>
+        </div>
         <ol style={paddingLeft}>{moves}</ol>
       </div>
     </div>
