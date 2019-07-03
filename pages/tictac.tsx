@@ -101,14 +101,15 @@ function calculateWinner(squares: string[]): { valid: boolean; mark?: string; nu
     [0, 4, 8],
     [2, 4, 6],
   ]
+  let line = { valid: false, mark: '', numbers: [0, 0, 0] }
   lines.map((i) => {
     const [markA, markB, markC] = [squares[i[0]], squares[i[1]], squares[i[3]]]
     if (markA && markA === markB && markA === markC) {
       console.log('match', [markA, i])
-      return { valid: true, mark: markA, numbers: i }
+      line = { valid: true, mark: markA, numbers: i }
     }
   })
-  return { valid: false }
+  return line
 }
 
 function Game() {
@@ -126,6 +127,7 @@ function Game() {
   const squares = current.squares.slice()
   const winner = calculateWinner(squares)
 
+  console.log(winner)
   const sortOrder = () => setAsc(!asc)
   const handleClick = (i: number) => {
     if (winner.valid || squares[i]) {
