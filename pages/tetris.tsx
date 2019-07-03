@@ -1,80 +1,146 @@
 import React, { useState, useEffect } from 'react'
 import { Layout } from '../components/Layout'
 import { TetrisShape } from '../components/TetrisShape'
-
 import styled from 'styled-components'
 
 function Game() {
-  const [board, setBoard] = useState([Array(20).fill(Array(10).fill(0))])
-  console.log(board)
-  console.log(TetrisShape)
+  const boardType = [
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+  ]
+  const [board, setBoard] = useState(boardType)
+  const [currentColor, setCurrentColor] = useState(0)
+  const [currentShape, setCurrentShape] = useState(0)
+  const [running, setRunning] = useState(false)
+  const [lon, setLon] = useState(0)
+  const [lat, setLat] = useState(0)
+  let selectShape = Math.floor(Math.random() * 27)
+  let selectColor = Math.floor(Math.random() * 5)
+  // const [lapse, setLapse] = useState(0)
+  const colors = [
+    //テトリスの色の配列
+    'navy',
+    'darkmagenta',
+    'orangered',
+    'yellow',
+    'deeppink',
+    'limegreen',
+  ]
 
-  let block = Math.floor(Math.random() * 27) //テトリスの形 ランダム表示
-  let wid = 0 //テトリスの横の位置
-  let len = 0 //テトリスの高さ
+  // const addTetris = TetrisShape[currentShape].map((ver: number[], verIndex: number) => {
+  //   ver.map((hor, horIndex) => (hor === 1) && { verIndex, horIndex })
 
-  // const drawBoard = () => {
-  //   let newBoard = $.extend(true, [], board); // board をディープコピー
-  //   tetris[block].forEach((a, aa) => a.forEach((b, bb) =>{
-  //     if(b === 1 ) newBoard[aa + len][bb + wid + 4] = color + 1; // newBoard にtetrisを表示
-  //   }))
+  let newBoard = board.slice()
 
-  //   let boards="";
-  //   newBoard.forEach((a) => a.forEach((b) =>{
-  //     boards += blockColor[b] + "</div>";   // 画面上に表示
-  //   }))
+  const drowBoard = (numbers: number[][]) =>
+    numbers.map((line, colNo) => (
+      <div key={colNo} className='line'>
+        {line.map((num: number, rowNo: number) => (
+          <div
+            key={rowNo}
+            className={'block ' + (num === 0 && 'clear')}
+            style={num > 0 ? { backgroundColor: colors[num - 1] } : undefined}
+          >
+            {num}
+          </div>
+        ))}
+      </div>
+    ))
 
-  //   $("#boardArea").append(boards);
-  //   blockClass.forEach((a, b) => $(a).css("backgroundColor",colors[b]))  // 色表示設定
-  // }
+  const addNewTetris = () =>
+    TetrisShape[currentShape].map((hei, heiIndex) =>
+      hei.map((wid, widIndex) => {
+        wid === 1 && (newBoard[heiIndex + lon][widIndex + lat + 4] = currentColor)
+      }),
+    )
+
+  const flow = () =>
+    setInterval(() => {
+      setLon(lon + 1)
+    })
+
+  const handleRunClick = () => {
+    if (running) {
+      clearInterval(flow())
+    } else {
+      flow()
+    }
+    return setRunning(!running)
+  }
+
+  const handleClearClick = () => {
+    setBoard(boardType)
+    newBoard = board.slice()
+    clearInterval(flow())
+    setLon(0)
+  }
 
   return (
     <div>
-      <div className='boardArea'></div>
-      <div className='tetrisArea'></div>
+      <div className='boardWrapper'>
+        <div className='board'>{drowBoard(board)}</div>
+        <div className='newBoard'>{drowBoard(newBoard)}</div>
+      </div>
+      <button className='btn btn-primary' onClick={() => handleRunClick()}>
+        {running ? 'Stop' : 'Start!'}
+      </button>
+      <button className='btn btn-primary' onClick={() => handleClearClick()}>
+        Clear
+      </button>
+      <label style={{ fontSize: '5em', display: 'block' }}>{lon}</label>
       <style>
         {`
-        .boardArea{
-          width: 319px;
-          height:auto;
-          border-collapse: collapse;
-          box-sizing: border-box;
-          table-layout: fixed;
-          margin:auto;
-          padding-top: 100px;
-        }
-        .tetrisArea{
+        .boardWrapper{
           position: relative;
-          width: 319px;
-          padding-top:0px;
-          height:600px;
-        }
-        .noColor, .color0, .color1, .color2, .color3, .color4, .color5{
-          box-sizing: border-box;
+          width: 250px;
           background-color: rgb(15, 15, 27);
-          border:1px solid rgba(0, 0, 0, 0.253);
-          width:30px;
-          height:30px;
+          height: 600px;
+        }
+        .newBoard, .board{
+          position: absolute;
+          width: 100%;
+          top: 0px;
+          left: 0px;
+        }
+        .line {
+          display: flex;
+        }
+        .block {
+          width: 30px;
+          height: 30px;
+          box-sizing: border-box;
+          border: 1px solid rgba(0, 0, 0, 0.253);
+          border-collapse: collapse;
           text-align: center;
-          float: left;
+          box-sizing: border-box;
+          color: white;
+        }
+        .clear {
+          backgroud-color: rgb(254, 254, 254, 0);
         }
         .color0, .color1, .color2, .color3, .color4, .color5{
           border:5px outset rgba(255, 255, 255, 0.568);
         }
-        .tetrisWrapper{
-          position:absolute;
-          top:-30;
-          left:120;
-        }
-        .block{
-          border-collapse: collapse;
-        }
-        .flex{
-          display: flex;
-        }
-        .blank{
-          width:30px;
-          height:30px;
+        .btn {
+          margin-top: 30px;
         }
         `}
       </style>

@@ -5,7 +5,8 @@
   "repository": "https://github.com/lilycoco/lilycoco.github.io",
   "private": true,
   "scripts": {
-    "dev": "node server.js",
+    "dev_server": "node server.js",
+    "dev": "next",
     "start": "cross-env NODE_ENV=production node server.js",
     "build": "next build && next export",
     "deploy": "npm run build && sh scripts/deploy.sh"
