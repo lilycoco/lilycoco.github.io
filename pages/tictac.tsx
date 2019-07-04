@@ -2,17 +2,6 @@ import React, { useState, useEffect } from 'react'
 import { Layout } from '../components/Layout'
 import styled from 'styled-components'
 
-const paddingLeft = {
-  paddingLeft: '30px',
-}
-
-const BoardRow = styled.div`
-  &::after {
-    clear: both;
-    content: '';
-    display: table;
-  }
-`
 interface EProps {
   className: 'highlight' | undefined
   onClick: React.MouseEventHandler
@@ -54,34 +43,96 @@ function Square(props: EProps) {
   )
 }
 
-function Board(props: { squares: any; onClick: any; highlight: any }) {
-  const renderSquare = (i: number) => {
-    return (
-      <Square
-        value={props.squares[i]}
-        onClick={() => props.onClick(i)}
-        className={props.highlight(i)}
-      />
-    )
+const BoardRow = styled.div`
+  &::after {
+    clear: both;
+    content: '';
+    display: table;
   }
+`
+function Board(props: { squares: any; onClick: any; highlight: any }) {
+  const renderSquare = (i: number) => (
+    <Square
+      value={props.squares[i]}
+      onClick={() => props.onClick(i)}
+      className={props.highlight(i)}
+    />
+  )
 
   return (
-    <div>
-      <BoardRow>
-        {renderSquare(0)}
-        {renderSquare(1)}
-        {renderSquare(2)}
-      </BoardRow>
-      <BoardRow>
-        {renderSquare(3)}
-        {renderSquare(4)}
-        {renderSquare(5)}
-      </BoardRow>
-      <BoardRow>
-        {renderSquare(6)}
-        {renderSquare(7)}
-        {renderSquare(8)}
-      </BoardRow>
+    <div className='game-board'>
+      <div>
+        <BoardRow>
+          {renderSquare(0)}
+          {renderSquare(1)}
+          {renderSquare(2)}
+        </BoardRow>
+        <BoardRow>
+          {renderSquare(3)}
+          {renderSquare(4)}
+          {renderSquare(5)}
+        </BoardRow>
+        <BoardRow>
+          {renderSquare(6)}
+          {renderSquare(7)}
+          {renderSquare(8)}
+        </BoardRow>
+      </div>
+    </div>
+  )
+}
+
+interface SProps {
+  onClick: React.MouseEventHandler
+  histories: any
+  asc: boolean
+  winner: { mark?: string; numbers?: number[] } | null
+  stepNumber: number
+  xIsNext: boolean
+}
+
+function SwichButton(props: SProps) {
+  // const jumpTo = (step: number) => {
+  //   setStepNumber(step)
+  //   setXIsNext(step % 2 === 0)
+  // }
+  const status = () =>
+    props.winner
+      ? 'Winner: ' + props.winner.mark
+      : props.stepNumber < 9
+      ? 'Next player: ' + (props.xIsNext ? 'X' : 'O')
+      : 'Draw'
+
+  const moves = props.histories.map((history: any, step: string | any) => {
+    !props.asc && (step = props.histories.length - step - 1)
+    const bold = props.stepNumber === step ? 'bold' : 'unbold'
+    const desc = step ? 'Go to move #' + step : 'Go to game start'
+    return (
+      <li key={step}>
+        <button
+          className={bold}
+          // onClick={() => jumpTo(step)}
+        >
+          {desc}
+        </button>
+        <style>
+          {`
+          .bold {
+            font-weight: bold;
+          }
+        `}
+        </style>
+      </li>
+    )
+  })
+
+  return (
+    <div style={{ marginLeft: '20px' }}>
+      <div>{status()}</div>
+      <div>
+        <button onClick={props.onClick}>Sort order</button>
+      </div>
+      <ol style={{ paddingLeft: '30px' }}>{moves}</ol>
     </div>
   )
 }
@@ -104,71 +155,31 @@ function calculateWinner(squares: string[]): { mark?: string; numbers?: number[]
 }
 
 function Game() {
-  const [historys, setHistory] = useState([
-    {
-      squares: Array(9).fill(null),
-    },
-  ])
-
+  const [histories, setHistories] = useState([{ squares: Array(9).fill(null) }])
   const [stepNumber, setStepNumber] = useState(0)
   const [xIsNext, setXIsNext] = useState(true)
   const [asc, setAsc] = useState(true)
-
-  const history = historys.slice(0, stepNumber + 1)
-  const current = history[history.length - 1]
-  const squares = current.squares.slice()
+  const history = histories.slice(0, stepNumber + 1)
+  const squares = history[history.length - 1].squares.slice()
   const winner = calculateWinner(squares)
-  const sortOrder = () => setAsc(!asc)
-  const handleClick = (i: number) => {
-    if (winner || squares[i]) {
-      return
-    }
-    squares[i] = xIsNext ? 'X' : 'O'
-    setHistory(history.concat([{ squares: squares }]))
-    setStepNumber(history.length)
-    setXIsNext(!xIsNext)
-  }
-
-  const jumpTo = (step: number) => {
-    setStepNumber(step)
-    setXIsNext(step % 2 === 0)
-  }
 
   useEffect(() => {
     document.title = `You clicked ${stepNumber} times`
   }, [stepNumber])
 
-  const moves = historys.map((step, move) => {
-    if (!asc) {
-      move = historys.length - move - 1
+  const handleClick = (i: number) => {
+    if (winner || squares[i]) {
+      return
     }
-    const bold = stepNumber === move ? 'bold' : 'unbold'
-    const desc = move ? 'Go to move #' + move : 'Go to game start'
-    return (
-      <li key={move}>
-        <button className={bold} onClick={() => jumpTo(move)}>
-          {desc}
-        </button>
-        <style>
-          {`
-          .bold {
-            font-weight: bold;
-          }
-        `}
-        </style>
-      </li>
-    )
-  })
+    squares[i] = xIsNext ? 'X' : 'O'
+    setHistories(history.concat([{ squares: squares }]))
+    setStepNumber(history.length)
+    setXIsNext(!xIsNext)
+  }
 
+  const sortOrder = () => setAsc(!asc)
   const win = (i: number) =>
     winner ? winner.numbers && winner.numbers.map((n: number) => i === n && ' highlight ') : null
-
-  const status = () =>
-    winner
-      ? 'Winner: ' + winner.mark
-      : stepNumber < 9
-      ? 'Next player: ' + (xIsNext ? 'X' : 'O')
-      : 'Draw'
 
   return (
     <div
@@ -177,20 +188,19 @@ function Game() {
         flexDirection: 'row',
       }}
     >
-      <div className='game-board'>
-        <Board
-          squares={current.squares}
-          onClick={(i: number) => handleClick(i)}
-          highlight={(i: number) => win(i)}
-        />
-      </div>
-      <div style={{ marginLeft: '20px' }}>
-        <div>{status()}</div>
-        <div>
-          <button onClick={() => sortOrder()}>Sort order</button>
-        </div>
-        <ol style={paddingLeft}>{moves}</ol>
-      </div>
+      <Board
+        squares={squares}
+        onClick={(i: number) => handleClick(i)}
+        highlight={(i: number) => win(i)}
+      />
+      <SwichButton
+        onClick={() => sortOrder()}
+        histories={histories}
+        asc={asc}
+        winner={winner}
+        stepNumber={stepNumber}
+        xIsNext={xIsNext}
+      />
     </div>
   )
 }
