@@ -187,7 +187,6 @@ function Game() {
     setStepNumber(history.length)
     setXIsNext(!xIsNext)
   }
-
   const jumpTo = (step: number) => {
     setStepNumber(step)
     setXIsNext(step % 2 === 0)
