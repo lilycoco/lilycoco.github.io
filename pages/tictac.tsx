@@ -8,11 +8,16 @@ interface EProps {
   value: string
 }
 
+interface WProps {
+  mark?: string
+  numbers?: number[]
+}
+
 interface SProps {
   onClick: React.MouseEventHandler
   histories: any
   asc: boolean
-  winner: { mark?: string; numbers?: number[] } | null
+  winner: WProps | null
   stepNumber: number
   xIsNext: boolean
 }
@@ -59,15 +64,11 @@ const BoardRow = styled.div`
     display: table;
   }
 `
-function Board(props: {
-  squares: any
-  onClick: any
-  winner: { mark?: string; numbers?: number[] } | null
-}) {
+function Board(props: { squares: any; onClick: any; winner: WProps | null }) {
   const win = (i: number): any =>
-    props.winner
-      ? props.winner.numbers && props.winner.numbers.map((n: number) => i === n && ' highlight ')
-      : null
+    props.winner &&
+    props.winner.numbers &&
+    props.winner.numbers.map((n: number) => i === n && ' highlight ')
 
   const renderSquare = (i: number) => (
     <Square value={props.squares[i]} onClick={() => props.onClick(i)} className={win(i)} />
@@ -142,7 +143,7 @@ function SwichButton(props: SProps) {
   )
 }
 
-function calculateWinner(squares: string[]): { mark?: string; numbers?: number[] } | null {
+function calculateWinner(squares: string[]): WProps | null {
   const lines = [
     [0, 1, 2],
     [3, 4, 5],
@@ -202,8 +203,6 @@ function Game() {
     </div>
   )
 }
-
-// ========================================
 
 export default class TicTocToe extends React.Component<{ contents: any }> {
   public render() {
