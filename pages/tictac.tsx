@@ -14,12 +14,13 @@ interface WProps {
 }
 
 interface SProps {
-  onClick: React.MouseEventHandler
+  onClick?: any
   histories: any
   asc: boolean
-  winner: WProps | null
+  winner?: WProps | null
   stepNumber: number
-  xIsNext: boolean
+  xIsNext?: boolean
+  jump?: any
 }
 
 function Square(props: EProps) {
@@ -97,11 +98,30 @@ function Board(props: { squares: any; onClick: any; winner: WProps | null }) {
   )
 }
 
+function Moves(props: SProps): any {
+  const key = [...props.histories.keys()]
+  return key.map((step: string | any) => {
+    !props.asc && (step = props.histories.length - step - 1)
+    const bold = props.stepNumber === step ? 'bold' : 'unbold'
+    const desc = step ? 'Go to move #' + step : 'Go to game start'
+    return (
+      <li key={step}>
+        <button className={bold} onClick={() => props.onClick(step)}>
+          {desc}
+        </button>
+        <style>
+          {`
+            .bold {
+              font-weight: bold;
+            }
+          `}
+        </style>
+      </li>
+    )
+  })
+}
+
 function SwichButton(props: SProps) {
-  // const jumpTo = (step: number) => {
-  //   setStepNumber(step)
-  //   setXIsNext(step % 2 === 0)
-  // }
   const status = () =>
     props.winner
       ? 'Winner: ' + props.winner.mark
@@ -109,36 +129,20 @@ function SwichButton(props: SProps) {
       ? 'Next player: ' + (props.xIsNext ? 'X' : 'O')
       : 'Draw'
 
-  const moves = props.histories.map((history: any, step: string | any) => {
-    !props.asc && (step = props.histories.length - step - 1)
-    const bold = props.stepNumber === step ? 'bold' : 'unbold'
-    const desc = step ? 'Go to move #' + step : 'Go to game start'
-    return (
-      <li key={step}>
-        <button
-          className={bold}
-          // onClick={() => jumpTo(step)}
-        >
-          {desc}
-        </button>
-        <style>
-          {`
-          .bold {
-            font-weight: bold;
-          }
-        `}
-        </style>
-      </li>
-    )
-  })
-
   return (
     <div style={{ marginLeft: '20px' }}>
       <div>{status()}</div>
       <div>
         <button onClick={props.onClick}>Sort order</button>
       </div>
-      <ol style={{ paddingLeft: '30px' }}>{moves}</ol>
+      <ol style={{ paddingLeft: '30px' }}>
+        <Moves
+          histories={props.histories}
+          asc={props.asc}
+          stepNumber={props.stepNumber}
+          onClick={(step: number) => props.jump(step)}
+        />
+      </ol>
     </div>
   )
 }
@@ -184,6 +188,11 @@ function Game() {
     setXIsNext(!xIsNext)
   }
 
+  const jumpTo = (step: number) => {
+    setStepNumber(step)
+    setXIsNext(step % 2 === 0)
+  }
+
   return (
     <div
       style={{
@@ -199,6 +208,7 @@ function Game() {
         winner={winner}
         stepNumber={stepNumber}
         xIsNext={xIsNext}
+        jump={(step: number) => jumpTo(step)}
       />
     </div>
   )
