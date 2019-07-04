@@ -45,6 +45,9 @@ function Square(props: EProps) {
         .kbd-navigation .square:focus {
           background: #ddd;
         }
+        .highlight {
+          background: yellow;
+        }
       `}
       </style>
     </button>
@@ -79,18 +82,11 @@ function Board(props: { squares: any; onClick: any; highlight: any }) {
         {renderSquare(7)}
         {renderSquare(8)}
       </BoardRow>
-      <style>
-        {`
-        .highlight {
-          background-color: yellow;
-        }
-      `}
-      </style>
     </div>
   )
 }
 
-function calculateWinner(squares: string[]): { valid: boolean; mark?: string; numbers?: number[] } {
+function calculateWinner(squares: string[]): { mark?: string; numbers?: number[] } | null {
   const lines = [
     [0, 1, 2],
     [3, 4, 5],
@@ -101,12 +97,11 @@ function calculateWinner(squares: string[]): { valid: boolean; mark?: string; nu
     [0, 4, 8],
     [2, 4, 6],
   ]
-  let line = { valid: false, mark: '', numbers: [0, 0, 0] }
-  lines.map((i) => {
-    const [markA, markB, markC] = [squares[i[0]], squares[i[1]], squares[i[3]]]
+  let line = null
+  lines.forEach((i) => {
+    const [markA, markB, markC] = [squares[i[0]], squares[i[1]], squares[i[2]]]
     if (markA && markA === markB && markA === markC) {
-      console.log('match', [markA, i])
-      line = { valid: true, mark: markA, numbers: i }
+      line = { mark: markA, numbers: i }
     }
   })
   return line
@@ -118,6 +113,7 @@ function Game() {
       squares: Array(9).fill(null),
     },
   ])
+
   const [stepNumber, setStepNumber] = useState(0)
   const [xIsNext, setXIsNext] = useState(true)
   const [asc, setAsc] = useState(true)
@@ -126,11 +122,9 @@ function Game() {
   const current = history[history.length - 1]
   const squares = current.squares.slice()
   const winner = calculateWinner(squares)
-
-  console.log(winner)
   const sortOrder = () => setAsc(!asc)
   const handleClick = (i: number) => {
-    if (winner.valid || squares[i]) {
+    if (winner || squares[i]) {
       return
     }
     squares[i] = xIsNext ? 'X' : 'O'
@@ -170,12 +164,12 @@ function Game() {
     )
   })
 
-  const win = (i: number, w: any) =>
-    w.valid ? w.numbers.map((n: number) => (i === n ? 'highlight' : 'nocolor')) : 'nocolor'
+  const win = (i: number) =>
+    winner ? winner.numbers && winner.numbers.map((n: number) => i === n && ' highlight ') : null
 
-  const status = (w: any) =>
-    w.valid
-      ? 'Winner: ' + w.mark
+  const status = () =>
+    winner
+      ? 'Winner: ' + winner.mark
       : stepNumber < 9
       ? 'Next player: ' + (xIsNext ? 'X' : 'O')
       : 'Draw'
@@ -191,11 +185,11 @@ function Game() {
         <Board
           squares={current.squares}
           onClick={(i: number) => handleClick(i)}
-          highlight={(i: number) => win(i, winner)}
+          highlight={(i: number) => win(i)}
         />
       </div>
       <div style={{ marginLeft: '20px' }}>
-        <div>{status(winner)}</div>
+        <div>{status()}</div>
         <div>
           <button onClick={() => sortOrder()}>Sort order</button>
         </div>
