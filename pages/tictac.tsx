@@ -97,14 +97,10 @@ function calculateWinner(squares: string[]): { mark?: string; numbers?: number[]
     [0, 4, 8],
     [2, 4, 6],
   ]
-  let line = null
-  lines.forEach((i) => {
-    const [markA, markB, markC] = [squares[i[0]], squares[i[1]], squares[i[2]]]
-    if (markA && markA === markB && markA === markC) {
-      line = { mark: markA, numbers: i }
-    }
-  })
-  return line
+  const line = lines.find(
+    (i) => squares[i[0]] && squares[i[0]] === squares[i[1]] && squares[i[0]] === squares[i[2]],
+  )
+  return line ? { mark: squares[line[0]], numbers: line } : null
 }
 
 function Game() {
