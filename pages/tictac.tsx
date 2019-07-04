@@ -3,9 +3,18 @@ import { Layout } from '../components/Layout'
 import styled from 'styled-components'
 
 interface EProps {
-  className: 'highlight' | undefined
+  className: 'highlight' | null | undefined
   onClick: React.MouseEventHandler
   value: string
+}
+
+interface SProps {
+  onClick: React.MouseEventHandler
+  histories: any
+  asc: boolean
+  winner: { mark?: string; numbers?: number[] } | null
+  stepNumber: number
+  xIsNext: boolean
 }
 
 function Square(props: EProps) {
@@ -50,13 +59,18 @@ const BoardRow = styled.div`
     display: table;
   }
 `
-function Board(props: { squares: any; onClick: any; highlight: any }) {
+function Board(props: {
+  squares: any
+  onClick: any
+  winner: { mark?: string; numbers?: number[] } | null
+}) {
+  const win = (i: number): any =>
+    props.winner
+      ? props.winner.numbers && props.winner.numbers.map((n: number) => i === n && ' highlight ')
+      : null
+
   const renderSquare = (i: number) => (
-    <Square
-      value={props.squares[i]}
-      onClick={() => props.onClick(i)}
-      className={props.highlight(i)}
-    />
+    <Square value={props.squares[i]} onClick={() => props.onClick(i)} className={win(i)} />
   )
 
   return (
@@ -80,15 +94,6 @@ function Board(props: { squares: any; onClick: any; highlight: any }) {
       </div>
     </div>
   )
-}
-
-interface SProps {
-  onClick: React.MouseEventHandler
-  histories: any
-  asc: boolean
-  winner: { mark?: string; numbers?: number[] } | null
-  stepNumber: number
-  xIsNext: boolean
 }
 
 function SwichButton(props: SProps) {
@@ -167,6 +172,7 @@ function Game() {
     document.title = `You clicked ${stepNumber} times`
   }, [stepNumber])
 
+  const sortOrder = () => setAsc(!asc)
   const handleClick = (i: number) => {
     if (winner || squares[i]) {
       return
@@ -177,10 +183,6 @@ function Game() {
     setXIsNext(!xIsNext)
   }
 
-  const sortOrder = () => setAsc(!asc)
-  const win = (i: number) =>
-    winner ? winner.numbers && winner.numbers.map((n: number) => i === n && ' highlight ') : null
-
   return (
     <div
       style={{
@@ -188,11 +190,7 @@ function Game() {
         flexDirection: 'row',
       }}
     >
-      <Board
-        squares={squares}
-        onClick={(i: number) => handleClick(i)}
-        highlight={(i: number) => win(i)}
-      />
+      <Board squares={squares} onClick={(i: number) => handleClick(i)} winner={winner} />
       <SwichButton
         onClick={() => sortOrder()}
         histories={histories}
