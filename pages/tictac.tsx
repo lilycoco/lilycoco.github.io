@@ -171,7 +171,7 @@ function useNewTimer(currentDate: any, winner: WProps | null) {
   const [date, setDate] = useState(currentDate)
 
   function tick() {
-    setDate(Math.floor((Date.now() - startTime) / 1000))
+    setDate(Math.round((Date.now() - startTime) / 1000))
   }
 
   const timerID = setInterval(() => tick(), 1000)
