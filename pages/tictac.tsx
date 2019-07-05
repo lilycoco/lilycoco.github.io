@@ -130,12 +130,14 @@ function SwichButton(props: SProps) {
       : 'Draw'
 
   return (
-    <div style={{ marginLeft: '20px' }}>
-      <div>{status()}</div>
+    <div style={{ marginTop: '20px' }}>
+      <div style={{ fontSize: '20px' }}>{status()}</div>
       <div>
-        <button onClick={props.onClick}>Sort order</button>
+        <button onClick={props.onClick} style={{ margin: '10px 0px' }}>
+          Sort order
+        </button>
       </div>
-      <ol style={{ paddingLeft: '30px' }}>
+      <ol>
         <Moves
           histories={props.histories}
           asc={props.asc}
@@ -162,6 +164,47 @@ function calculateWinner(squares: string[]): WProps | null {
     (i) => squares[i[0]] && squares[i[0]] === squares[i[1]] && squares[i[0]] === squares[i[2]],
   )
   return line ? { mark: squares[line[0]], numbers: line } : null
+}
+
+const startTime = Date.now()
+function useNewTimer(currentDate: any, winner: WProps | null) {
+  const [date, setDate] = useState(currentDate)
+
+  function tick() {
+    setDate(Math.floor((Date.now() - startTime) / 1000))
+  }
+
+  const timerID = setInterval(() => tick(), 1000)
+
+  useEffect(() => {
+    timerID
+    return function cleanup() {
+      clearInterval(timerID)
+    }
+  })
+
+  if (winner) {
+    clearInterval(timerID)
+  }
+
+  return date
+}
+
+function Clock(props: { winner: WProps | null }) {
+  const timer = useNewTimer(0, props.winner)
+  return (
+    <div>
+      <h2> {timer} sec has passed </h2>
+      <style>
+        {`
+            h2 {
+              font-size: 20px;
+              margin-top: 15px;
+            }
+          `}
+      </style>
+    </div>
+  )
 }
 
 function Game() {
@@ -193,13 +236,9 @@ function Game() {
   }
 
   return (
-    <div
-      style={{
-        display: 'flex',
-        flexDirection: 'row',
-      }}
-    >
+    <div>
       <Board squares={squares} onClick={(i: number) => handleClick(i)} winner={winner} />
+      <Clock winner={winner} />
       <SwichButton
         onClick={() => sortOrder()}
         histories={histories}
