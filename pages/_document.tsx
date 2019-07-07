@@ -29,7 +29,7 @@ export default class MyDocument extends Document {
           <meta httpEquiv='X-UA-Compatible' content='IE=edge' />
           <meta name='viewport' content='width=device-width,initial-scale=1' />
           <meta name='author' content='Lilycoco' />
-          <link rel='shortcut icon' href='static/favicon.ico' />
+          <link rel='shortcut icon' href='/static/favicon.ico' />
           <link
             rel='stylesheet'
             href='https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css'
