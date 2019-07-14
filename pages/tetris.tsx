@@ -59,40 +59,36 @@ function Game() {
   const [board, setBoard] = useState(BoardType)
   const [x, setX] = useState(4)
   const [y, setY] = useState(-BrockShape[currentShape].length)
-  const intervalRef = useRef()
 
+  console.log(currentShape)
   const downHandler = ({ key }: any) => {
     switch (key) {
       case 'ArrowDown':
-        setY((y) => y + 1)
+        setY((y) => (y + BrockShape[currentShape].length < 20 ? y + 1 : y))
         break
       case 'ArrowLeft':
-        setX((x) => x - 1)
+        setX((x) => (x > 0 ? x - 1 : x))
         break
       case 'ArrowRight':
-        setX((x) => x + 1)
+        console.log(currentShape)
+        setX((x) => (x + BrockShape[currentShape][0].length < 10 ? x + 1 : x))
         break
       case 'Enter':
         setCurrentShape((c) => ((c + 1) % 4 === 0 ? c - 3 : c + 1))
     }
   }
-  // console.log(currentShape)
 
   useEffect(() => {
     window.addEventListener('keydown', downHandler)
     const flowBlock: any = setInterval(() => {
       setY((y) => (y + BrockShape[currentShape].length < 20 ? y + 1 : 0))
     }, 1000)
-    intervalRef.current = flowBlock
     return () => {
       window.addEventListener('keydown', downHandler)
-      clearInterval(intervalRef.current)
+      clearInterval(flowBlock)
     }
   }, [])
 
-  // if(!running){
-  //   clearInterval(intervalRef.current)
-  // }
   const drowBoard = boardStyle(board)
   const newboard = drowNewBoard(BoardType, x, y, currentColor, currentShape, running)
 
