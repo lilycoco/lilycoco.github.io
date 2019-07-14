@@ -1,51 +1,15 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import { Layout } from '../components/Layout'
-import { TetrisShape } from '../components/TetrisShape'
-import styled from 'styled-components'
+import { BrockShape, BoardType, BrockColors } from '../components/TetrisComponent'
 
-const colors = [
-  //テトリスの色の配列
-  'navy',
-  'darkmagenta',
-  'orangered',
-  'yellow',
-  'deeppink',
-  'limegreen',
-]
-
-function flow(defaultLow: any, running: boolean, currentShape: number) {
-  const [low, setLow] = useState(defaultLow)
-  const [lat, setLat] = useState(4)
-
-  const calculateLow = low + TetrisShape[currentShape].length < 20 ? low + 1 : 0
-  const flowing = setInterval(() => setLow(calculateLow), 1000)
-  const downHandler = ({ key }: any) => {
-    key === 'ArrowDown' && setLow(low + 1)
-    key === 'ArrowLeft' && setLat(lat - 1)
-    key === 'ArrowRight' && setLat(lat + 1)
-  }
-  useEffect(() => {
-    window.addEventListener('keydown', downHandler)
-    flowing
-    return function cleanup() {
-      clearInterval(flowing)
-    }
-  })
-
-  if (!running) {
-    clearInterval(flowing)
-  }
-  return { low, lat }
-}
-
-const boardStyle = (defaultBoard: any[][]) => {
-  return defaultBoard.map((line: any, colNo: number) => (
+const boardStyle = (defaultBoard: number[][]) => {
+  return defaultBoard.map((line: number[], colNo: number) => (
     <div key={colNo} className='line'>
       {line.map((num: number, rowNo: number) => (
         <div
           key={rowNo}
           className={'block ' + (num === 0 && 'clear')}
-          style={num > 0 ? { backgroundColor: colors[num - 1] } : undefined}
+          style={num > 0 ? { backgroundColor: BrockColors[num - 1] } : undefined}
         >
           {num}
         </div>
@@ -54,72 +18,83 @@ const boardStyle = (defaultBoard: any[][]) => {
   ))
 }
 
-function drowBoard(defaultBoard: any) {
-  const [board, setBoard] = useState(defaultBoard)
-  // useEffect(() => {
-  // })
-  return boardStyle(board)
-}
-
 function drowNewBoard(
-  defaultBoard: any,
-  low: number,
-  lat: number,
+  defaultBoard: number[][],
+  x: number,
+  y: number,
   currentColor: number,
   currentShape: number,
   running: boolean,
 ) {
+  let dummy = defaultBoard
   if (running) {
-    TetrisShape[currentShape].map((hei, heiIndex) =>
-      hei.map((wid, widIndex) => {
-        return wid === 1 && (defaultBoard.slice()[heiIndex + low][widIndex + lat] = currentColor)
+    console.log(currentShape)
+    dummy = defaultBoard.map((line: number[], lineIndex: number) =>
+      line.map((block: number, blockIndex: number) => {
+        const currentBlock = BrockShape[currentShape]
+        if (
+          lineIndex - y >= 0 &&
+          blockIndex - x >= 0 &&
+          currentBlock.length > lineIndex - y &&
+          currentBlock[0].length > blockIndex - x &&
+          currentBlock[lineIndex - y][blockIndex - x] === 1
+        ) {
+          return block + currentColor
+        } else {
+          return block
+        }
       }),
     )
   }
-  return boardStyle(defaultBoard)
+  console.log(dummy)
+  return boardStyle(dummy)
 }
 
 function Game() {
-  const boardType = [
-    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-  ]
   let selectShape = Math.floor(Math.random() * 27)
   let selectColor = Math.floor(Math.random() * 5)
   const [currentColor, setCurrentColor] = useState(selectColor)
   const [currentShape, setCurrentShape] = useState(selectShape)
   const [running, setRunning] = useState(false)
-  const { low, lat } = flow(
-    0,
-    running,
-    currentShape,
-  )
-  console.log(low)
-  const board = drowBoard(boardType)
-  const newboard = drowNewBoard(boardType, low, lat, currentColor, currentShape, running)
+  const [board, setBoard] = useState(BoardType)
+  const [x, setX] = useState(4)
+  const [y, setY] = useState(-BrockShape[currentShape].length)
+  const intervalRef = useRef()
 
-  if (low + TetrisShape[currentShape].length >= 20) {
-    // setCurrentColor(selectColor)
-    // setCurrentShape(selectShape)
+  const downHandler = ({ key }: any) => {
+    switch (key) {
+      case 'ArrowDown':
+        setY((y) => y + 1)
+        break
+      case 'ArrowLeft':
+        setX((x) => x - 1)
+        break
+      case 'ArrowRight':
+        setX((x) => x + 1)
+        break
+      case 'Enter':
+        setCurrentShape((c) => ((c + 1) % 4 === 0 ? c - 3 : c + 1))
+    }
   }
+  // console.log(currentShape)
+
+  useEffect(() => {
+    window.addEventListener('keydown', downHandler)
+    const flowBlock: any = setInterval(() => {
+      setY((y) => (y + BrockShape[currentShape].length < 20 ? y + 1 : 0))
+    }, 1000)
+    intervalRef.current = flowBlock
+    return () => {
+      window.addEventListener('keydown', downHandler)
+      clearInterval(intervalRef.current)
+    }
+  }, [])
+
+  // if(!running){
+  //   clearInterval(intervalRef.current)
+  // }
+  const drowBoard = boardStyle(board)
+  const newboard = drowNewBoard(BoardType, x, y, currentColor, currentShape, running)
 
   const handleRunClick = () => setRunning(!running)
   const handleClearClick = () => {}
@@ -127,7 +102,7 @@ function Game() {
   return (
     <div>
       <div className='boardWrapper'>
-        <div className='board'>{board}</div>
+        {/* <div className='board'>{drowBoard}</div> */}
         <div className='newBoard'>{newboard}</div>
       </div>
       <button className='btn btn-primary' onClick={() => handleRunClick()}>
@@ -136,7 +111,7 @@ function Game() {
       <button className='btn btn-primary' onClick={() => handleClearClick()}>
         Clear
       </button>
-      <label style={{ fontSize: '5em', display: 'block' }}>{low}</label>
+      <label style={{ fontSize: '5em', display: 'block' }}>{y}</label>
       <style>
         {`
         .boardWrapper{
@@ -178,8 +153,6 @@ function Game() {
     </div>
   )
 }
-
-// ========================================
 
 export default class Tetris extends React.Component<{ contents: any }> {
   public render() {
