@@ -26,28 +26,26 @@ function drowBoard(
   y: number,
   currentColor: number,
   currentShape: number,
-  running: boolean,
 ) {
   let newBoard = defaultBoard
-  if (running) {
-    console.log(currentShape)
-    newBoard = defaultBoard.map((line: number[], lineIndex: number) =>
-      line.map((block: number, blockIndex: number) => {
-        const currentBlock = BrockShape[currentShape]
-        if (
-          lineIndex - y >= 0 &&
-          blockIndex - x >= 0 &&
-          currentBlock.length > lineIndex - y &&
-          currentBlock[0].length > blockIndex - x &&
-          currentBlock[lineIndex - y][blockIndex - x] === 1
-        ) {
-          return block + currentColor
-        } else {
-          return block
-        }
-      }),
-    )
-  }
+  console.log(currentShape)
+  newBoard = defaultBoard.map((line: number[], lineIndex: number) =>
+    line.map((block: number, blockIndex: number) => {
+      const currentBlock = BrockShape[currentShape]
+      if (
+        lineIndex - y >= 0 &&
+        blockIndex - x >= 0 &&
+        currentBlock.length > lineIndex - y &&
+        currentBlock[0].length > blockIndex - x &&
+        currentBlock[lineIndex - y][blockIndex - x] === 1
+      ) {
+        return block + currentColor
+      } else {
+        return block
+      }
+    }),
+  )
+
   return newBoard
 }
 
@@ -96,7 +94,7 @@ function Game() {
   }, [running, currentShape])
 
   // const baseBoard = boardStyle(board)
-  const newboard = boardStyle(drowBoard(BoardType, x, y, currentColor, currentShape, running))
+  const newboard = boardStyle(drowBoard(BoardType, x, y, currentColor, currentShape))
   const handleRunClick = () => setRunning(!running)
   const handleClearClick = () => {}
 
