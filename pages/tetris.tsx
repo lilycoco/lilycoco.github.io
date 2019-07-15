@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useReducer } from 'react'
+import React, { useState, useEffect, useReducer, useCallback } from 'react'
 import { Layout } from '../components/Layout'
 import { BrockShape, BoardType, BrockColors } from '../components/TetrisComponent'
 
@@ -25,9 +25,7 @@ function drowBoard(
   currentColor: number,
   currentShape: number,
 ) {
-  let newBoard = defaultBoard
-  console.log(currentShape)
-  newBoard = defaultBoard.map((line: number[], lineIndex: number) =>
+  return defaultBoard.map((line: number[], lineIndex: number) =>
     line.map((block: number, blockIndex: number) => {
       const currentBlock = BrockShape[currentShape]
       if (
@@ -37,19 +35,17 @@ function drowBoard(
         currentBlock[0].length > blockIndex - x &&
         currentBlock[lineIndex - y][blockIndex - x] === 1
       ) {
-        return block + currentColor
+        return currentColor
       } else {
         return block
       }
     }),
   )
-
-  return newBoard
 }
 
 function Game() {
   let selectShape = Math.floor(Math.random() * 27)
-  let selectColor = Math.floor(Math.random() * 5)
+  let selectColor = Math.floor(Math.random() * 5) + 1
   const [currentColor, setCurrentColor] = useState(selectColor)
   const [currentShape, setCurrentShape] = useState(selectShape)
   const [running, setRunning] = useState(false)
@@ -57,11 +53,28 @@ function Game() {
   const [y, setY] = useState(-BrockShape[currentShape].length)
   const [board, setBoard] = useState(BoardType)
 
-  console.log(currentShape)
+  const baseBoard = boardStyle(board)
+  const newboard = boardStyle(drowBoard(BoardType, x, y, currentColor, currentShape))
+  const handleRunClick = () => setRunning(!running)
+  const handleClearClick = () => {}
+
+  const checkForward = useCallback(
+    (y: number) =>
+      !BrockShape[currentShape].some((line, lineIndex) =>
+        line.some(
+          (block, blockIndex) =>
+            block === 1 &&
+            (!board[y + lineIndex + 1] ||
+              (board[y + lineIndex + 1] && board[y + lineIndex + 1][blockIndex + x] !== 0)),
+        ),
+      ),
+    [y, x, currentShape],
+  )
+
   const downHandler = ({ key }: any) => {
     switch (key) {
       case 'ArrowDown':
-        setY((y) => (y + BrockShape[currentShape].length < 20 ? y + 1 : y))
+        setY((y) => (checkForward(y) ? y + 1 : y))
         break
       case 'ArrowLeft':
         setX((x) => (x > 0 ? x - 1 : x))
@@ -78,28 +91,23 @@ function Game() {
   useEffect(() => {
     window.addEventListener('keydown', downHandler)
     const flowBlock: any = setInterval(() => {
-      // if(!(y + BrockShape[currentShape].length >= 20)) {
-      //   setCurrentShape(selectShape)
-      //   setCurrentColor(selectColor)
-      //   setBoard(drowBoard(board, x, y, currentColor, currentShape, running))
-      // }
-      setY((y) => (running ? (y + BrockShape[currentShape].length < 20 ? y + 1 : 0) : y))
+      setY((y) => (running ? (checkForward(y) ? y + 1 : 0) : y))
+      if (!checkForward(y)) {
+        setCurrentShape(selectShape)
+        setCurrentColor(selectColor)
+        setBoard(drowBoard(board, x, y, currentColor, currentShape))
+      }
     }, 1000)
     return () => {
       window.removeEventListener('keydown', downHandler)
       clearInterval(flowBlock)
     }
-  }, [running, currentShape])
-
-  // const baseBoard = boardStyle(board)
-  const newboard = boardStyle(drowBoard(BoardType, x, y, currentColor, currentShape))
-  const handleRunClick = () => setRunning(!running)
-  const handleClearClick = () => {}
+  }, [y, running, currentShape])
 
   return (
     <div>
       <div className='boardWrapper'>
-        {/* <div className='board'>{baseBoard}</div> */}
+        <div className='board'>{baseBoard}</div>
         <div className='newBoard'>{newboard}</div>
       </div>
       <button className='btn btn-primary' onClick={handleRunClick}>
