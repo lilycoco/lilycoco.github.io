@@ -90,10 +90,10 @@ function Game() {
       setY((y) => (y + BrockShape[currentShape].length < 20 ? y + 1 : 0))
     }, 1000)
     return () => {
-      window.addEventListener('keydown', downHandler)
+      window.removeEventListener('keydown', downHandler)
       clearInterval(flowBlock)
     }
-  }, [])
+  }, [running, currentShape])
 
   // const baseBoard = boardStyle(board)
   const newboard = boardStyle(drowBoard(BoardType, x, y, currentColor, currentShape, running))
@@ -106,10 +106,10 @@ function Game() {
         {/* <div className='board'>{baseBoard}</div> */}
         <div className='newBoard'>{newboard}</div>
       </div>
-      <button className='btn btn-primary' onClick={() => handleRunClick()}>
+      <button className='btn btn-primary' onClick={handleRunClick}>
         {running ? 'Stop' : 'Start!'}
       </button>
-      <button className='btn btn-primary' onClick={() => handleClearClick()}>
+      <button className='btn btn-primary' onClick={handleClearClick}>
         Clear
       </button>
       <label style={{ fontSize: '5em', display: 'block' }}>{y}</label>
