@@ -87,7 +87,7 @@ function Game() {
       //   setCurrentColor(selectColor)
       //   setBoard(drowBoard(board, x, y, currentColor, currentShape, running))
       // }
-      setY((y) => (y + BrockShape[currentShape].length < 20 ? y + 1 : 0))
+      setY((y) => (running ? (y + BrockShape[currentShape].length < 20 ? y + 1 : 0) : y))
     }, 1000)
     return () => {
       window.removeEventListener('keydown', downHandler)
