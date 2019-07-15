@@ -25,7 +25,8 @@ function drowBoard(
   currentColor: number,
   currentShape: number,
 ) {
-  return defaultBoard.map((line: number[], lineIndex: number) =>
+  let newBoard = defaultBoard
+  newBoard = defaultBoard.map((line: number[], lineIndex: number) =>
     line.map((block: number, blockIndex: number) => {
       const currentBlock = BrockShape[currentShape]
       if (
@@ -41,11 +42,12 @@ function drowBoard(
       }
     }),
   )
+  return newBoard
 }
 
 function Game() {
   let selectShape = Math.floor(Math.random() * 27)
-  let selectColor = Math.floor(Math.random() * 5) + 1
+  let selectColor = Math.floor(Math.random() * 6) + 1
   const [currentColor, setCurrentColor] = useState(selectColor)
   const [currentShape, setCurrentShape] = useState(selectShape)
   const [running, setRunning] = useState(false)
@@ -58,44 +60,81 @@ function Game() {
   const handleRunClick = () => setRunning(!running)
   const handleClearClick = () => {}
 
-  const checkForward = useCallback(
-    (y: number) =>
-      !BrockShape[currentShape].some((line, lineIndex) =>
-        line.some(
-          (block, blockIndex) =>
-            block === 1 &&
-            (!board[y + lineIndex + 1] ||
-              (board[y + lineIndex + 1] && board[y + lineIndex + 1][blockIndex + x] !== 0)),
-        ),
+  const checkForward = (y: number) =>
+    !BrockShape[currentShape].some((line, lineIndex) =>
+      line.some(
+        (block, blockIndex) =>
+          block === 1 &&
+          (!board[y + lineIndex + 1] ||
+            (board[y + lineIndex + 1] && board[y + lineIndex + 1][blockIndex + x] !== 0)),
       ),
-    [y, x, currentShape],
-  )
+    )
+
+  const checkRight = (x: number) =>
+    !BrockShape[currentShape].some((line, lineIndex) =>
+      line.some(
+        (block, blockIndex) =>
+          block === 1 &&
+          (!board[x + blockIndex + 1] ||
+            (board[x + blockIndex + 1] && board[y + lineIndex][x + blockIndex + 1] !== 0)),
+      ),
+    )
+
+  const checkLeft = (x: number) =>
+    !BrockShape[currentShape].some((line, lineIndex) =>
+      line.some(
+        (block, blockIndex) =>
+          block === 1 && (x <= 0 || (x > 0 && board[y + lineIndex][x + blockIndex - 1] !== 0)),
+      ),
+    )
 
   const downHandler = ({ key }: any) => {
     switch (key) {
       case 'ArrowDown':
         setY((y) => (checkForward(y) ? y + 1 : y))
         break
-      case 'ArrowLeft':
-        setX((x) => (x > 0 ? x - 1 : x))
-        break
       case 'ArrowRight':
-        console.log(currentShape)
-        setX((x) => (x + BrockShape[currentShape][0].length < 10 ? x + 1 : x))
+        setX((x) => (checkRight(x) ? x + 1 : x))
+        break
+      case 'ArrowLeft':
+        setX((x) => (checkLeft(x) ? x - 1 : x))
         break
       case 'Enter':
         setCurrentShape((c) => ((c + 1) % 4 === 0 ? c - 3 : c + 1))
     }
   }
 
+  function deleteRow() {
+    const willDeleteRow: any[] = []
+    console.log(willDeleteRow)
+    board.forEach((line) => {
+      if (!line.some((block: number) => block === 0)) {
+        willDeleteRow.push(line)
+      }
+    })
+
+    if (willDeleteRow.length > 0) {
+      for (let t = board.length - 1; t >= 0; t--) {
+        // if(t - willDeleteRow.length > 0 && willDeleteRow[0] >= t) {
+        board[t] = board[t - willDeleteRow.length]
+        // }
+      }
+    }
+  }
+
   useEffect(() => {
     window.addEventListener('keydown', downHandler)
     const flowBlock: any = setInterval(() => {
-      setY((y) => (running ? (checkForward(y) ? y + 1 : 0) : y))
-      if (!checkForward(y)) {
-        setCurrentShape(selectShape)
-        setCurrentColor(selectColor)
-        setBoard(drowBoard(board, x, y, currentColor, currentShape))
+      if (running) {
+        if (checkForward(y)) {
+          setY((y) => y + 1)
+        } else {
+          setBoard(drowBoard(board, x, y, currentColor, currentShape))
+          deleteRow()
+          setY(0)
+          setCurrentShape(selectShape)
+          setCurrentColor(selectColor)
+        }
       }
     }, 1000)
     return () => {
