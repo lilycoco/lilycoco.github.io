@@ -65,12 +65,13 @@ function Game() {
   const handleRunClick = () => setRunning(!running)
   const handleClearClick = () => {}
   const blockSize = 1
+  const hasBlock = 1
 
   const checkForward = (y: number) =>
     !BrockShape[currentShape].some((line, lineIndex) =>
       line.some(
         (block, blockIndex) =>
-          block === 1 &&
+          block === hasBlock &&
           (!board[y + lineIndex + blockSize] ||
             (board[y + lineIndex + blockSize] &&
               board[y + lineIndex + blockSize][blockIndex + x] !== 0)),
@@ -81,7 +82,7 @@ function Game() {
     !BrockShape[currentShape].some((line, lineIndex) =>
       line.some(
         (block, blockIndex) =>
-          block === 1 &&
+          block === hasBlock &&
           (!board[x + blockIndex + blockSize] ||
             (board[x + blockIndex + blockSize] &&
               board[y + lineIndex][x + blockIndex + blockSize] !== 0)),
@@ -92,7 +93,7 @@ function Game() {
     !BrockShape[currentShape].some((line, lineIndex) =>
       line.some(
         (block, blockIndex) =>
-          block === 1 &&
+          block === hasBlock &&
           (x <= 0 || (x > 0 && board[y + lineIndex][x + blockIndex - blockSize] !== 0)),
       ),
     )
@@ -133,7 +134,7 @@ function Game() {
     const flowBlock: any = setInterval(() => {
       if (running) {
         if (checkForward(y)) {
-          setY((y) => y + 1)
+          setY((y) => y + blockSize)
         } else {
           setBoard(changeBoard(board, x, y, currentColor, currentShape))
           setY(0)
