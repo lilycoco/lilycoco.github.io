@@ -1,12 +1,13 @@
 import React, { useState, useEffect, useRef } from 'react'
 import { Layout } from '../components/Layout'
+import { DrowBoard } from '../components/DrowBoard'
 import {
-  BrockShape,
-  BoardType,
-  DrowBoard,
-  ChangeBoard,
-  DeleteRow,
-  CheckForward,
+  brockShape,
+  boardType,
+  changeBoard,
+  deleteRow,
+  checkForward,
+  judgeGameOver,
 } from '../components/TetrisComponents'
 
 function Game() {
@@ -17,24 +18,50 @@ function Game() {
   const [currentShape, setCurrentShape] = useState(selectShape)
   const [running, setRunning] = useState(false)
   const [x, setX] = useState(4)
-  const [y, setY] = useState(-BrockShape[currentShape].length)
-  const [board, setBoard] = useState(BoardType)
+  const [y, setY] = useState(-brockShape[currentShape].length)
+  const [board, setBoard] = useState(boardType)
+  const [over, setOver] = useState(false)
   const baseBoard = DrowBoard(board)
-  const newboard = DrowBoard(ChangeBoard(BoardType, x, y, currentColor, currentShape))
+  const newboard = DrowBoard(changeBoard(boardType, x, y, currentColor, currentShape))
   const intervalRef = useRef()
-  const row = DeleteRow(board)
+  const canDeleteRow = deleteRow(board)
+  const canGoForward = (position: number, key: string) =>
+    checkForward(position, key, x, y, currentShape, board)
 
   const handleRunClick = () => setRunning(!running)
 
   const handleClearClick = () => {
     clearInterval(intervalRef.current)
     setRunning(false)
-    setBoard(BoardType)
-    setY(-BrockShape[currentShape].length)
+    setOver(false)
+    setBoard(boardType)
+    setY(-brockShape[currentShape].length)
   }
 
-  const canGoForward = (position: number, key: string) =>
-    CheckForward(position, key, x, y, currentShape, board)
+  const DrowGameOver = () => {
+    clearInterval(intervalRef.current)
+    return (
+      <div className='gameOver'>
+        Game Over
+        <style>
+          {`
+        .gameOver {
+          color: white;
+          font-size: 75px;
+          padding: 35px 25px;
+          position: absolute;
+          width: 100%;
+          top: 0px;
+          left: 0px;
+          background-color: rgb(0, 0, 0, 0.6);
+          height: 100%;
+          letter-spacing: 0.05em;
+        }
+        `}
+        </style>
+      </div>
+    )
+  }
 
   const downHandler = ({ key }: any) => {
     switch (key) {
@@ -54,11 +81,12 @@ function Game() {
 
   const intervalProcessing = () => {
     if (running) {
+      judgeGameOver(board) && setOver(true)
       if (canGoForward(y, 'ArrowDown')) {
         setY((currentY) => currentY + blockSize)
-        row && setBoard(row)
+        canDeleteRow && setBoard(canDeleteRow)
       } else {
-        setBoard(ChangeBoard(board, x, y, currentColor, currentShape))
+        setBoard(changeBoard(board, x, y, currentColor, currentShape))
         setY(0)
         setX(4)
         setCurrentShape(selectShape)
@@ -82,6 +110,7 @@ function Game() {
       <div className='boardWrapper'>
         <div className='board'>{baseBoard}</div>
         <div className='newBoard'>{newboard}</div>
+        {over ? DrowGameOver() : null}
       </div>
       <button className='btn btn-primary' onClick={handleRunClick}>
         {running ? 'Stop' : 'Start!'}

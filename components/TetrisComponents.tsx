@@ -1,4 +1,4 @@
-export const BrockShape = [
+export const brockShape = [
   //1: 四角
   [[1, 1], [1, 1]], //0
   [[1, 1], [1, 1]], //1
@@ -36,7 +36,7 @@ export const BrockShape = [
   [[0, 1, 1], [1, 1, 0]], //27
 ]
 
-export const BoardType = [
+export const boardType = [
   [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
   [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
   [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
@@ -59,30 +59,7 @@ export const BoardType = [
   [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
 ]
 
-export const BrockColors = ['navy', 'darkmagenta', 'orangered', 'yellow', 'deeppink', 'limegreen']
-
-export const DrowBoard = (defaultBoard: number[][]) => {
-  return defaultBoard.map((line: number[], colNo: number) => (
-    <div key={colNo} style={{ display: 'flex' }}>
-      {line.map((num: number, rowNo: number) => (
-        <div
-          key={rowNo}
-          className={'block ' + (!num && 'clear')}
-          style={
-            num
-              ? {
-                  backgroundColor: BrockColors[num - 1],
-                  border: '5px outset rgba(255, 255, 255, 0.568)',
-                }
-              : undefined
-          }
-        ></div>
-      ))}
-    </div>
-  ))
-}
-
-export const ChangeBoard = (
+export const changeBoard = (
   defaultBoard: number[][],
   x: number,
   y: number,
@@ -91,7 +68,7 @@ export const ChangeBoard = (
 ) => {
   let newBoard = defaultBoard.map((line: number[], lineIndex: number) =>
     line.map((block: number, blockIndex: number) => {
-      const currentBlock = BrockShape[currentShape]
+      const currentBlock = brockShape[currentShape]
       if (
         lineIndex >= y &&
         blockIndex >= x &&
@@ -108,7 +85,7 @@ export const ChangeBoard = (
   return newBoard
 }
 
-export const DeleteRow = (currentBoard: number[][]) => {
+export const deleteRow = (currentBoard: number[][]) => {
   const willDeleteRows = currentBoard
     .slice()
     .reverse()
@@ -124,7 +101,7 @@ export const DeleteRow = (currentBoard: number[][]) => {
   }
 }
 
-export const CheckForward = (
+export const checkForward = (
   position: number,
   key: string,
   x: number,
@@ -132,7 +109,7 @@ export const CheckForward = (
   currentShape: number,
   board: number[][],
 ) =>
-  !BrockShape[currentShape].some((line, lineIndex) =>
+  !brockShape[currentShape].some((line, lineIndex) =>
     line.some((block, blockIndex) => {
       const hasBlock = 1
       const blockSize = 1
@@ -158,3 +135,13 @@ export const CheckForward = (
       }
     }),
   )
+
+export const judgeGameOver = (board: number[][]) => {
+  for (let i = 0; i < 6; i++) {
+    for (let n = 4; n < 8; n++) {
+      if (board[i][n]) {
+        return true
+      }
+    }
+  }
+}
