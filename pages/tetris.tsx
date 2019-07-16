@@ -23,19 +23,19 @@ function Game() {
   const newboard = DrowBoard(ChangeBoard(BoardType, x, y, currentColor, currentShape))
   const handleRunClick = () => setRunning(!running)
   const handleClearClick = () => {}
-  const check = (position: number, key: string) =>
+  const canGoForward = (position: number, key: string) =>
     CheckForward(position, key, x, y, currentShape, board)
 
   const downHandler = ({ key }: any) => {
     switch (key) {
       case 'ArrowDown':
-        setY((currentY) => (check(currentY, key) ? currentY + blockSize : currentY))
+        setY((currentY) => (canGoForward(currentY, key) ? currentY + blockSize : currentY))
         break
       case 'ArrowRight':
-        setX((currentX) => (check(currentX, key) ? currentX + blockSize : currentX))
+        setX((currentX) => (canGoForward(currentX, key) ? currentX + blockSize : currentX))
         break
       case 'ArrowLeft':
-        setX((currentX) => (check(currentX, key) ? currentX - blockSize : currentX))
+        setX((currentX) => (canGoForward(currentX, key) ? currentX - blockSize : currentX))
         break
       case 'Enter':
         setCurrentShape((c) => ((c + 1) % 4 === 0 ? c - 3 : c + 1))
@@ -46,7 +46,7 @@ function Game() {
     window.addEventListener('keydown', downHandler)
     const flowBlock: any = setInterval(() => {
       if (running) {
-        if (check(y, 'ArrowDown')) {
+        if (canGoForward(y, 'ArrowDown')) {
           setY((currentY) => currentY + blockSize)
         } else {
           setBoard(ChangeBoard(board, x, y, currentColor, currentShape))
