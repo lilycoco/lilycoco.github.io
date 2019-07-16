@@ -64,14 +64,16 @@ function Game() {
   const newboard = drowBoard(changeBoard(BoardType, x, y, currentColor, currentShape))
   const handleRunClick = () => setRunning(!running)
   const handleClearClick = () => {}
+  const blockSize = 1
 
   const checkForward = (y: number) =>
     !BrockShape[currentShape].some((line, lineIndex) =>
       line.some(
         (block, blockIndex) =>
           block === 1 &&
-          (!board[y + lineIndex + 1] ||
-            (board[y + lineIndex + 1] && board[y + lineIndex + 1][blockIndex + x] !== 0)),
+          (!board[y + lineIndex + blockSize] ||
+            (board[y + lineIndex + blockSize] &&
+              board[y + lineIndex + blockSize][blockIndex + x] !== 0)),
       ),
     )
 
@@ -80,8 +82,9 @@ function Game() {
       line.some(
         (block, blockIndex) =>
           block === 1 &&
-          (!board[x + blockIndex + 1] ||
-            (board[x + blockIndex + 1] && board[y + lineIndex][x + blockIndex + 1] !== 0)),
+          (!board[x + blockIndex + blockSize] ||
+            (board[x + blockIndex + blockSize] &&
+              board[y + lineIndex][x + blockIndex + blockSize] !== 0)),
       ),
     )
 
@@ -89,20 +92,21 @@ function Game() {
     !BrockShape[currentShape].some((line, lineIndex) =>
       line.some(
         (block, blockIndex) =>
-          block === 1 && (x <= 0 || (x > 0 && board[y + lineIndex][x + blockIndex - 1] !== 0)),
+          block === 1 &&
+          (x <= 0 || (x > 0 && board[y + lineIndex][x + blockIndex - blockSize] !== 0)),
       ),
     )
 
   const downHandler = ({ key }: any) => {
     switch (key) {
       case 'ArrowDown':
-        setY((y) => (checkForward(y) ? y + 1 : y))
+        setY((y) => (checkForward(y) ? y + blockSize : y))
         break
       case 'ArrowRight':
-        setX((x) => (checkRight(x) ? x + 1 : x))
+        setX((x) => (checkRight(x) ? x + blockSize : x))
         break
       case 'ArrowLeft':
-        setX((x) => (checkLeft(x) ? x - 1 : x))
+        setX((x) => (checkLeft(x) ? x - blockSize : x))
         break
       case 'Enter':
         setCurrentShape((c) => ((c + 1) % 4 === 0 ? c - 3 : c + 1))
