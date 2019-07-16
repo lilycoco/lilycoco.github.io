@@ -27,8 +27,8 @@ function Game() {
   const handleRunClick = () => setRunning(!running)
 
   const handleClearClick = () => {
-    setRunning(false)
     clearInterval(intervalRef.current)
+    setRunning(false)
     setBoard(BoardType)
     setY(-BrockShape[currentShape].length)
   }
