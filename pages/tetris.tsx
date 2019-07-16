@@ -12,13 +12,15 @@ import {
 function Game() {
   let selectShape = Math.floor(Math.random() * 27)
   let selectColor = Math.floor(Math.random() * 6) + 1
+  const blockSize = 1
+
   const [currentColor, setCurrentColor] = useState(selectColor)
   const [currentShape, setCurrentShape] = useState(selectShape)
   const [running, setRunning] = useState(false)
   const [x, setX] = useState(4)
   const [y, setY] = useState(-BrockShape[currentShape].length)
   const [board, setBoard] = useState(BoardType)
-  const blockSize = 1
+
   const baseBoard = DrowBoard(board)
   const newboard = DrowBoard(ChangeBoard(BoardType, x, y, currentColor, currentShape))
   const handleRunClick = () => setRunning(!running)
