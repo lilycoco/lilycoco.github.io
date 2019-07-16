@@ -1,24 +1,29 @@
-import React, { useState, useEffect, useReducer, useCallback } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Layout } from '../components/Layout'
 import { BrockShape, BoardType, BrockColors } from '../components/TetrisComponent'
 
-const boardStyle = (defaultBoard: number[][]) => {
+const drowBoard = (defaultBoard: number[][]) => {
   return defaultBoard.map((line: number[], colNo: number) => (
     <div key={colNo} className='line'>
       {line.map((num: number, rowNo: number) => (
         <div
           key={rowNo}
           className={'block ' + (num === 0 && 'clear')}
-          style={num > 0 ? { backgroundColor: BrockColors[num - 1] } : undefined}
-        >
-          {num}
-        </div>
+          style={
+            num > 0
+              ? {
+                  backgroundColor: BrockColors[num - 1],
+                  border: '5px outset rgba(255, 255, 255, 0.568)',
+                }
+              : undefined
+          }
+        ></div>
       ))}
     </div>
   ))
 }
 
-function drowBoard(
+function changeBoard(
   defaultBoard: number[][],
   x: number,
   y: number,
@@ -55,8 +60,8 @@ function Game() {
   const [y, setY] = useState(-BrockShape[currentShape].length)
   const [board, setBoard] = useState(BoardType)
 
-  const baseBoard = boardStyle(board)
-  const newboard = boardStyle(drowBoard(BoardType, x, y, currentColor, currentShape))
+  const baseBoard = drowBoard(board)
+  const newboard = drowBoard(changeBoard(BoardType, x, y, currentColor, currentShape))
   const handleRunClick = () => setRunning(!running)
   const handleClearClick = () => {}
 
@@ -105,20 +110,17 @@ function Game() {
   }
 
   function deleteRow() {
-    const willDeleteRow: any[] = []
-    console.log(willDeleteRow)
-    board.forEach((line) => {
-      if (!line.some((block: number) => block === 0)) {
-        willDeleteRow.push(line)
-      }
-    })
+    const willDeleteRows: any[] = []
+    board.forEach(
+      (line, lineIndex): number | false =>
+        line.every((block: number) => block !== 0) && willDeleteRows.push(lineIndex),
+    )
 
-    if (willDeleteRow.length > 0) {
-      for (let t = board.length - 1; t >= 0; t--) {
-        // if(t - willDeleteRow.length > 0 && willDeleteRow[0] >= t) {
-        board[t] = board[t - willDeleteRow.length]
-        // }
-      }
+    if (willDeleteRows.length > 0) {
+      const test = board
+      test.splice(willDeleteRows[willDeleteRows.length - 1], 1)
+      test.unshift(Array(10).fill(0))
+      setBoard(test)
     }
   }
 
@@ -129,15 +131,16 @@ function Game() {
         if (checkForward(y)) {
           setY((y) => y + 1)
         } else {
-          setBoard(drowBoard(board, x, y, currentColor, currentShape))
-          deleteRow()
+          setBoard(changeBoard(board, x, y, currentColor, currentShape))
           setY(0)
+          setX(4)
           setCurrentShape(selectShape)
           setCurrentColor(selectColor)
         }
       }
-    }, 1000)
+    }, 600)
     return () => {
+      deleteRow()
       window.removeEventListener('keydown', downHandler)
       clearInterval(flowBlock)
     }
@@ -155,12 +158,12 @@ function Game() {
       <button className='btn btn-primary' onClick={handleClearClick}>
         Clear
       </button>
-      <label style={{ fontSize: '5em', display: 'block' }}>{y}</label>
+      {/* <label style={{ fontSize: '5em', display: 'block' }}>{y}</label> */}
       <style>
         {`
         .boardWrapper {
           position: relative;
-          width: 250px;
+          width: 300px;
           background-color: rgb(15, 15, 27);
           height: 600px;
         }
@@ -187,16 +190,9 @@ function Game() {
         .clear {
           background-color: rgb(254, 254, 254, 0);
         }
-        .color0,
-        .color1,
-        .color2,
-        .color3,
-        .color4,
-        .color5 {
-          border: 5px outset rgba(255, 255, 255, 0.568);
-        }
         .btn {
-          margin-top: 30px;
+          margin: 20px 10px;
+          width: 100px;
         }
       `}
       </style>
