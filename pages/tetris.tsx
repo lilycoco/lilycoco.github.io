@@ -49,6 +49,22 @@ function changeBoard(
   return newBoard
 }
 
+function deleteRow(currentBoard: number[][]) {
+  const willDeleteRows = currentBoard
+    .slice()
+    .reverse()
+    .findIndex((line): boolean => line.every((block: number) => block !== 0))
+
+  if (willDeleteRows >= 0) {
+    let refleshedBoard = currentBoard
+    refleshedBoard.splice(19 - willDeleteRows, 1)
+    refleshedBoard.unshift(Array(10).fill(0))
+    return refleshedBoard
+  } else {
+    return null
+  }
+}
+
 function Game() {
   let selectShape = Math.floor(Math.random() * 27)
   let selectColor = Math.floor(Math.random() * 6) + 1
@@ -113,20 +129,6 @@ function Game() {
     }
   }
 
-  function deleteRow() {
-    const willDeleteRows = board
-      .slice()
-      .reverse()
-      .findIndex((line): boolean => line.every((block: number) => block !== 0))
-
-    if (willDeleteRows >= 0) {
-      const test = board
-      test.splice(19 - willDeleteRows, 1)
-      test.unshift(Array(10).fill(0))
-      setBoard(test)
-    }
-  }
-
   useEffect(() => {
     window.addEventListener('keydown', downHandler)
     const flowBlock: any = setInterval(() => {
@@ -143,7 +145,10 @@ function Game() {
       }
     }, 600)
     return () => {
-      deleteRow()
+      const row = deleteRow(board)
+      if (row) {
+        setBoard(row)
+      }
       window.removeEventListener('keydown', downHandler)
       clearInterval(flowBlock)
     }
