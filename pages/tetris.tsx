@@ -82,38 +82,7 @@ function Game() {
   const blockSize = 1
   const hasBlock = 1
 
-  const checkForward = (y: number) =>
-    !BrockShape[currentShape].some((line, lineIndex) =>
-      line.some(
-        (block, blockIndex) =>
-          block === hasBlock &&
-          (!board[y + lineIndex + blockSize] ||
-            (board[y + lineIndex + blockSize] &&
-              board[y + lineIndex + blockSize][blockIndex + x] !== 0)),
-      ),
-    )
-
-  const checkRight = (x: number) =>
-    !BrockShape[currentShape].some((line, lineIndex) =>
-      line.some(
-        (block, blockIndex) =>
-          block === hasBlock &&
-          (!board[x + blockIndex + blockSize] ||
-            (board[x + blockIndex + blockSize] &&
-              board[y + lineIndex][x + blockIndex + blockSize] !== 0)),
-      ),
-    )
-
-  const checkLeft = (x: number) =>
-    !BrockShape[currentShape].some((line, lineIndex) =>
-      line.some(
-        (block, blockIndex) =>
-          block === hasBlock &&
-          (x <= 0 || (x > 0 && board[y + lineIndex][x + blockIndex - blockSize] !== 0)),
-      ),
-    )
-
-  const checkAll = (position: number, key: string) =>
+  const checkForward = (position: number, key: string) =>
     !BrockShape[currentShape].some((line, lineIndex) =>
       line.some((block, blockIndex) => {
         switch (key) {
@@ -129,7 +98,7 @@ function Game() {
               block === hasBlock &&
               (!board[position + blockIndex + blockSize] ||
                 (board[position + blockIndex + blockSize] &&
-                  board[y + lineIndex][x + blockIndex + blockSize] !== 0))
+                  board[y + lineIndex][position + blockIndex + blockSize] !== 0))
             )
           case 'ArrowLeft':
             return (
@@ -142,16 +111,16 @@ function Game() {
     )
 
   const downHandler = ({ key }: any) => {
-    console.log(checkAll(y, key))
+    console.log(checkForward(y, key))
     switch (key) {
       case 'ArrowDown':
-        setY((y) => (checkForward(y) ? y + blockSize : y))
+        setY((y) => (checkForward(y, key) ? y + blockSize : y))
         break
       case 'ArrowRight':
-        setX((x) => (checkRight(x) ? x + blockSize : x))
+        setX((x) => (checkForward(x, key) ? x + blockSize : x))
         break
       case 'ArrowLeft':
-        setX((x) => (checkLeft(x) ? x - blockSize : x))
+        setX((x) => (checkForward(x, key) ? x - blockSize : x))
         break
       case 'Enter':
         setCurrentShape((c) => ((c + 1) % 4 === 0 ? c - 3 : c + 1))
@@ -162,7 +131,7 @@ function Game() {
     window.addEventListener('keydown', downHandler)
     const flowBlock: any = setInterval(() => {
       if (running) {
-        if (checkForward(y)) {
+        if (checkForward(y, 'ArrowDown')) {
           setY((y) => y + blockSize)
         } else {
           setBoard(changeBoard(board, x, y, currentColor, currentShape))
