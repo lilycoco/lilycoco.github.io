@@ -4,7 +4,7 @@ import { BrockShape, BoardType, BrockColors } from '../components/TetrisComponen
 
 const drowBoard = (defaultBoard: number[][]) => {
   return defaultBoard.map((line: number[], colNo: number) => (
-    <div key={colNo} className='line'>
+    <div key={colNo} style={{ display: 'flex' }}>
       {line.map((num: number, rowNo: number) => (
         <div
           key={rowNo}
@@ -208,9 +208,6 @@ function Game() {
           width: 100%;
           top: 0px;
           left: 0px;
-        }
-        .line {
-          display: flex;
         }
         .block {
           width: 30px;
