@@ -8,9 +8,9 @@ const drowBoard = (defaultBoard: number[][]) => {
       {line.map((num: number, rowNo: number) => (
         <div
           key={rowNo}
-          className={'block ' + (num === 0 && 'clear')}
+          className={'block ' + (!num && 'clear')}
           style={
-            num > 0
+            num
               ? {
                   backgroundColor: BrockColors[num - 1],
                   border: '5px outset rgba(255, 255, 255, 0.568)',
@@ -30,13 +30,12 @@ function changeBoard(
   currentColor: number,
   currentShape: number,
 ) {
-  let newBoard = defaultBoard
-  newBoard = defaultBoard.map((line: number[], lineIndex: number) =>
+  let newBoard = defaultBoard.map((line: number[], lineIndex: number) =>
     line.map((block: number, blockIndex: number) => {
       const currentBlock = BrockShape[currentShape]
       if (
-        lineIndex - y >= 0 &&
-        blockIndex - x >= 0 &&
+        lineIndex >= y &&
+        blockIndex >= x &&
         currentBlock.length > lineIndex - y &&
         currentBlock[0].length > blockIndex - x &&
         currentBlock[lineIndex - y][blockIndex - x] === 1
@@ -115,15 +114,14 @@ function Game() {
   }
 
   function deleteRow() {
-    const willDeleteRows: any[] = []
-    board.forEach(
-      (line, lineIndex): number | false =>
-        line.every((block: number) => block !== 0) && willDeleteRows.push(lineIndex),
-    )
+    const willDeleteRows = board
+      .slice()
+      .reverse()
+      .findIndex((line): boolean => line.every((block: number) => block !== 0))
 
-    if (willDeleteRows.length > 0) {
+    if (willDeleteRows >= 0) {
       const test = board
-      test.splice(willDeleteRows[willDeleteRows.length - 1], 1)
+      test.splice(19 - willDeleteRows, 1)
       test.unshift(Array(10).fill(0))
       setBoard(test)
     }
