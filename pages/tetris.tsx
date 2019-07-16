@@ -113,6 +113,33 @@ function Game() {
       ),
     )
 
+  const checkAll = (y: number, key: string) =>
+    !BrockShape[currentShape].some((line, lineIndex) =>
+      line.some((block, blockIndex) => {
+        switch (key) {
+          case 'ArrowDown':
+            return (
+              block === hasBlock &&
+              (!board[y + lineIndex + blockSize] ||
+                (board[y + lineIndex + blockSize] &&
+                  board[y + lineIndex + blockSize][blockIndex + x] !== 0))
+            )
+          case 'ArrowRight':
+            return (
+              block === hasBlock &&
+              (!board[x + blockIndex + blockSize] ||
+                (board[x + blockIndex + blockSize] &&
+                  board[y + lineIndex][x + blockIndex + blockSize] !== 0))
+            )
+          case 'ArrowLeft':
+            return (
+              block === hasBlock &&
+              (x <= 0 || (x > 0 && board[y + lineIndex][x + blockIndex - blockSize] !== 0))
+            )
+        }
+      }),
+    )
+
   const downHandler = ({ key }: any) => {
     switch (key) {
       case 'ArrowDown':
