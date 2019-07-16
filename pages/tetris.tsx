@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import { Layout } from '../components/Layout'
 import {
   BrockShape,
@@ -21,9 +21,18 @@ function Game() {
   const [board, setBoard] = useState(BoardType)
   const baseBoard = DrowBoard(board)
   const newboard = DrowBoard(ChangeBoard(BoardType, x, y, currentColor, currentShape))
+  const intervalRef = useRef()
   const row = DeleteRow(board)
+
   const handleRunClick = () => setRunning(!running)
-  const handleClearClick = () => {}
+
+  const handleClearClick = () => {
+    setRunning(false)
+    clearInterval(intervalRef.current)
+    setBoard(BoardType)
+    setY(-BrockShape[currentShape].length)
+  }
+
   const canGoForward = (position: number, key: string) =>
     CheckForward(position, key, x, y, currentShape, board)
 
@@ -61,10 +70,10 @@ function Game() {
   useEffect(() => {
     window.addEventListener('keydown', downHandler)
     const flowBlock: any = setInterval(() => intervalProcessing(), 600)
-
+    intervalRef.current = flowBlock
     return () => {
       window.removeEventListener('keydown', downHandler)
-      clearInterval(flowBlock)
+      clearInterval(intervalRef.current)
     }
   }, [intervalProcessing])
 
