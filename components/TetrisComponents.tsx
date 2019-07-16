@@ -123,3 +123,38 @@ export const DeleteRow = (currentBoard: number[][]) => {
     return null
   }
 }
+
+export const CheckForward = (
+  position: number,
+  key: string,
+  x: number,
+  y: number,
+  currentShape: number,
+  board: number[][],
+) =>
+  !BrockShape[currentShape].some((line, lineIndex) =>
+    line.some((block, blockIndex) => {
+      const hasBlock = 1
+      const blockSize = 1
+      const aBlockDown = position + lineIndex + blockSize
+      const aBlockRight = position + blockIndex + blockSize
+      switch (key) {
+        case 'ArrowDown':
+          return (
+            block === hasBlock &&
+            (!board[aBlockDown] || (board[aBlockDown] && board[aBlockDown][blockIndex + x] !== 0))
+          )
+        case 'ArrowRight':
+          return (
+            block === hasBlock &&
+            (!board[aBlockRight] || (board[aBlockRight] && board[y + lineIndex][aBlockRight] !== 0))
+          )
+        case 'ArrowLeft':
+          return (
+            block === hasBlock &&
+            (position <= 0 ||
+              (position > 0 && board[y + lineIndex][position + blockIndex - blockSize] !== 0))
+          )
+      }
+    }),
+  )

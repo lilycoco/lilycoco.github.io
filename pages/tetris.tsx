@@ -6,6 +6,7 @@ import {
   DrowBoard,
   ChangeBoard,
   DeleteRow,
+  CheckForward,
 } from '../components/TetrisComponents'
 
 function Game() {
@@ -17,51 +18,24 @@ function Game() {
   const [x, setX] = useState(4)
   const [y, setY] = useState(-BrockShape[currentShape].length)
   const [board, setBoard] = useState(BoardType)
-
+  const blockSize = 1
   const baseBoard = DrowBoard(board)
   const newboard = DrowBoard(ChangeBoard(BoardType, x, y, currentColor, currentShape))
   const handleRunClick = () => setRunning(!running)
   const handleClearClick = () => {}
-  const blockSize = 1
-  const hasBlock = 1
-
-  const checkForward = (position: number, key: string) =>
-    !BrockShape[currentShape].some((line, lineIndex) =>
-      line.some((block, blockIndex) => {
-        const aBlockDown = position + lineIndex + blockSize
-        const aBlockRight = position + blockIndex + blockSize
-        switch (key) {
-          case 'ArrowDown':
-            return (
-              block === hasBlock &&
-              (!board[aBlockDown] || (board[aBlockDown] && board[aBlockDown][blockIndex + x] !== 0))
-            )
-          case 'ArrowRight':
-            return (
-              block === hasBlock &&
-              (!board[aBlockRight] ||
-                (board[aBlockRight] && board[y + lineIndex][aBlockRight] !== 0))
-            )
-          case 'ArrowLeft':
-            return (
-              block === hasBlock &&
-              (position <= 0 ||
-                (position > 0 && board[y + lineIndex][position + blockIndex - blockSize] !== 0))
-            )
-        }
-      }),
-    )
+  const check = (position: number, key: string) =>
+    CheckForward(position, key, x, y, currentShape, board)
 
   const downHandler = ({ key }: any) => {
     switch (key) {
       case 'ArrowDown':
-        setY((currentY) => (checkForward(currentY, key) ? currentY + blockSize : currentY))
+        setY((currentY) => (check(currentY, key) ? currentY + blockSize : currentY))
         break
       case 'ArrowRight':
-        setX((currentX) => (checkForward(currentX, key) ? currentX + blockSize : currentX))
+        setX((currentX) => (check(currentX, key) ? currentX + blockSize : currentX))
         break
       case 'ArrowLeft':
-        setX((currentX) => (checkForward(currentX, key) ? currentX - blockSize : currentX))
+        setX((currentX) => (check(currentX, key) ? currentX - blockSize : currentX))
         break
       case 'Enter':
         setCurrentShape((c) => ((c + 1) % 4 === 0 ? c - 3 : c + 1))
@@ -72,7 +46,7 @@ function Game() {
     window.addEventListener('keydown', downHandler)
     const flowBlock: any = setInterval(() => {
       if (running) {
-        if (checkForward(y, 'ArrowDown')) {
+        if (check(y, 'ArrowDown')) {
           setY((currentY) => currentY + blockSize)
         } else {
           setBoard(ChangeBoard(board, x, y, currentColor, currentShape))
