@@ -1,69 +1,12 @@
 import React, { useState, useEffect } from 'react'
 import { Layout } from '../components/Layout'
-import { BrockShape, BoardType, BrockColors } from '../components/TetrisComponent'
-
-const drowBoard = (defaultBoard: number[][]) => {
-  return defaultBoard.map((line: number[], colNo: number) => (
-    <div key={colNo} style={{ display: 'flex' }}>
-      {line.map((num: number, rowNo: number) => (
-        <div
-          key={rowNo}
-          className={'block ' + (!num && 'clear')}
-          style={
-            num
-              ? {
-                  backgroundColor: BrockColors[num - 1],
-                  border: '5px outset rgba(255, 255, 255, 0.568)',
-                }
-              : undefined
-          }
-        ></div>
-      ))}
-    </div>
-  ))
-}
-
-function changeBoard(
-  defaultBoard: number[][],
-  x: number,
-  y: number,
-  currentColor: number,
-  currentShape: number,
-) {
-  let newBoard = defaultBoard.map((line: number[], lineIndex: number) =>
-    line.map((block: number, blockIndex: number) => {
-      const currentBlock = BrockShape[currentShape]
-      if (
-        lineIndex >= y &&
-        blockIndex >= x &&
-        currentBlock.length > lineIndex - y &&
-        currentBlock[0].length > blockIndex - x &&
-        currentBlock[lineIndex - y][blockIndex - x] === 1
-      ) {
-        return currentColor
-      } else {
-        return block
-      }
-    }),
-  )
-  return newBoard
-}
-
-function deleteRow(currentBoard: number[][]) {
-  const willDeleteRows = currentBoard
-    .slice()
-    .reverse()
-    .findIndex((line): boolean => line.every((block: number) => block !== 0))
-
-  if (willDeleteRows >= 0) {
-    let refleshedBoard = currentBoard
-    refleshedBoard.splice(19 - willDeleteRows, 1)
-    refleshedBoard.unshift(Array(10).fill(0))
-    return refleshedBoard
-  } else {
-    return null
-  }
-}
+import {
+  BrockShape,
+  BoardType,
+  DrowBoard,
+  ChangeBoard,
+  DeleteRow,
+} from '../components/TetrisComponents'
 
 function Game() {
   let selectShape = Math.floor(Math.random() * 27)
@@ -75,8 +18,8 @@ function Game() {
   const [y, setY] = useState(-BrockShape[currentShape].length)
   const [board, setBoard] = useState(BoardType)
 
-  const baseBoard = drowBoard(board)
-  const newboard = drowBoard(changeBoard(BoardType, x, y, currentColor, currentShape))
+  const baseBoard = DrowBoard(board)
+  const newboard = DrowBoard(ChangeBoard(BoardType, x, y, currentColor, currentShape))
   const handleRunClick = () => setRunning(!running)
   const handleClearClick = () => {}
   const blockSize = 1
@@ -85,20 +28,19 @@ function Game() {
   const checkForward = (position: number, key: string) =>
     !BrockShape[currentShape].some((line, lineIndex) =>
       line.some((block, blockIndex) => {
+        const aBlockDown = position + lineIndex + blockSize
+        const aBlockRight = position + blockIndex + blockSize
         switch (key) {
           case 'ArrowDown':
             return (
               block === hasBlock &&
-              (!board[position + lineIndex + blockSize] ||
-                (board[position + lineIndex + blockSize] &&
-                  board[position + lineIndex + blockSize][blockIndex + x] !== 0))
+              (!board[aBlockDown] || (board[aBlockDown] && board[aBlockDown][blockIndex + x] !== 0))
             )
           case 'ArrowRight':
             return (
               block === hasBlock &&
-              (!board[position + blockIndex + blockSize] ||
-                (board[position + blockIndex + blockSize] &&
-                  board[y + lineIndex][position + blockIndex + blockSize] !== 0))
+              (!board[aBlockRight] ||
+                (board[aBlockRight] && board[y + lineIndex][aBlockRight] !== 0))
             )
           case 'ArrowLeft':
             return (
@@ -111,16 +53,15 @@ function Game() {
     )
 
   const downHandler = ({ key }: any) => {
-    console.log(checkForward(y, key))
     switch (key) {
       case 'ArrowDown':
-        setY((y) => (checkForward(y, key) ? y + blockSize : y))
+        setY((currentY) => (checkForward(currentY, key) ? currentY + blockSize : currentY))
         break
       case 'ArrowRight':
-        setX((x) => (checkForward(x, key) ? x + blockSize : x))
+        setX((currentX) => (checkForward(currentX, key) ? currentX + blockSize : currentX))
         break
       case 'ArrowLeft':
-        setX((x) => (checkForward(x, key) ? x - blockSize : x))
+        setX((currentX) => (checkForward(currentX, key) ? currentX - blockSize : currentX))
         break
       case 'Enter':
         setCurrentShape((c) => ((c + 1) % 4 === 0 ? c - 3 : c + 1))
@@ -132,9 +73,9 @@ function Game() {
     const flowBlock: any = setInterval(() => {
       if (running) {
         if (checkForward(y, 'ArrowDown')) {
-          setY((y) => y + blockSize)
+          setY((currentY) => currentY + blockSize)
         } else {
-          setBoard(changeBoard(board, x, y, currentColor, currentShape))
+          setBoard(ChangeBoard(board, x, y, currentColor, currentShape))
           setY(0)
           setX(4)
           setCurrentShape(selectShape)
@@ -143,7 +84,7 @@ function Game() {
       }
     }, 600)
     return () => {
-      const row = deleteRow(board)
+      const row = DeleteRow(board)
       if (row) {
         setBoard(row)
       }
@@ -164,7 +105,6 @@ function Game() {
       <button className='btn btn-primary' onClick={handleClearClick}>
         Clear
       </button>
-      {/* <label style={{ fontSize: '5em', display: 'block' }}>{y}</label> */}
       <style>
         {`
         .boardWrapper {

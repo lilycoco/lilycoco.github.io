@@ -60,3 +60,66 @@ export const BoardType = [
 ]
 
 export const BrockColors = ['navy', 'darkmagenta', 'orangered', 'yellow', 'deeppink', 'limegreen']
+
+export const DrowBoard = (defaultBoard: number[][]) => {
+  return defaultBoard.map((line: number[], colNo: number) => (
+    <div key={colNo} style={{ display: 'flex' }}>
+      {line.map((num: number, rowNo: number) => (
+        <div
+          key={rowNo}
+          className={'block ' + (!num && 'clear')}
+          style={
+            num
+              ? {
+                  backgroundColor: BrockColors[num - 1],
+                  border: '5px outset rgba(255, 255, 255, 0.568)',
+                }
+              : undefined
+          }
+        ></div>
+      ))}
+    </div>
+  ))
+}
+
+export const ChangeBoard = (
+  defaultBoard: number[][],
+  x: number,
+  y: number,
+  currentColor: number,
+  currentShape: number,
+) => {
+  let newBoard = defaultBoard.map((line: number[], lineIndex: number) =>
+    line.map((block: number, blockIndex: number) => {
+      const currentBlock = BrockShape[currentShape]
+      if (
+        lineIndex >= y &&
+        blockIndex >= x &&
+        currentBlock.length > lineIndex - y &&
+        currentBlock[0].length > blockIndex - x &&
+        currentBlock[lineIndex - y][blockIndex - x] === 1
+      ) {
+        return currentColor
+      } else {
+        return block
+      }
+    }),
+  )
+  return newBoard
+}
+
+export const DeleteRow = (currentBoard: number[][]) => {
+  const willDeleteRows = currentBoard
+    .slice()
+    .reverse()
+    .findIndex((line): boolean => line.every((block: number) => block !== 0))
+
+  if (willDeleteRows >= 0) {
+    let refleshedBoard = currentBoard
+    refleshedBoard.splice(19 - willDeleteRows, 1)
+    refleshedBoard.unshift(Array(10).fill(0))
+    return refleshedBoard
+  } else {
+    return null
+  }
+}
