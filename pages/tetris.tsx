@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useCallback } from 'react'
 import { Layout } from '../components/Layout'
 import {
   BrockShape,
@@ -13,16 +13,15 @@ function Game() {
   let selectShape = Math.floor(Math.random() * 27)
   let selectColor = Math.floor(Math.random() * 6) + 1
   const blockSize = 1
-
   const [currentColor, setCurrentColor] = useState(selectColor)
   const [currentShape, setCurrentShape] = useState(selectShape)
   const [running, setRunning] = useState(false)
   const [x, setX] = useState(4)
   const [y, setY] = useState(-BrockShape[currentShape].length)
   const [board, setBoard] = useState(BoardType)
-
   const baseBoard = DrowBoard(board)
   const newboard = DrowBoard(ChangeBoard(BoardType, x, y, currentColor, currentShape))
+  const row = DeleteRow(board)
   const handleRunClick = () => setRunning(!running)
   const handleClearClick = () => {}
   const canGoForward = (position: number, key: string) =>
@@ -44,30 +43,30 @@ function Game() {
     }
   }
 
+  const intervalProcessing = () => {
+    if (running) {
+      if (canGoForward(y, 'ArrowDown')) {
+        setY((currentY) => currentY + blockSize)
+        row && setBoard(row)
+      } else {
+        setBoard(ChangeBoard(board, x, y, currentColor, currentShape))
+        setY(0)
+        setX(4)
+        setCurrentShape(selectShape)
+        setCurrentColor(selectColor)
+      }
+    }
+  }
+
   useEffect(() => {
     window.addEventListener('keydown', downHandler)
-    const flowBlock: any = setInterval(() => {
-      if (running) {
-        if (canGoForward(y, 'ArrowDown')) {
-          setY((currentY) => currentY + blockSize)
-        } else {
-          setBoard(ChangeBoard(board, x, y, currentColor, currentShape))
-          setY(0)
-          setX(4)
-          setCurrentShape(selectShape)
-          setCurrentColor(selectColor)
-        }
-      }
-    }, 600)
+    const flowBlock: any = setInterval(() => intervalProcessing(), 600)
+
     return () => {
-      const row = DeleteRow(board)
-      if (row) {
-        setBoard(row)
-      }
       window.removeEventListener('keydown', downHandler)
       clearInterval(flowBlock)
     }
-  }, [y, running, currentShape])
+  }, [intervalProcessing])
 
   return (
     <div>
