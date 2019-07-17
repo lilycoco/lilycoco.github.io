@@ -29,11 +29,11 @@ export const Clock = (props: { winner: WProps | null }) => {
       <h2> {timer} sec has passed </h2>
       <style>
         {`
-            h2 {
-              font-size: 20px;
-              margin-top: 15px;
-            }
-          `}
+          h2 {
+            font-size: 20px;
+            margin-top: 15px;
+          }
+        `}
       </style>
     </div>
   )

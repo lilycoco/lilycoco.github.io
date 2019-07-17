@@ -13,10 +13,10 @@ export const Moves = (props: SProps): any => {
         </button>
         <style>
           {`
-              .bold {
-                font-weight: bold;
-              }
-            `}
+            .bold {
+              font-weight: bold;
+            }
+          `}
         </style>
       </li>
     )
