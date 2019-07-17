@@ -1,8 +1,8 @@
 import React, { useState, useEffect, useRef } from 'react'
 import { Layout } from '../components/Layout'
-import { DrowGameOver } from '../components/DrowGameOver'
-import { DrowBoard } from '../components/DrowBoard'
-import { BoardWrapperStyle, BoardStyle } from '../styled/Tetris'
+import { DrowGameOver } from '../components/TetrisDrowGameOver'
+import { DrowBoard } from '../components/TetrisDrowBoard'
+import { BoardWrapperStyle, BoardStyle } from '../styled/TetrisStyle'
 import {
   brockShape,
   boardType,
