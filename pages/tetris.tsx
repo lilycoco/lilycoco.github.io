@@ -90,7 +90,7 @@ function Game() {
         {over ? DrowGameOver(intervalRef.current) : null}
       </BoardWrapperStyle>
       <button className='btn btn-primary' onClick={handleRunClick}>
-        {running ? 'Stop' : 'Start!'}
+        {running ? 'Stop' : 'Start'}
       </button>
       <button className='btn btn-primary' onClick={handleClearClick}>
         Clear
