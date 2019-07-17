@@ -10,7 +10,7 @@ import {
   deleteRow,
   checkForward,
   judgeGameOver,
-} from '../components/TetrisComponents'
+} from '../lib/tetris'
 
 function Game() {
   const selectShape = Math.floor(Math.random() * 27)
