@@ -1,6 +1,8 @@
 import React, { useState, useEffect, useRef } from 'react'
 import { Layout } from '../components/Layout'
+import { DrowGameOver } from '../components/DrowGameOver'
 import { DrowBoard } from '../components/DrowBoard'
+import { BoardWrapperStyle, BoardStyle } from '../styled/Tetris'
 import {
   brockShape,
   boardType,
@@ -36,31 +38,6 @@ function Game() {
     setOver(false)
     setBoard(boardType)
     setY(-brockShape[currentShape].length)
-  }
-
-  const DrowGameOver = () => {
-    clearInterval(intervalRef.current)
-    return (
-      <div className='gameOver'>
-        Game Over
-        <style>
-          {`
-        .gameOver {
-          color: white;
-          font-size: 75px;
-          padding: 35px 25px;
-          position: absolute;
-          width: 100%;
-          top: 0px;
-          left: 0px;
-          background-color: rgb(0, 0, 0, 0.6);
-          height: 100%;
-          letter-spacing: 0.05em;
-        }
-        `}
-        </style>
-      </div>
-    )
   }
 
   const downHandler = ({ key }: any) => {
@@ -107,11 +84,11 @@ function Game() {
 
   return (
     <div>
-      <div className='boardWrapper'>
-        <div className='board'>{baseBoard}</div>
-        <div className='newBoard'>{newboard}</div>
-        {over ? DrowGameOver() : null}
-      </div>
+      <BoardWrapperStyle>
+        <BoardStyle>{baseBoard}</BoardStyle>
+        <BoardStyle>{newboard}</BoardStyle>
+        {over ? DrowGameOver(intervalRef.current) : null}
+      </BoardWrapperStyle>
       <button className='btn btn-primary' onClick={handleRunClick}>
         {running ? 'Stop' : 'Start!'}
       </button>
@@ -120,32 +97,6 @@ function Game() {
       </button>
       <style>
         {`
-        .boardWrapper {
-          position: relative;
-          width: 300px;
-          background-color: rgb(15, 15, 27);
-          height: 600px;
-        }
-        .newBoard,
-        .board {
-          position: absolute;
-          width: 100%;
-          top: 0px;
-          left: 0px;
-        }
-        .block {
-          width: 30px;
-          height: 30px;
-          border: 1px solid rgba(0, 0, 0, 0.253);
-          border-collapse: collapse;
-          text-align: center;
-          box-sizing: border-box;
-          color: white;
-          line-height: 30px;
-        }
-        .clear {
-          background-color: rgb(254, 254, 254, 0);
-        }
         .btn {
           margin: 20px 10px;
           width: 100px;
