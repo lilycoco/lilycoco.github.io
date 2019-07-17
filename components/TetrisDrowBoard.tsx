@@ -12,8 +12,8 @@ export const Block = styled.div`
   line-height: 30px;
 `
 
-export const DrowBoard = (defaultBoard: number[][]) => {
-  return defaultBoard.map((line: number[], colNo: number) => (
+export const DrowBoard = (defaultBoard: number[][]) =>
+  defaultBoard.map((line: number[], colNo: number) => (
     <div key={colNo} style={{ display: 'flex' }}>
       {line.map((num: number, rowNo: number) => (
         <Block
@@ -32,4 +32,3 @@ export const DrowBoard = (defaultBoard: number[][]) => {
       ))}
     </div>
   ))
-}
