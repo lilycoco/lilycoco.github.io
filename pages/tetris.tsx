@@ -88,7 +88,7 @@ function Game() {
       <BoardWrapperStyle>
         <BoardStyle>{baseBoard}</BoardStyle>
         <BoardStyle>{newboard}</BoardStyle>
-        {over ? DrowGameOver(intervalRef.current) : null}
+        {over ? <DrowGameOver ref={intervalRef.current} /> : null}
       </BoardWrapperStyle>
       <button className='btn btn-primary' onClick={handleRunClick}>
         {running ? 'Stop' : 'Start'}

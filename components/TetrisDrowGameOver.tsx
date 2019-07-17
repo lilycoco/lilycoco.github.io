@@ -13,7 +13,7 @@ const GameOver = styled.div`
   letter-spacing: 0.05em;
 `
 
-export const DrowGameOver = (intervalRef: any) => {
-  clearInterval(intervalRef)
+export const DrowGameOver = (props: { ref: any }) => {
+  clearInterval(props.ref)
   return <GameOver>Game Over</GameOver>
 }
