@@ -13,8 +13,8 @@ import {
 } from '../components/TetrisComponents'
 
 function Game() {
-  let selectShape = Math.floor(Math.random() * 27)
-  let selectColor = Math.floor(Math.random() * 6) + 1
+  const selectShape = Math.floor(Math.random() * 27)
+  const selectColor = Math.floor(Math.random() * 6) + 1
   const blockSize = 1
   const [currentColor, setCurrentColor] = useState(selectColor)
   const [currentShape, setCurrentShape] = useState(selectShape)
@@ -23,13 +23,14 @@ function Game() {
   const [y, setY] = useState(-brockShape[currentShape].length)
   const [board, setBoard] = useState(boardType)
   const [over, setOver] = useState(false)
-  const baseBoard = DrowBoard(board)
-  const newboard = DrowBoard(changeBoard(boardType, x, y, currentColor, currentShape))
   const intervalRef = useRef()
   const canDeleteRow = deleteRow(board)
+  const addBlockToBoard = (currentBoard: number[][]) =>
+    changeBoard(currentBoard, x, y, currentColor, currentShape)
+  const baseBoard = DrowBoard(board)
+  const newboard = DrowBoard(addBlockToBoard(boardType))
   const canGoForward = (position: number, key: string) =>
     checkForward(position, key, x, y, currentShape, board)
-
   const handleRunClick = () => setRunning(!running)
 
   const handleClearClick = () => {
@@ -63,7 +64,7 @@ function Game() {
         setY((currentY) => currentY + blockSize)
         canDeleteRow && setBoard(canDeleteRow)
       } else {
-        setBoard(changeBoard(board, x, y, currentColor, currentShape))
+        setBoard(addBlockToBoard(board))
         setY(0)
         setX(4)
         setCurrentShape(selectShape)

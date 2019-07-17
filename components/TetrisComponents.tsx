@@ -137,7 +137,7 @@ export const checkForward = (
   )
 
 export const judgeGameOver = (board: number[][]) => {
-  for (let i = 0; i < 6; i++) {
+  for (let i = 0; i < 4; i++) {
     for (let n = 4; n < 8; n++) {
       if (board[i][n]) {
         return true
