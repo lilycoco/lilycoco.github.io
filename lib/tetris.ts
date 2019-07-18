@@ -36,28 +36,7 @@ export const brockShape = [
   [[0, 1, 1], [1, 1, 0]], //27
 ]
 
-export const boardType = [
-  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-]
+export const boardType = Array(20).fill(Array(10).fill(0))
 
 export const changeBoard = (
   defaultBoard: number[][],
@@ -65,8 +44,8 @@ export const changeBoard = (
   y: number,
   currentColor: number,
   currentShape: number,
-) => {
-  let newBoard = defaultBoard.map((line: number[], lineIndex: number) =>
+) =>
+  defaultBoard.map((line: number[], lineIndex: number) =>
     line.map((block: number, blockIndex: number) => {
       const currentBlock = brockShape[currentShape]
       if (
@@ -82,8 +61,6 @@ export const changeBoard = (
       }
     }),
   )
-  return newBoard
-}
 
 export const deleteRow = (currentBoard: number[][]) => {
   const willDeleteRows = currentBoard

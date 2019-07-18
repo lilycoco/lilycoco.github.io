@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from 'react'
 import { Layout } from '../components/Layout'
 import { DrowGameOver } from '../components/TetrisDrowGameOver'
 import { DrowBoard } from '../components/TetrisDrowBoard'
-import { BoardWrapperStyle, BoardStyle } from '../styled/TetrisStyle'
+import { BoardWrapperStyle, BoardStyle, btnStyle } from '../styled/Tetris'
 import {
   brockShape,
   boardType,
@@ -90,20 +90,18 @@ function Game() {
         <BoardStyle>{newboard}</BoardStyle>
         {over ? <DrowGameOver ref={intervalRef} /> : null}
       </BoardWrapperStyle>
-      <button className='btn btn-primary' onClick={handleRunClick}>
-        {running ? 'Stop' : 'Start'}
-      </button>
-      <button className='btn btn-primary' onClick={handleClearClick}>
-        Clear
-      </button>
-      <style>
-        {`
-        .btn {
-          margin: 20px 10px;
-          width: 100px;
-        }
-      `}
-      </style>
+      <button
+        className='btn btn-primary'
+        onClick={handleRunClick}
+        children={running ? 'Stop' : 'Start'}
+        style={btnStyle}
+      />
+      <button
+        className='btn btn-primary'
+        onClick={handleClearClick}
+        children={'Clear'}
+        style={btnStyle}
+      />
     </div>
   )
 }

@@ -1,4 +1,3 @@
-// import css from 'styled-jsx/css'
 import styled from 'styled-components'
 
 export const BoardWrapperStyle = styled.div`
@@ -13,9 +12,7 @@ export const BoardStyle = styled.div`
   top: 0px;
   left: 0px;
 `
-// export default css`
-//   .btn {
-//     margin: 20px 10px;
-//     width: 100px;
-//   }
-// `
+export const btnStyle: React.CSSProperties = {
+  margin: '20px 10px',
+  width: '100px',
+}

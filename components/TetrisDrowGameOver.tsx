@@ -15,5 +15,5 @@ const GameOver = styled.div`
 
 export const DrowGameOver = (props: { ref: any }) => {
   clearInterval(props.ref)
-  return <GameOver>Game Over</GameOver>
+  return <GameOver children={'Game Over'} />
 }
