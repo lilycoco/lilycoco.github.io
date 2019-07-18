@@ -63,14 +63,14 @@ export const changeBoard = (
   )
 
 export const deleteRow = (currentBoard: number[][]) => {
-  const willDeleteRows = currentBoard
+  const willDeleteRow = currentBoard
     .slice()
     .reverse()
     .findIndex((line): boolean => line.every((block: number) => block !== 0))
 
-  if (willDeleteRows >= 0) {
+  if (willDeleteRow >= 0) {
     let refleshedBoard = currentBoard
-    refleshedBoard.splice(19 - willDeleteRows, 1)
+    refleshedBoard.splice(19 - willDeleteRow, 1)
     refleshedBoard.unshift(Array(10).fill(0))
     return refleshedBoard
   } else {
