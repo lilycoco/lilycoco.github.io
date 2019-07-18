@@ -52,7 +52,7 @@ function Game() {
       case 'ArrowLeft':
         setX((currentX) => (canGoForward(currentX, key) ? currentX - blockSize : currentX))
         break
-      case 'Enter':
+      case 'ArrowUp':
         setCurrentShape((c) => ((c + 1) % 4 === 0 ? c - 3 : c + 1))
     }
   }
