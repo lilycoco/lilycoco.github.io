@@ -35,18 +35,17 @@ export const Header = () => (
     <Navbar.Toggle aria-controls='basic-navbar-nav' />
     <Navbar.Collapse id='basic-navbar-nav'>
       <Nav className='mr-auto' style={nav}>
-        <Nav.Link href='/home' children='Home' />
-        <Nav.Link href='/blog' children='Blog' />
+        <Nav.Link href='/home'>Home</Nav.Link>
+        <Nav.Link href='/blog'>Blog</Nav.Link>
         <NavDropdown title='Play Game' id='basic-nav-dropdown' style={nav}>
-          <NavDropDownItem
-            href='https://lilycoco-spaceinvaders.netlify.com/'
-            children='Space Invaders'
-          />
-          <NavDropDownItem href='https://lilycoco-tetris.netlify.com/' children='Tetris' />
-          <NavDropDownItem href='https://mugensweeper.netlify.com/' children='Mugen Sweeper' />
+          <NavDropDownItem href='https://lilycoco-spaceinvaders.netlify.com/'>
+            Space Invaders
+          </NavDropDownItem>
+          <NavDropDownItem href='https://lilycoco-tetris.netlify.com/'>Tetris</NavDropDownItem>
+          <NavDropDownItem href='https://mugensweeper.netlify.com/'>Mugen Sweeper</NavDropDownItem>
           <NavDropdown.Divider />
-          <NavDropDownItem href='/tictac' children='Tic Tac Toe' />
-          <NavDropDownItem href='/tetris' children='Tetris with React' />
+          <NavDropDownItem href='/tictac'>Tic Tac Toe</NavDropDownItem>
+          <NavDropDownItem href='/tetris'>Tetris with React</NavDropDownItem>
         </NavDropdown>
       </Nav>
       <SocialIcon href='https://github.com/lilycoco' src='/static/icon/github.png' />
