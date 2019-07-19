@@ -1,4 +1,4 @@
-import { Square } from './TictacSquare'
+import { Square } from './Square'
 import styled from 'styled-components'
 import { WProps } from '../../models/Tictac'
 
