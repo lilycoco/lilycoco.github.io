@@ -12,10 +12,10 @@ import {
 } from '../../lib/tetris'
 
 export const Game: any = () => {
-  const selectShape = Math.floor(Math.random() * 27)
-  const selectColor = Math.floor(Math.random() * 6) + 1
+  const initialShape = Math.floor(Math.random() * 27)
+  const initialColor = Math.floor(Math.random() * 6) + 1
   const blockSize = 1
-  const [blockType, setBlockType] = useState({ color: selectColor, shape: selectShape })
+  const [blockType, setBlockType] = useState({ color: initialColor, shape: initialShape })
   const [running, setRunning] = useState(false)
   const [axes, setAxes] = useState({ x: 4, y: -brockShape[blockType.shape].length })
   const [board, setBoard] = useState(boardType)
@@ -65,7 +65,10 @@ export const Game: any = () => {
       } else {
         setBoard(addBlockToBoard(board))
         setAxes({ x: 4, y: 0 })
-        setBlockType({ color: selectColor, shape: selectShape })
+        setBlockType((blockType) => ({
+          color: blockType.color < 6 ? blockType.color + 1 : 1,
+          shape: blockType.shape < 24 ? blockType.shape + 4 : 27 - blockType.shape,
+        }))
       }
     }
   }
