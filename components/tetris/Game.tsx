@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react'
-import { DrowGameOver } from './TetrisDrowGameOver'
-import { DrowBoard } from './TetrisDrowBoard'
-import { BoardWrapperStyle, BoardStyle, btnStyle } from '../styled/Tetris'
+import { DrowGameOver } from './DrowGameOver'
+import { DrowBoard } from './DrowBoard'
+import { BoardWrapperStyle, BoardStyle, btnStyle } from '../../styled/Tetris'
 import {
   brockShape,
   boardType,
@@ -9,7 +9,7 @@ import {
   deleteRow,
   checkForward,
   judgeGameOver,
-} from '../lib/tetris'
+} from '../../lib/tetris'
 
 export const Game: any = () => {
   const selectShape = Math.floor(Math.random() * 27)

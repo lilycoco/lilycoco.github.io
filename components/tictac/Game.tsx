@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react'
-import { Board } from '../components/TictacBoard'
-import { SwichButton } from '../components/TictacSwichButton'
-import { Clock } from '../components/TictacClock'
-import { calculateWinner } from '../lib/tictac'
+import { Board } from './Board'
+import { SwichButton } from './SwichButton'
+import { Clock } from './Clock'
+import { calculateWinner } from '../../lib/tictac'
 
 export const Game = () => {
   const [histories, setHistories] = useState([{ squares: Array(9).fill(null) }])
