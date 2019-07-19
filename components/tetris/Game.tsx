@@ -1,7 +1,8 @@
 import React, { useState, useEffect, useRef } from 'react'
 import { DrowGameOver } from './DrowGameOver'
 import { DrowBoard } from './DrowBoard'
-import { BoardWrapperStyle, BoardStyle, btnStyle } from '../../styled/Tetris'
+import { BoardWrapper, Board } from './Style'
+import { btnStyle } from '../../styled/Tetris'
 import {
   brockShape,
   boardType,
@@ -21,15 +22,13 @@ export const Game: any = () => {
   const [board, setBoard] = useState(boardType)
   const [over, setOver] = useState(false)
   const intervalRef = useRef()
-  const canDeleteRow = deleteRow(board)
+  const didDeleteRowBoard = deleteRow(board)
   const addBlockToBoard = (currentBoard: number[][]) => changeBoard(currentBoard, axes, blockType)
-  const baseBoard = DrowBoard(board)
-  const newboard = DrowBoard(addBlockToBoard(boardType))
   const canGoForward = (position: number, key: string) =>
     checkForward(position, key, axes, blockType.shape, board)
-  const handleRunClick = () => setRunning(!running)
+  const toggleRunning = () => setRunning(!running)
 
-  const handleClearClick = () => {
+  const clearAll = () => {
     clearInterval(intervalRef.current)
     setRunning(false)
     setOver(false)
@@ -61,7 +60,7 @@ export const Game: any = () => {
       judgeGameOver(board) && setOver(true)
       if (canGoForward(axes.y, 'ArrowDown')) {
         setAxes((axes) => ({ ...axes, y: axes.y + blockSize }))
-        canDeleteRow && setBoard(canDeleteRow)
+        didDeleteRowBoard && setBoard(didDeleteRowBoard)
       } else {
         setBoard(addBlockToBoard(board))
         setAxes({ x: 4, y: 0 })
@@ -82,23 +81,21 @@ export const Game: any = () => {
 
   return (
     <div>
-      <BoardWrapperStyle>
-        <BoardStyle>{baseBoard}</BoardStyle>
-        <BoardStyle>{newboard}</BoardStyle>
+      <BoardWrapper>
+        <Board>
+          <DrowBoard defaultBoard={board} />
+        </Board>
+        <Board>
+          <DrowBoard defaultBoard={addBlockToBoard(boardType)} />
+        </Board>
         {over ? <DrowGameOver ref={intervalRef} /> : null}
-      </BoardWrapperStyle>
-      <button
-        className='btn btn-primary'
-        onClick={handleRunClick}
-        children={running ? 'Stop' : 'Start'}
-        style={btnStyle}
-      />
-      <button
-        className='btn btn-primary'
-        onClick={handleClearClick}
-        children={'Clear'}
-        style={btnStyle}
-      />
+      </BoardWrapper>
+      <button className='btn btn-primary' onClick={toggleRunning} style={btnStyle}>
+        {running ? 'Stop' : 'Start'}
+      </button>
+      <button className='btn btn-primary' onClick={clearAll} style={btnStyle}>
+        Clear
+      </button>
     </div>
   )
 }
