@@ -21,7 +21,7 @@ export const Game: any = () => {
   const [x, setX] = useState(4)
   const [y, setY] = useState(-brockShape[currentShape].length)
   const [board, setBoard] = useState(boardType)
-  const [over, setOver] = useState(false)
+  const [gameOver, setGameOver] = useState(false)
   const intervalRef = useRef()
   const canDeleteRow = deleteRow(board)
   const addBlockToBoard = (currentBoard: number[][]) =>
@@ -35,7 +35,7 @@ export const Game: any = () => {
   const handleClearClick = () => {
     clearInterval(intervalRef.current)
     setRunning(false)
-    setOver(false)
+    setGameOver(false)
     setBoard(boardType)
     setY(-brockShape[currentShape].length)
   }
@@ -58,7 +58,7 @@ export const Game: any = () => {
 
   const intervalProcessing = () => {
     if (running) {
-      judgeGameOver(board) && setOver(true)
+      judgeGameOver(board) && setGameOver(true)
       if (canGoForward(y, 'ArrowDown')) {
         setY((currentY) => currentY + blockSize)
         canDeleteRow && setBoard(canDeleteRow)
@@ -87,7 +87,7 @@ export const Game: any = () => {
       <BoardWrapperStyle>
         <BoardStyle>{baseBoard}</BoardStyle>
         <BoardStyle>{newboard}</BoardStyle>
-        {over ? <DrowGameOver ref={intervalRef} /> : null}
+        {gameOver ? <DrowGameOver ref={intervalRef} /> : null}
       </BoardWrapperStyle>
       <button
         className='btn btn-primary'
