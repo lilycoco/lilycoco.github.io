@@ -89,18 +89,12 @@ export const Game: any = () => {
         <BoardStyle>{newboard}</BoardStyle>
         {over ? <DrowGameOver ref={intervalRef} /> : null}
       </BoardWrapperStyle>
-      <button
-        className='btn btn-primary'
-        onClick={handleRunClick}
-        children={running ? 'Stop' : 'Start'}
-        style={btnStyle}
-      />
-      <button
-        className='btn btn-primary'
-        onClick={handleClearClick}
-        children={'Clear'}
-        style={btnStyle}
-      />
+      <button className='btn btn-primary' onClick={handleRunClick} style={btnStyle}>
+        {running ? 'Stop' : 'Start'}
+      </button>
+      <button className='btn btn-primary' onClick={handleClearClick} style={btnStyle}>
+        Clear
+      </button>
     </div>
   )
 }
