@@ -24,11 +24,9 @@ export const Game: any = () => {
   const [board, setBoard] = useState(boardType)
   const [over, setOver] = useState(false)
   const intervalRef = useRef()
-  const canDeleteRow = deleteRow(board)
+  const didDeleteRowBoard = deleteRow(board)
   const addBlockToBoard = (currentBoard: number[][]) =>
     changeBoard(currentBoard, x, y, currentColor, currentShape)
-  const baseBoard = DrowBoard(board)
-  const newboard = DrowBoard(addBlockToBoard(boardType))
   const canGoForward = (position: number, key: string) =>
     checkForward(position, key, x, y, currentShape, board)
   const handleRunClick = () => setRunning(!running)
@@ -62,7 +60,7 @@ export const Game: any = () => {
       judgeGameOver(board) && setOver(true)
       if (canGoForward(y, 'ArrowDown')) {
         setY((currentY) => currentY + blockSize)
-        canDeleteRow && setBoard(canDeleteRow)
+        didDeleteRowBoard && setBoard(didDeleteRowBoard)
       } else {
         setBoard(addBlockToBoard(board))
         setY(0)
@@ -86,22 +84,21 @@ export const Game: any = () => {
   return (
     <div>
       <BoardWrapper>
-        <Board>{baseBoard}</Board>
-        <Board>{newboard}</Board>
+        <Board>
+          {' '}
+          <DrowBoard defaultBoard={board} />
+        </Board>
+        <Board>
+          <DrowBoard defaultBoard={addBlockToBoard(boardType)} />
+        </Board>
         {over ? <DrowGameOver ref={intervalRef} /> : null}
       </BoardWrapper>
-      <button
-        className='btn btn-primary'
-        onClick={handleRunClick}
-        children={running ? 'Stop' : 'Start'}
-        style={btnStyle}
-      />
-      <button
-        className='btn btn-primary'
-        onClick={handleClearClick}
-        children={'Clear'}
-        style={btnStyle}
-      />
+      <button className='btn btn-primary' onClick={handleRunClick} style={btnStyle}>
+        {running ? 'Stop' : 'Start'}
+      </button>
+      <button className='btn btn-primary' onClick={handleClearClick} style={btnStyle}>
+        Clear
+      </button>
     </div>
   )
 }
