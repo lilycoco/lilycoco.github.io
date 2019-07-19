@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 
-const GameOver = styled.div`
+const GameOverFilter = styled.div`
   color: white;
   font-size: 75px;
   padding: 35px 25px;
@@ -13,7 +13,7 @@ const GameOver = styled.div`
   letter-spacing: 0.05em;
 `
 
-export const DrowGameOver = (props: { ref: any }) => {
+export const GameOverSign = (props: { ref: any }) => {
   clearInterval(props.ref)
-  return <GameOver children={'Game Over'} />
+  return <GameOverFilter children={'Game Over'} />
 }

@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react'
-import { DrowGameOver } from './DrowGameOver'
-import { DrowBoard } from './DrowBoard'
+import { GameOverSign } from './GameOverSign'
+import { Board } from './Board'
 import { BoardWrapperStyle, BoardStyle, btnStyle } from '../../styled/Tetris'
 import {
   brockShape,
@@ -20,23 +20,21 @@ export const Game: any = () => {
   const [running, setRunning] = useState(false)
   const [x, setX] = useState(4)
   const [y, setY] = useState(-brockShape[currentShape].length)
-  const [board, setBoard] = useState(boardType)
+  const [baseBoard, setBaseBoard] = useState(boardType)
   const [gameOver, setGameOver] = useState(false)
   const intervalRef = useRef()
-  const canDeleteRow = deleteRow(board)
+  const canDeleteRow = deleteRow(baseBoard)
   const addBlockToBoard = (currentBoard: number[][]) =>
     changeBoard(currentBoard, x, y, currentColor, currentShape)
-  const baseBoard = DrowBoard(board)
-  const newboard = DrowBoard(addBlockToBoard(boardType))
   const canGoForward = (position: number, key: string) =>
-    checkForward(position, key, x, y, currentShape, board)
+    checkForward(position, key, x, y, currentShape, baseBoard)
   const handleRunClick = () => setRunning(!running)
 
   const handleClearClick = () => {
     clearInterval(intervalRef.current)
     setRunning(false)
     setGameOver(false)
-    setBoard(boardType)
+    setBaseBoard(boardType)
     setY(-brockShape[currentShape].length)
   }
 
@@ -58,12 +56,12 @@ export const Game: any = () => {
 
   const intervalProcessing = () => {
     if (running) {
-      judgeGameOver(board) && setGameOver(true)
+      judgeGameOver(baseBoard) && setGameOver(true)
       if (canGoForward(y, 'ArrowDown')) {
         setY((currentY) => currentY + blockSize)
-        canDeleteRow && setBoard(canDeleteRow)
+        canDeleteRow && setBaseBoard(canDeleteRow)
       } else {
-        setBoard(addBlockToBoard(board))
+        setBaseBoard(addBlockToBoard(baseBoard))
         setY(0)
         setX(4)
         setCurrentShape(selectShape)
@@ -85,9 +83,13 @@ export const Game: any = () => {
   return (
     <div>
       <BoardWrapperStyle>
-        <BoardStyle>{baseBoard}</BoardStyle>
-        <BoardStyle>{newboard}</BoardStyle>
-        {gameOver ? <DrowGameOver ref={intervalRef} /> : null}
+        <BoardStyle>
+          <Board defaultBoard={baseBoard} />
+        </BoardStyle>
+        <BoardStyle>
+          <Board defaultBoard={addBlockToBoard(boardType)} />
+        </BoardStyle>
+        {gameOver ? <GameOverSign ref={intervalRef} /> : null}
       </BoardWrapperStyle>
       <button
         className='btn btn-primary'

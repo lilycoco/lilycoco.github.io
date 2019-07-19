@@ -22,8 +22,8 @@ export const BlockStyle = styled.div<{ color: any }>`
         }};
 `
 
-export const DrowBoard = (defaultBoard: number[][]) =>
-  defaultBoard.map((line: number[], colNo: number) => (
+export const Board = (props: { defaultBoard: number[][] }): any =>
+  props.defaultBoard.map((line: number[], colNo: number) => (
     <div key={colNo} style={{ display: 'flex' }}>
       {line.map((num: number, rowNo: number) => (
         <BlockStyle key={rowNo} color={num} />
