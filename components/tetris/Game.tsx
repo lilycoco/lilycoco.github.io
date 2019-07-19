@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react'
-import { DrowGameOver } from './DrowGameOver'
-import { DrowBoard } from './DrowBoard'
-import { BoardWrapper, Board } from './Style'
+import { GameOverSign } from './GameOverSign'
+import { Board } from './Board'
+import { BoardArea, BoardWrapper } from './Style'
 import { btnStyle } from '../../styled/Tetris'
 import {
   brockShape,
@@ -19,20 +19,20 @@ export const Game: any = () => {
   const [blockType, setBlockType] = useState({ color: selectColor, shape: selectShape })
   const [running, setRunning] = useState(false)
   const [axes, setAxes] = useState({ x: 4, y: -brockShape[blockType.shape].length })
-  const [board, setBoard] = useState(boardType)
-  const [over, setOver] = useState(false)
+  const [baseBoard, setBaseBoard] = useState(boardType)
+  const [gameOver, setGameOver] = useState(false)
   const intervalRef = useRef()
-  const didDeleteRowBoard = deleteRow(board)
+  const didDeleteRowBoard = deleteRow(baseBoard)
   const addBlockToBoard = (currentBoard: number[][]) => changeBoard(currentBoard, axes, blockType)
   const canGoForward = (position: number, key: string) =>
-    checkForward(position, key, axes, blockType.shape, board)
+    checkForward(position, key, axes, blockType.shape, baseBoard)
   const toggleRunning = () => setRunning(!running)
 
   const clearAll = () => {
     clearInterval(intervalRef.current)
     setRunning(false)
-    setOver(false)
-    setBoard(boardType)
+    setGameOver(false)
+    setBaseBoard(boardType)
     setAxes({ x: 4, y: -brockShape[blockType.shape].length })
   }
 
@@ -57,12 +57,12 @@ export const Game: any = () => {
 
   const intervalProcessing = () => {
     if (running) {
-      judgeGameOver(board) && setOver(true)
+      judgeGameOver(baseBoard) && setGameOver(true)
       if (canGoForward(axes.y, 'ArrowDown')) {
         setAxes((axes) => ({ ...axes, y: axes.y + blockSize }))
-        didDeleteRowBoard && setBoard(didDeleteRowBoard)
+        didDeleteRowBoard && setBaseBoard(didDeleteRowBoard)
       } else {
-        setBoard(addBlockToBoard(board))
+        setBaseBoard(addBlockToBoard(baseBoard))
         setAxes({ x: 4, y: 0 })
         setBlockType({ color: selectColor, shape: selectShape })
       }
@@ -81,15 +81,15 @@ export const Game: any = () => {
 
   return (
     <div>
-      <BoardWrapper>
-        <Board>
-          <DrowBoard defaultBoard={board} />
-        </Board>
-        <Board>
-          <DrowBoard defaultBoard={addBlockToBoard(boardType)} />
-        </Board>
-        {over ? <DrowGameOver ref={intervalRef} /> : null}
-      </BoardWrapper>
+      <BoardArea>
+        <BoardWrapper>
+          <Board defaultBoard={baseBoard} />
+        </BoardWrapper>
+        <BoardWrapper>
+          <Board defaultBoard={addBlockToBoard(boardType)} />
+        </BoardWrapper>
+        {gameOver ? <GameOverSign ref={intervalRef} /> : null}
+      </BoardArea>
       <button className='btn btn-primary' onClick={toggleRunning} style={btnStyle}>
         {running ? 'Stop' : 'Start'}
       </button>

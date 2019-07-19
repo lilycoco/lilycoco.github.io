@@ -1,18 +1,18 @@
 import styled from 'styled-components'
 
-export const BoardWrapper = styled.div`
+export const BoardArea = styled.div`
   position: relative;
   width: 300px;
   background-color: rgb(15, 15, 27);
   height: 600px;
 `
-export const Board = styled.div`
+export const BoardWrapper = styled.div`
   position: absolute;
   width: 100%;
   top: 0px;
   left: 0px;
 `
-export const GameOver = styled.div`
+export const GameOverFilter = styled.div`
   color: white;
   font-size: 75px;
   padding: 35px 25px;
