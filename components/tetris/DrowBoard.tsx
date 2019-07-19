@@ -1,5 +1,6 @@
-export const brockColors = ['navy', 'darkmagenta', 'orangered', 'yellow', 'deeppink', 'limegreen']
 import styled from 'styled-components'
+
+const brockColors = ['navy', 'darkmagenta', 'orangered', 'yellow', 'deeppink', 'limegreen']
 
 export const BlockStyle = styled.div<{ color: any }>`
   width: 30px;
