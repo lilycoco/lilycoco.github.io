@@ -1,7 +1,8 @@
 import React, { useState, useEffect, useRef } from 'react'
 import { DrowGameOver } from './DrowGameOver'
 import { DrowBoard } from './DrowBoard'
-import { BoardWrapperStyle, BoardStyle, btnStyle } from '../../styled/Tetris'
+import { BoardWrapper, Board } from './Style'
+import { btnStyle } from '../../styled/Tetris'
 import {
   brockShape,
   boardType,
@@ -23,11 +24,9 @@ export const Game: any = () => {
   const [board, setBoard] = useState(boardType)
   const [over, setOver] = useState(false)
   const intervalRef = useRef()
-  const canDeleteRow = deleteRow(board)
+  const didDeleteRowBoard = deleteRow(board)
   const addBlockToBoard = (currentBoard: number[][]) =>
     changeBoard(currentBoard, x, y, currentColor, currentShape)
-  const baseBoard = DrowBoard(board)
-  const newboard = DrowBoard(addBlockToBoard(boardType))
   const canGoForward = (position: number, key: string) =>
     checkForward(position, key, x, y, currentShape, board)
   const toggleRunning = () => setRunning(!running)
@@ -61,7 +60,7 @@ export const Game: any = () => {
       judgeGameOver(board) && setOver(true)
       if (canGoForward(y, 'ArrowDown')) {
         setY((currentY) => currentY + blockSize)
-        canDeleteRow && setBoard(canDeleteRow)
+        didDeleteRowBoard && setBoard(didDeleteRowBoard)
       } else {
         setBoard(addBlockToBoard(board))
         setY(0)
@@ -84,18 +83,21 @@ export const Game: any = () => {
 
   return (
     <div>
-      <BoardWrapperStyle>
-        <BoardStyle>{baseBoard}</BoardStyle>
-        <BoardStyle>{newboard}</BoardStyle>
+      <BoardWrapper>
+        <Board>
+          <DrowBoard defaultBoard={board} />
+        </Board>
+        <Board>
+          <DrowBoard defaultBoard={addBlockToBoard(boardType)} />
+        </Board>
         {over ? <DrowGameOver ref={intervalRef} /> : null}
-      </BoardWrapperStyle>
-      <button
-        className='btn btn-primary'
-        onClick={toggleRunning}
-        children={running ? 'Stop' : 'Start'}
-        style={btnStyle}
-      />
-      <button className='btn btn-primary' onClick={clearAll} children={'Clear'} style={btnStyle} />
+      </BoardWrapper>
+      <button className='btn btn-primary' onClick={toggleRunning} style={btnStyle}>
+        {running ? 'Stop' : 'Start'}
+      </button>
+      <button className='btn btn-primary' onClick={clearAll} style={btnStyle}>
+        Clear
+      </button>
     </div>
   )
 }
