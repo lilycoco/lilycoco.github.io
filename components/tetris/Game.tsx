@@ -4,7 +4,7 @@ import { Board } from './Board'
 import { BoardArea, BoardWrapper } from './Style'
 import { btnStyle } from '../../styled/Tetris'
 import {
-  brockShape,
+  blockShape,
   boardType,
   changeBoard,
   deleteRow,
@@ -18,7 +18,7 @@ export const Game: any = () => {
   const blockSize = 1
   const [blockType, setBlockType] = useState({ color: initialColor, shape: initialShape })
   const [running, setRunning] = useState(false)
-  const [axes, setAxes] = useState({ x: 4, y: -brockShape[blockType.shape].length })
+  const [axes, setAxes] = useState({ x: 4, y: -blockShape[blockType.shape].length })
   const [baseBoard, setBaseBoard] = useState(boardType)
   const [gameOver, setGameOver] = useState(false)
   const intervalRef = useRef()
@@ -33,7 +33,7 @@ export const Game: any = () => {
     setRunning(false)
     setGameOver(false)
     setBaseBoard(boardType)
-    setAxes({ x: 4, y: -brockShape[blockType.shape].length })
+    setAxes({ x: 4, y: -blockShape[blockType.shape].length })
   }
 
   const downHandler = ({ key }: any) => {
@@ -57,7 +57,10 @@ export const Game: any = () => {
 
   const intervalProcessing = () => {
     if (running) {
-      judgeGameOver(baseBoard) && setGameOver(true)
+      if (judgeGameOver(baseBoard)) {
+        setGameOver(true)
+        setRunning(false)
+      }
       if (canGoForward(axes.y, 'ArrowDown')) {
         setAxes((axes) => ({ ...axes, y: axes.y + blockSize }))
         didDeleteRowBoard && setBaseBoard(didDeleteRowBoard)
@@ -74,8 +77,11 @@ export const Game: any = () => {
 
   useEffect(() => {
     window.addEventListener('keydown', downHandler)
-    const flowBlock: any = setInterval(() => intervalProcessing(), 600)
+    const flowBlock: any = setInterval(intervalProcessing, 600)
     intervalRef.current = flowBlock
+    if (gameOver) {
+      clearInterval(intervalRef.current)
+    }
     return () => {
       window.removeEventListener('keydown', downHandler)
       clearInterval(intervalRef.current)
@@ -91,7 +97,7 @@ export const Game: any = () => {
         <BoardWrapper>
           <Board defaultBoard={addBlockToBoard(boardType)} />
         </BoardWrapper>
-        {gameOver ? <GameOverSign ref={intervalRef} /> : null}
+        {gameOver ? <GameOverSign /> : null}
       </BoardArea>
       <button className='btn btn-primary' onClick={toggleRunning} style={btnStyle}>
         {running ? 'Stop' : 'Start'}

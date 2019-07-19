@@ -1,4 +1,4 @@
-export const brockShape = [
+export const blockShape = [
   //1: 四角
   [[1, 1], [1, 1]], //0
   [[1, 1], [1, 1]], //1
@@ -47,7 +47,7 @@ export const changeBoard = (
     line.map((block: number, blockIndex: number) => {
       const { x, y } = axes
       const { color, shape } = blockType
-      const currentBlock = brockShape[shape]
+      const currentBlock = blockShape[shape]
       if (
         lineIndex >= y &&
         blockIndex >= x &&
@@ -85,7 +85,7 @@ export const checkForward = (
   currentShape: number,
   board: number[][],
 ) =>
-  !brockShape[currentShape].some((line, lineIndex) =>
+  !blockShape[currentShape].some((line, lineIndex) =>
     line.some((block, blockIndex) => {
       const hasBlock = 1
       const blockSize = 1

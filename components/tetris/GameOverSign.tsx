@@ -1,6 +1,5 @@
 import { GameOverFilter } from './Style'
 
-export const GameOverSign = (props: { ref: any }) => {
-  clearInterval(props.ref)
+export const GameOverSign = () => {
   return <GameOverFilter>Game Over</GameOverFilter>
 }
