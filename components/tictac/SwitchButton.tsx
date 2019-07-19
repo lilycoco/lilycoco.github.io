@@ -1,5 +1,5 @@
-import { SProps } from '../models/Tictac'
-import { Moves } from './TictacMoves'
+import { SProps } from '../../models/Tictac'
+import { Moves } from './Moves'
 
 export const SwitchButton = (props: SProps) => {
   const status = () =>

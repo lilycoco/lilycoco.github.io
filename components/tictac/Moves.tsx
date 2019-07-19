@@ -1,4 +1,4 @@
-import { SProps } from '../models/Tictac'
+import { SProps } from '../../models/Tictac'
 
 export const Moves = (props: SProps): any => {
   const key = [...props.histories.keys()]

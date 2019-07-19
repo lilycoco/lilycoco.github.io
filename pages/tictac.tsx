@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react'
 import { Layout } from '../components/Layout'
-import { Board } from '../components/TictacBoard'
-import { SwitchButton } from '../components/TictacSwitchButton'
-import { Clock } from '../components/TictacClock'
+import { Board } from '../components/tictac/Board'
+import { SwitchButton } from '../components/tictac/SwitchButton'
+import { Clock } from '../components/tictac/Clock'
 import { WProps } from '../models/Tictac'
 
 function calculateWinner(squares: string[]): WProps | null {
