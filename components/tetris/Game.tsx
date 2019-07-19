@@ -29,9 +29,9 @@ export const Game: any = () => {
     changeBoard(currentBoard, x, y, currentColor, currentShape)
   const canGoForward = (position: number, key: string) =>
     checkForward(position, key, x, y, currentShape, board)
-  const handleRunClick = () => setRunning(!running)
+  const toggleRunning = () => setRunning(!running)
 
-  const handleClearClick = () => {
+  const clearAll = () => {
     clearInterval(intervalRef.current)
     setRunning(false)
     setOver(false)
@@ -85,7 +85,6 @@ export const Game: any = () => {
     <div>
       <BoardWrapper>
         <Board>
-          {' '}
           <DrowBoard defaultBoard={board} />
         </Board>
         <Board>
@@ -93,10 +92,10 @@ export const Game: any = () => {
         </Board>
         {over ? <DrowGameOver ref={intervalRef} /> : null}
       </BoardWrapper>
-      <button className='btn btn-primary' onClick={handleRunClick} style={btnStyle}>
+      <button className='btn btn-primary' onClick={toggleRunning} style={btnStyle}>
         {running ? 'Stop' : 'Start'}
       </button>
-      <button className='btn btn-primary' onClick={handleClearClick} style={btnStyle}>
+      <button className='btn btn-primary' onClick={clearAll} style={btnStyle}>
         Clear
       </button>
     </div>
