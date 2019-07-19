@@ -40,14 +40,14 @@ export const boardType = Array(20).fill(Array(10).fill(0))
 
 export const changeBoard = (
   defaultBoard: number[][],
-  x: number,
-  y: number,
-  currentColor: number,
-  currentShape: number,
+  axes: { [key: string]: number },
+  blockType: { [key: string]: number },
 ) =>
   defaultBoard.map((line: number[], lineIndex: number) =>
     line.map((block: number, blockIndex: number) => {
-      const currentBlock = brockShape[currentShape]
+      const { x, y } = axes
+      const { color, shape } = blockType
+      const currentBlock = brockShape[shape]
       if (
         lineIndex >= y &&
         blockIndex >= x &&
@@ -55,7 +55,7 @@ export const changeBoard = (
         currentBlock[0].length > blockIndex - x &&
         currentBlock[lineIndex - y][blockIndex - x] === 1
       ) {
-        return currentColor
+        return color
       } else {
         return block
       }
@@ -63,14 +63,14 @@ export const changeBoard = (
   )
 
 export const deleteRow = (currentBoard: number[][]) => {
-  const willDeleteRow = currentBoard
+  const findDeleteRow = currentBoard
     .slice()
     .reverse()
     .findIndex((line): boolean => line.every((block: number) => block !== 0))
 
-  if (willDeleteRow >= 0) {
+  if (findDeleteRow >= 0) {
     let refleshedBoard = currentBoard
-    refleshedBoard.splice(19 - willDeleteRow, 1)
+    refleshedBoard.splice(19 - findDeleteRow, 1)
     refleshedBoard.unshift(Array(10).fill(0))
     return refleshedBoard
   } else {
@@ -81,8 +81,7 @@ export const deleteRow = (currentBoard: number[][]) => {
 export const checkForward = (
   position: number,
   key: string,
-  x: number,
-  y: number,
+  axes: { [key: string]: number },
   currentShape: number,
   board: number[][],
 ) =>
@@ -92,6 +91,7 @@ export const checkForward = (
       const blockSize = 1
       const aBlockDown = position + lineIndex + blockSize
       const aBlockRight = position + blockIndex + blockSize
+      const { x, y } = axes
       switch (key) {
         case 'ArrowDown':
           return (

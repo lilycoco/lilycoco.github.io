@@ -1,8 +1,31 @@
 import styled from 'styled-components'
 
+export const BoardArea = styled.div`
+  position: relative;
+  width: 300px;
+  background-color: rgb(15, 15, 27);
+  height: 600px;
+`
+export const BoardWrapper = styled.div`
+  position: absolute;
+  width: 100%;
+  top: 0px;
+  left: 0px;
+`
+export const GameOverFilter = styled.div`
+  color: white;
+  font-size: 75px;
+  padding: 35px 25px;
+  position: absolute;
+  width: 100%;
+  top: 0px;
+  left: 0px;
+  background-color: rgb(0, 0, 0, 0.6);
+  height: 100%;
+  letter-spacing: 0.05em;
+`
 const brockColors = ['navy', 'darkmagenta', 'orangered', 'yellow', 'deeppink', 'limegreen']
-
-export const BlockStyle = styled.div<{ color: any }>`
+export const Block = styled.div<{ color: any }>`
   width: 30px;
   height: 30px;
   border: 1px solid rgba(0, 0, 0, 0.253);
@@ -21,12 +44,3 @@ export const BlockStyle = styled.div<{ color: any }>`
           backgroundColor: 'rgb(254, 254, 254, 0)',
         }};
 `
-
-export const DrowBoard = (defaultBoard: number[][]) =>
-  defaultBoard.map((line: number[], colNo: number) => (
-    <div key={colNo} style={{ display: 'flex' }}>
-      {line.map((num: number, rowNo: number) => (
-        <BlockStyle key={rowNo} color={num} />
-      ))}
-    </div>
-  ))
