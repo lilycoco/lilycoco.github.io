@@ -58,7 +58,10 @@ export const Game: any = () => {
 
   const intervalProcessing = () => {
     if (running) {
-      judgeGameOver(board) && setOver(true)
+      if (judgeGameOver(board)) {
+        setOver(true)
+        setRunning(false)
+      }
       if (canGoForward(y, 'ArrowDown')) {
         setY((currentY) => currentY + blockSize)
         canDeleteRow && setBoard(canDeleteRow)
@@ -74,8 +77,11 @@ export const Game: any = () => {
 
   useEffect(() => {
     window.addEventListener('keydown', downHandler)
-    const flowBlock: any = setInterval(() => intervalProcessing(), 600)
+    const flowBlock: any = setInterval(intervalProcessing, 600)
     intervalRef.current = flowBlock
+    if (over) {
+      clearInterval(intervalRef.current)
+    }
     return () => {
       window.removeEventListener('keydown', downHandler)
       clearInterval(intervalRef.current)
@@ -87,7 +93,7 @@ export const Game: any = () => {
       <BoardWrapperStyle>
         <BoardStyle>{baseBoard}</BoardStyle>
         <BoardStyle>{newboard}</BoardStyle>
-        {over ? <DrowGameOver ref={intervalRef} /> : null}
+        {over ? <DrowGameOver /> : null}
       </BoardWrapperStyle>
       <button
         className='btn btn-primary'
