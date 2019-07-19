@@ -1,4 +1,4 @@
-import { EProps } from '../models/Tictac'
+import { EProps } from '../../models/Tictac'
 
 export const Square = (props: EProps) => {
   return (

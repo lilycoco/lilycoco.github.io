@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { WProps } from '../models/Tictac'
+import { WProps } from '../../models/Tictac'
 
 const startTime = Date.now()
 
