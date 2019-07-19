@@ -23,7 +23,7 @@ export const Game: any = () => {
   const [board, setBoard] = useState(boardType)
   const [over, setOver] = useState(false)
   const intervalRef = useRef()
-  const canDeleteRow = deleteRow(board)
+  const didDeleteRowBoard = deleteRow(board)
   const addBlockToBoard = (currentBoard: number[][]) =>
     changeBoard(currentBoard, x, y, currentColor, currentShape)
   const baseBoard = DrowBoard(board)
@@ -61,7 +61,7 @@ export const Game: any = () => {
       judgeGameOver(board) && setOver(true)
       if (canGoForward(y, 'ArrowDown')) {
         setY((currentY) => currentY + blockSize)
-        canDeleteRow && setBoard(canDeleteRow)
+        didDeleteRowBoard && setBoard(didDeleteRowBoard)
       } else {
         setBoard(addBlockToBoard(board))
         setY(0)
