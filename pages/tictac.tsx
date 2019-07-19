@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { Layout } from '../components/Layout'
 import { Board } from '../components/TictacBoard'
-import { SwichButton } from '../components/TictacSwichButton'
+import { SwitchButton } from '../components/TictacSwitchButton'
 import { Clock } from '../components/TictacClock'
 import { WProps } from '../models/Tictac'
 
@@ -54,7 +54,7 @@ function Game() {
     <div>
       <Board squares={squares} onClick={(i: number) => handleClick(i)} winner={winner} />
       <Clock winner={winner} />
-      <SwichButton
+      <SwitchButton
         onClick={() => sortOrder()}
         histories={histories}
         asc={asc}
