@@ -1,6 +1,6 @@
-import { Square } from '../components/TictacSquare'
+import { Square } from './TictacSquare'
 import styled from 'styled-components'
-import { WProps } from '../models/Tictac'
+import { WProps } from '../../models/Tictac'
 
 const BoardRow = styled.div`
   &::after {
