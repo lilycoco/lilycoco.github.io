@@ -1,5 +1,5 @@
-import { SProps } from '../models/Tictac'
-import { Moves } from '../components/TictacMoves'
+import { SProps } from '../../models/Tictac'
+import { Moves } from './TictacMoves'
 
 export const SwichButton = (props: SProps) => {
   const status = () =>
