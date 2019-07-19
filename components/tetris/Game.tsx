@@ -1,7 +1,8 @@
 import React, { useState, useEffect, useRef } from 'react'
 import { GameOverSign } from './GameOverSign'
 import { Board } from './Board'
-import { BoardWrapperStyle, BoardStyle, btnStyle } from '../../styled/Tetris'
+import { BoardArea, BoardWrapper } from './Style'
+import { btnStyle } from '../../styled/Tetris'
 import {
   brockShape,
   boardType,
@@ -15,57 +16,55 @@ export const Game: any = () => {
   const selectShape = Math.floor(Math.random() * 27)
   const selectColor = Math.floor(Math.random() * 6) + 1
   const blockSize = 1
-  const [currentColor, setCurrentColor] = useState(selectColor)
-  const [currentShape, setCurrentShape] = useState(selectShape)
+  const [blockType, setBlockType] = useState({ color: selectColor, shape: selectShape })
   const [running, setRunning] = useState(false)
-  const [x, setX] = useState(4)
-  const [y, setY] = useState(-brockShape[currentShape].length)
+  const [axes, setAxes] = useState({ x: 4, y: -brockShape[blockType.shape].length })
   const [baseBoard, setBaseBoard] = useState(boardType)
   const [gameOver, setGameOver] = useState(false)
   const intervalRef = useRef()
-  const canDeleteRow = deleteRow(baseBoard)
-  const addBlockToBoard = (currentBoard: number[][]) =>
-    changeBoard(currentBoard, x, y, currentColor, currentShape)
+  const didDeleteRowBoard = deleteRow(baseBoard)
+  const addBlockToBoard = (currentBoard: number[][]) => changeBoard(currentBoard, axes, blockType)
   const canGoForward = (position: number, key: string) =>
-    checkForward(position, key, x, y, currentShape, baseBoard)
-  const handleRunClick = () => setRunning(!running)
+    checkForward(position, key, axes, blockType.shape, baseBoard)
+  const toggleRunning = () => setRunning(!running)
 
-  const handleClearClick = () => {
+  const clearAll = () => {
     clearInterval(intervalRef.current)
     setRunning(false)
     setGameOver(false)
     setBaseBoard(boardType)
-    setY(-brockShape[currentShape].length)
+    setAxes({ x: 4, y: -brockShape[blockType.shape].length })
   }
 
   const downHandler = ({ key }: any) => {
     switch (key) {
       case 'ArrowDown':
-        setY((currentY) => (canGoForward(currentY, key) ? currentY + blockSize : currentY))
+        setAxes((axes) => ({ ...axes, y: canGoForward(axes.y, key) ? axes.y + blockSize : axes.y }))
         break
       case 'ArrowRight':
-        setX((currentX) => (canGoForward(currentX, key) ? currentX + blockSize : currentX))
+        setAxes((axes) => ({ ...axes, x: canGoForward(axes.x, key) ? axes.x + blockSize : axes.x }))
         break
       case 'ArrowLeft':
-        setX((currentX) => (canGoForward(currentX, key) ? currentX - blockSize : currentX))
+        setAxes((axes) => ({ ...axes, x: canGoForward(axes.x, key) ? axes.x - blockSize : axes.x }))
         break
       case 'ArrowUp':
-        setCurrentShape((c) => ((c + 1) % 4 === 0 ? c - 3 : c + 1))
+        setBlockType((blockType) => ({
+          ...blockType,
+          shape: (blockType.shape + 1) % 4 === 0 ? blockType.shape - 3 : blockType.shape + 1,
+        }))
     }
   }
 
   const intervalProcessing = () => {
     if (running) {
       judgeGameOver(baseBoard) && setGameOver(true)
-      if (canGoForward(y, 'ArrowDown')) {
-        setY((currentY) => currentY + blockSize)
-        canDeleteRow && setBaseBoard(canDeleteRow)
+      if (canGoForward(axes.y, 'ArrowDown')) {
+        setAxes((axes) => ({ ...axes, y: axes.y + blockSize }))
+        didDeleteRowBoard && setBaseBoard(didDeleteRowBoard)
       } else {
         setBaseBoard(addBlockToBoard(baseBoard))
-        setY(0)
-        setX(4)
-        setCurrentShape(selectShape)
-        setCurrentColor(selectColor)
+        setAxes({ x: 4, y: 0 })
+        setBlockType({ color: selectColor, shape: selectShape })
       }
     }
   }
@@ -82,27 +81,21 @@ export const Game: any = () => {
 
   return (
     <div>
-      <BoardWrapperStyle>
-        <BoardStyle>
+      <BoardArea>
+        <BoardWrapper>
           <Board defaultBoard={baseBoard} />
-        </BoardStyle>
-        <BoardStyle>
+        </BoardWrapper>
+        <BoardWrapper>
           <Board defaultBoard={addBlockToBoard(boardType)} />
-        </BoardStyle>
+        </BoardWrapper>
         {gameOver ? <GameOverSign ref={intervalRef} /> : null}
-      </BoardWrapperStyle>
-      <button
-        className='btn btn-primary'
-        onClick={handleRunClick}
-        children={running ? 'Stop' : 'Start'}
-        style={btnStyle}
-      />
-      <button
-        className='btn btn-primary'
-        onClick={handleClearClick}
-        children={'Clear'}
-        style={btnStyle}
-      />
+      </BoardArea>
+      <button className='btn btn-primary' onClick={toggleRunning} style={btnStyle}>
+        {running ? 'Stop' : 'Start'}
+      </button>
+      <button className='btn btn-primary' onClick={clearAll} style={btnStyle}>
+        Clear
+      </button>
     </div>
   )
 }
