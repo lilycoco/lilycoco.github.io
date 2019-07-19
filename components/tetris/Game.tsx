@@ -26,8 +26,6 @@ export const Game: any = () => {
   const didDeleteRowBoard = deleteRow(board)
   const addBlockToBoard = (currentBoard: number[][]) =>
     changeBoard(currentBoard, x, y, currentColor, currentShape)
-  const baseBoard = DrowBoard(board)
-  const newboard = DrowBoard(addBlockToBoard(boardType))
   const canGoForward = (position: number, key: string) =>
     checkForward(position, key, x, y, currentShape, board)
   const handleRunClick = () => setRunning(!running)
@@ -85,8 +83,12 @@ export const Game: any = () => {
   return (
     <div>
       <BoardWrapperStyle>
-        <BoardStyle>{baseBoard}</BoardStyle>
-        <BoardStyle>{newboard}</BoardStyle>
+        <BoardStyle>
+          <DrowBoard defaultBoard={board} />
+        </BoardStyle>
+        <BoardStyle>
+          <DrowBoard defaultBoard={addBlockToBoard(boardType)} />
+        </BoardStyle>
         {over ? <DrowGameOver ref={intervalRef} /> : null}
       </BoardWrapperStyle>
       <button className='btn btn-primary' onClick={handleRunClick} style={btnStyle}>
