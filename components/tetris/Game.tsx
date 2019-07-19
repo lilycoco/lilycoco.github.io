@@ -1,7 +1,8 @@
 import React, { useState, useEffect, useRef } from 'react'
 import { DrowGameOver } from './DrowGameOver'
 import { DrowBoard } from './DrowBoard'
-import { BoardWrapperStyle, BoardStyle, btnStyle } from '../../styled/Tetris'
+import { BoardWrapper, Board } from './Style'
+import { btnStyle } from '../../styled/Tetris'
 import {
   brockShape,
   boardType,
@@ -82,15 +83,16 @@ export const Game: any = () => {
 
   return (
     <div>
-      <BoardWrapperStyle>
-        <BoardStyle>
+      <BoardWrapper>
+        <Board>
+          {' '}
           <DrowBoard defaultBoard={board} />
-        </BoardStyle>
-        <BoardStyle>
+        </Board>
+        <Board>
           <DrowBoard defaultBoard={addBlockToBoard(boardType)} />
-        </BoardStyle>
+        </Board>
         {over ? <DrowGameOver ref={intervalRef} /> : null}
-      </BoardWrapperStyle>
+      </BoardWrapper>
       <button className='btn btn-primary' onClick={handleRunClick} style={btnStyle}>
         {running ? 'Stop' : 'Start'}
       </button>
