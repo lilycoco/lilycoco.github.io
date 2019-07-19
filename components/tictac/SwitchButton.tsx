@@ -2,7 +2,7 @@ import { SProps } from '../../models/Tictac'
 import { Moves } from './Moves'
 import { H2 } from './Style'
 
-export const SwichButton = (props: SProps) => {
+export const SwitchButton = (props: SProps) => {
   const status = () =>
     props.winner
       ? 'Winner: ' + props.winner.mark

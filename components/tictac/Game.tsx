@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { Board } from './Board'
-import { SwichButton } from './SwichButton'
+import { SwitchButton } from './SwitchButton'
 import { Clock } from './Clock'
 import { calculateWinner } from '../../lib/tictac'
 
@@ -36,7 +36,7 @@ export const Game = () => {
     <div>
       <Board squares={squares} onClick={(i: number) => handleClick(i)} winner={winner} />
       <Clock winner={winner} />
-      <SwichButton
+      <SwitchButton
         onClick={() => sortOrder()}
         histories={histories}
         asc={asc}
