@@ -1,5 +1,6 @@
 import { SProps } from '../../models/Tictac'
 import { Moves } from './Moves'
+import { H2 } from './Style'
 
 export const SwichButton = (props: SProps) => {
   const status = () =>
@@ -11,7 +12,7 @@ export const SwichButton = (props: SProps) => {
 
   return (
     <div style={{ marginTop: '20px' }}>
-      <div style={{ fontSize: '20px' }}>{status()}</div>
+      <H2>{status()}</H2>
       <div>
         <button onClick={props.onClick} style={{ margin: '10px 0px' }}>
           Sort order
