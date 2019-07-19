@@ -25,7 +25,7 @@ export const GameOver = styled.div`
   letter-spacing: 0.05em;
 `
 const brockColors = ['navy', 'darkmagenta', 'orangered', 'yellow', 'deeppink', 'limegreen']
-export const BlockStyle = styled.div<{ color: any }>`
+export const Block = styled.div<{ color: any }>`
   width: 30px;
   height: 30px;
   border: 1px solid rgba(0, 0, 0, 0.253);

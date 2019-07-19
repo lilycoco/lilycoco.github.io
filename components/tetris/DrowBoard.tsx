@@ -1,10 +1,10 @@
-import { BlockStyle } from './Style'
+import { Block } from './Style'
 
 export const DrowBoard = (props: { defaultBoard: number[][] }): any =>
   props.defaultBoard.map((line: number[], colNo: number) => (
     <div key={colNo} style={{ display: 'flex' }}>
       {line.map((num: number, rowNo: number) => (
-        <BlockStyle key={rowNo} color={num} />
+        <Block key={rowNo} color={num} />
       ))}
     </div>
   ))
