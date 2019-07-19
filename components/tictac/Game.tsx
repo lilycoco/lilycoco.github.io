@@ -17,8 +17,8 @@ export const Game = () => {
     document.title = `You clicked ${stepNumber} times`
   }, [stepNumber])
 
-  const sortOrder = () => setAsc(!asc)
-  const handleClick = (i: number) => {
+  const toggleOrder = () => setAsc(!asc)
+  const putXorO = (i: number) => {
     if (winner || squares[i]) {
       return
     }
@@ -34,10 +34,10 @@ export const Game = () => {
 
   return (
     <div>
-      <Board squares={squares} onClick={(i: number) => handleClick(i)} winner={winner} />
+      <Board squares={squares} onClick={(i: number) => putXorO(i)} winner={winner} />
       <Clock winner={winner} />
       <SwichButton
-        onClick={() => sortOrder()}
+        onClick={() => toggleOrder()}
         histories={histories}
         asc={asc}
         winner={winner}

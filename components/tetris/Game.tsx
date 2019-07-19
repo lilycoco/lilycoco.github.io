@@ -30,9 +30,9 @@ export const Game: any = () => {
   const newboard = DrowBoard(addBlockToBoard(boardType))
   const canGoForward = (position: number, key: string) =>
     checkForward(position, key, x, y, currentShape, board)
-  const handleRunClick = () => setRunning(!running)
+  const toggleRunning = () => setRunning(!running)
 
-  const handleClearClick = () => {
+  const clearAll = () => {
     clearInterval(intervalRef.current)
     setRunning(false)
     setOver(false)
@@ -91,16 +91,11 @@ export const Game: any = () => {
       </BoardWrapperStyle>
       <button
         className='btn btn-primary'
-        onClick={handleRunClick}
+        onClick={toggleRunning}
         children={running ? 'Stop' : 'Start'}
         style={btnStyle}
       />
-      <button
-        className='btn btn-primary'
-        onClick={handleClearClick}
-        children={'Clear'}
-        style={btnStyle}
-      />
+      <button className='btn btn-primary' onClick={clearAll} children={'Clear'} style={btnStyle} />
     </div>
   )
 }
