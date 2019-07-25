@@ -64,12 +64,12 @@ export const addNewBlockToBoard = (
 
 export const updateBoard = (currentBoard: number[][]) => {
   const findDeleteRow = currentBoard
-    .slice()
+    .concat()
     .reverse()
     .findIndex((line): boolean => line.every((block: number) => block !== 0))
 
   if (findDeleteRow >= 0) {
-    let refleshedBoard = currentBoard
+    let refleshedBoard = currentBoard.concat()
     refleshedBoard.splice(19 - findDeleteRow, 1)
     refleshedBoard.unshift(Array(10).fill(0))
     return refleshedBoard
