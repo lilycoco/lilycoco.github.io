@@ -5,9 +5,9 @@ import { BoardArea, BoardWrapper } from './Style'
 import { btnStyle } from '../../styled/Tetris'
 import {
   blockShape,
-  boardType,
+  initialBoard,
   changeBoard,
-  deleteRow,
+  updateBoard,
   checkForward,
   judgeGameOver,
 } from '../../lib/tetris'
@@ -18,34 +18,35 @@ export const Game: any = () => {
   const blockSize = 1
   const [blockType, setBlockType] = useState({ color: initialColor, shape: initialShape })
   const [running, setRunning] = useState(false)
-  const [axes, setAxes] = useState({ x: 4, y: -blockShape[blockType.shape].length })
-  const [baseBoard, setBaseBoard] = useState(boardType)
+  const [position, setPosition] = useState({ x: 4, y: -blockShape[blockType.shape].length })
+  const [baseBoard, setBaseBoard] = useState(initialBoard)
   const [gameOver, setGameOver] = useState(false)
   const intervalRef = useRef()
-  const didDeleteRowBoard = deleteRow(baseBoard)
-  const addBlockToBoard = (currentBoard: number[][]) => changeBoard(currentBoard, axes, blockType)
-  const canGoForward = (position: number, key: string) =>
-    checkForward(position, key, axes, blockType.shape, baseBoard)
+  const updatedBaseBoard = updateBoard(baseBoard)
+  const addBlockToBoard = (currentBoard: number[][]) =>
+    changeBoard(currentBoard, position, blockType)
+  const canGoForward = (currentPosition: number, key: string) =>
+    checkForward(currentPosition, key, position, blockType.shape, baseBoard)
   const toggleRunning = () => setRunning(!running)
 
   const clearAll = () => {
     clearInterval(intervalRef.current)
     setRunning(false)
     setGameOver(false)
-    setBaseBoard(boardType)
-    setAxes({ x: 4, y: -blockShape[blockType.shape].length })
+    setBaseBoard(initialBoard)
+    setPosition({ x: 4, y: -blockShape[blockType.shape].length })
   }
 
   const downHandler = ({ key }: any) => {
     switch (key) {
       case 'ArrowDown':
-        setAxes((axes) => ({ ...axes, y: canGoForward(axes.y, key) ? axes.y + blockSize : axes.y }))
+        setPosition((p) => ({ ...p, y: canGoForward(p.y, key) ? p.y + blockSize : p.y }))
         break
       case 'ArrowRight':
-        setAxes((axes) => ({ ...axes, x: canGoForward(axes.x, key) ? axes.x + blockSize : axes.x }))
+        setPosition((p) => ({ ...p, x: canGoForward(p.x, key) ? p.x + blockSize : p.x }))
         break
       case 'ArrowLeft':
-        setAxes((axes) => ({ ...axes, x: canGoForward(axes.x, key) ? axes.x - blockSize : axes.x }))
+        setPosition((p) => ({ ...p, x: canGoForward(p.x, key) ? p.x - blockSize : p.x }))
         break
       case 'ArrowUp':
         setBlockType((blockType) => ({
@@ -61,12 +62,12 @@ export const Game: any = () => {
         setGameOver(true)
         setRunning(false)
       }
-      if (canGoForward(axes.y, 'ArrowDown')) {
-        setAxes((axes) => ({ ...axes, y: axes.y + blockSize }))
-        didDeleteRowBoard && setBaseBoard(didDeleteRowBoard)
+      if (canGoForward(position.y, 'ArrowDown')) {
+        setPosition((position) => ({ ...position, y: position.y + blockSize }))
+        updatedBaseBoard && setBaseBoard(updatedBaseBoard)
       } else {
         setBaseBoard(addBlockToBoard(baseBoard))
-        setAxes({ x: 4, y: 0 })
+        setPosition({ x: 4, y: 0 })
         setBlockType((blockType) => ({
           color: blockType.color < 6 ? blockType.color + 1 : 1,
           shape: blockType.shape < 24 ? blockType.shape + 4 : 27 - blockType.shape,
@@ -95,7 +96,7 @@ export const Game: any = () => {
           <Board defaultBoard={baseBoard} />
         </BoardWrapper>
         <BoardWrapper>
-          <Board defaultBoard={addBlockToBoard(boardType)} />
+          <Board defaultBoard={addBlockToBoard(initialBoard)} />
         </BoardWrapper>
         {gameOver ? <GameOverSign /> : null}
       </BoardArea>

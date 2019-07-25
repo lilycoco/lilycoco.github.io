@@ -36,16 +36,16 @@ export const blockShape = [
   [[0, 1, 1], [1, 1, 0]], //27
 ]
 
-export const boardType = Array(20).fill(Array(10).fill(0))
+export const initialBoard = Array(20).fill(Array(10).fill(0))
 
 export const changeBoard = (
   defaultBoard: number[][],
-  axes: { [key: string]: number },
+  position: { [key: string]: number },
   blockType: { [key: string]: number },
 ) =>
   defaultBoard.map((line: number[], lineIndex: number) =>
     line.map((block: number, blockIndex: number) => {
-      const { x, y } = axes
+      const { x, y } = position
       const { color, shape } = blockType
       const currentBlock = blockShape[shape]
       if (
@@ -62,7 +62,7 @@ export const changeBoard = (
     }),
   )
 
-export const deleteRow = (currentBoard: number[][]) => {
+export const updateBoard = (currentBoard: number[][]) => {
   const findDeleteRow = currentBoard
     .slice()
     .reverse()
@@ -79,9 +79,9 @@ export const deleteRow = (currentBoard: number[][]) => {
 }
 
 export const checkForward = (
-  position: number,
+  currentPosition: number,
   key: string,
-  axes: { [key: string]: number },
+  position: { [key: string]: number },
   currentShape: number,
   board: number[][],
 ) =>
@@ -89,9 +89,9 @@ export const checkForward = (
     line.some((block, blockIndex) => {
       const hasBlock = 1
       const blockSize = 1
-      const aBlockDown = position + lineIndex + blockSize
-      const aBlockRight = position + blockIndex + blockSize
-      const { x, y } = axes
+      const aBlockDown = currentPosition + lineIndex + blockSize
+      const aBlockRight = currentPosition + blockIndex + blockSize
+      const { x, y } = position
       switch (key) {
         case 'ArrowDown':
           return (
@@ -106,8 +106,9 @@ export const checkForward = (
         case 'ArrowLeft':
           return (
             block === hasBlock &&
-            (position <= 0 ||
-              (position > 0 && board[y + lineIndex][position + blockIndex - blockSize] !== 0))
+            (currentPosition <= 0 ||
+              (currentPosition > 0 &&
+                board[y + lineIndex][currentPosition + blockIndex - blockSize] !== 0))
           )
       }
     }),
