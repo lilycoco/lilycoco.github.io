@@ -6,7 +6,7 @@ import { btnStyle } from '../../styled/Tetris'
 import {
   blockShape,
   initialBoard,
-  changeBoard,
+  addNewBlockToBoard,
   updateBoard,
   checkForward,
   judgeGameOver,
@@ -16,17 +16,17 @@ export const Game: any = () => {
   const initialShape = Math.floor(Math.random() * 27)
   const initialColor = Math.floor(Math.random() * 6) + 1
   const blockSize = 1
-  const [blockType, setBlockType] = useState({ color: initialColor, shape: initialShape })
+  const [blockParams, setBlockParams] = useState({ color: initialColor, shape: initialShape })
   const [running, setRunning] = useState(false)
-  const [position, setPosition] = useState({ x: 4, y: -blockShape[blockType.shape].length })
+  const [position, setPosition] = useState({ x: 4, y: -blockShape[blockParams.shape].length })
   const [baseBoard, setBaseBoard] = useState(initialBoard)
   const [gameOver, setGameOver] = useState(false)
   const intervalRef = useRef()
   const updatedBaseBoard = updateBoard(baseBoard)
-  const addBlockToBoard = (currentBoard: number[][]) =>
-    changeBoard(currentBoard, position, blockType)
+  const addedNewBlockBoard = (currentBoard: number[][]) =>
+    addNewBlockToBoard(currentBoard, position, blockParams)
   const canGoForward = (currentPosition: number, key: string) =>
-    checkForward(currentPosition, key, position, blockType.shape, baseBoard)
+    checkForward(currentPosition, key, position, blockParams.shape, baseBoard)
   const toggleRunning = () => setRunning(!running)
 
   const clearAll = () => {
@@ -34,7 +34,7 @@ export const Game: any = () => {
     setRunning(false)
     setGameOver(false)
     setBaseBoard(initialBoard)
-    setPosition({ x: 4, y: -blockShape[blockType.shape].length })
+    setPosition({ x: 4, y: -blockShape[blockParams.shape].length })
   }
 
   const downHandler = ({ key }: any) => {
@@ -49,9 +49,9 @@ export const Game: any = () => {
         setPosition((p) => ({ ...p, x: canGoForward(p.x, key) ? p.x - blockSize : p.x }))
         break
       case 'ArrowUp':
-        setBlockType((blockType) => ({
-          ...blockType,
-          shape: (blockType.shape + 1) % 4 === 0 ? blockType.shape - 3 : blockType.shape + 1,
+        setBlockParams((b) => ({
+          ...b,
+          shape: (b.shape + 1) % 4 === 0 ? b.shape - 3 : b.shape + 1,
         }))
     }
   }
@@ -66,11 +66,11 @@ export const Game: any = () => {
         setPosition((position) => ({ ...position, y: position.y + blockSize }))
         updatedBaseBoard && setBaseBoard(updatedBaseBoard)
       } else {
-        setBaseBoard(addBlockToBoard(baseBoard))
+        setBaseBoard(addedNewBlockBoard(baseBoard))
         setPosition({ x: 4, y: 0 })
-        setBlockType((blockType) => ({
-          color: blockType.color < 6 ? blockType.color + 1 : 1,
-          shape: blockType.shape < 24 ? blockType.shape + 4 : 27 - blockType.shape,
+        setBlockParams((b) => ({
+          color: b.color < 6 ? b.color + 1 : 1,
+          shape: b.shape < 24 ? b.shape + 4 : 27 - b.shape,
         }))
       }
     }
@@ -93,10 +93,10 @@ export const Game: any = () => {
     <div>
       <BoardArea>
         <BoardWrapper>
-          <Board defaultBoard={baseBoard} />
+          <Board currentBoard={baseBoard} />
         </BoardWrapper>
         <BoardWrapper>
-          <Board defaultBoard={addBlockToBoard(initialBoard)} />
+          <Board currentBoard={addedNewBlockBoard(initialBoard)} />
         </BoardWrapper>
         {gameOver ? <GameOverSign /> : null}
       </BoardArea>

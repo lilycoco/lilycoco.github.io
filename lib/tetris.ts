@@ -38,15 +38,15 @@ export const blockShape = [
 
 export const initialBoard = Array(20).fill(Array(10).fill(0))
 
-export const changeBoard = (
-  defaultBoard: number[][],
+export const addNewBlockToBoard = (
+  currentBoard: number[][],
   position: { [key: string]: number },
-  blockType: { [key: string]: number },
+  blockParams: { [key: string]: number },
 ) =>
-  defaultBoard.map((line: number[], lineIndex: number) =>
+  currentBoard.map((line: number[], lineIndex: number) =>
     line.map((block: number, blockIndex: number) => {
       const { x, y } = position
-      const { color, shape } = blockType
+      const { color, shape } = blockParams
       const currentBlock = blockShape[shape]
       if (
         lineIndex >= y &&
