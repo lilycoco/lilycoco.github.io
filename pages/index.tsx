@@ -1,46 +1,10 @@
 import * as React from 'react'
-import styled from 'styled-components'
+import { Cover, Opacity, TytleWrapper, Title, Text } from '../components/index/Style'
 import { Button } from 'react-bootstrap'
 import { Layout } from '../components/Layout'
 import Link from 'next/link'
 
-const Cover = styled.div`
-  background-image: url('/static/pic/monet_water_lilies.jpg');
-  height: 800px;
-  background-position: center center;
-  background-repeat: no-repeat;
-  background-attachment: fixed;
-  background-size: cover;
-`
-const Opacity = styled.div`
-  background: rgba(255, 255, 255, 0.3);
-  height: 800px;
-  display: flex;
-  justify-content: flex-end;
-  align-items: center;
-`
-const TytleWrapper = styled.div`
-  width: 600px;
-  text-align: center;
-  margin: auto;
-  height: 200px;
-  color: #37548f;
-`
-const Title = styled.h1`
-  font-size: 45px;
-  margin: 20px;
-  font-weight: bold;
-`
-const Text = styled.div`
-  font-size: 15px;
-  margin: 10px 0 30px;
-`
-
-interface EProps {
-  contents: any
-}
-
-export default class CoverPage extends React.Component<EProps> {
+export default class CoverPage extends React.Component<{ contents: any }> {
   public render() {
     return (
       <Layout>

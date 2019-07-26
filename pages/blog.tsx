@@ -1,15 +1,7 @@
 import * as React from 'react'
 import { MainTitle } from '../styled/Page'
 import { Layout } from '../components/Layout'
-import Link from 'next/link'
-
-const ArticleLink = (props: { id: number; title: string }) => (
-  <li key={props.id}>
-    <Link as={`/blog/${props.id}`} href={`/article?id=${props.id}`}>
-      <a>{props.title}</a>
-    </Link>
-  </li>
-)
+import { ArticleLink } from '../components/blog/ArticleLink'
 
 export default function Blog() {
   return (
