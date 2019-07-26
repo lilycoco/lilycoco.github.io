@@ -34,3 +34,18 @@ const contentsList: Tron[] = [
 ]
 
 export const reversedContentsList = contentsList.reverse()
+
+export const addPoint = (content: Tron[], icon: string, i: number) =>
+  content.map((c) => {
+    if (c.id === i) {
+      switch (icon) {
+        case 'like':
+          c.like += 1
+          break
+        case 'heart':
+          c.heart += 1
+          break
+      }
+    }
+    return c
+  })
