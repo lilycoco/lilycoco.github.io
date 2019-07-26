@@ -11,26 +11,26 @@ import {
 } from '../../lib/tetris'
 
 export const Game: any = () => {
-  const [blockParams, setBlockParams] = useState({ color: 1, shape: 0 })
+  const [currentBlock, setCurrentBlock] = useState({ color: 1, shape: 0 })
   const [running, setRunning] = useState(false)
-  const [position, setPosition] = useState({ x: 4, y: -blockShape[blockParams.shape].length })
+  const [position, setPosition] = useState({ x: 4, y: -blockShape[currentBlock.shape].length })
   const [baseBoard, setBaseBoard] = useState(initialBoard)
   const [gameOver, setGameOver] = useState(false)
   const intervalRef = useRef()
   const updatedBaseBoard = updateBoard(baseBoard)
   const blockSize = 1
 
-  const changeBlock = () => {
+  const rotateCurrentBlock = () => {
     const randomColor = Math.floor(Math.random() * 6) + 1
     const randomShape = Math.floor(Math.random() * 27)
-    setBlockParams({ color: randomColor, shape: randomShape })
+    setCurrentBlock({ color: randomColor, shape: randomShape })
   }
 
   const addedNewBlockBoard = (currentBoard: number[][]) =>
-    addNewBlockToBoard(currentBoard, position, blockParams)
+    addNewBlockToBoard(currentBoard, position, currentBlock)
 
   const canGoForward = (currentPosition: number, key: string) =>
-    checkForward(currentPosition, key, position, blockParams.shape, baseBoard)
+    checkForward(currentPosition, key, position, currentBlock.shape, baseBoard)
 
   const downHandler = ({ key }: any) => {
     switch (key) {
@@ -44,7 +44,7 @@ export const Game: any = () => {
         setPosition((p) => ({ ...p, x: canGoForward(p.x, key) ? p.x - blockSize : p.x }))
         break
       case 'ArrowUp':
-        setBlockParams((b) => ({
+        setCurrentBlock((b) => ({
           ...b,
           shape: (b.shape + 1) % 4 === 0 ? b.shape - 3 : b.shape + 1,
         }))
@@ -63,7 +63,7 @@ export const Game: any = () => {
       } else {
         setBaseBoard(addedNewBlockBoard(baseBoard))
         setPosition({ x: 4, y: 0 })
-        changeBlock()
+        rotateCurrentBlock()
       }
     }
   }
@@ -88,7 +88,7 @@ export const Game: any = () => {
     setRunning(false)
     setGameOver(false)
     setBaseBoard(initialBoard)
-    setPosition({ x: 4, y: -blockShape[blockParams.shape].length })
+    setPosition({ x: 4, y: -blockShape[currentBlock.shape].length })
   }
 
   return (
