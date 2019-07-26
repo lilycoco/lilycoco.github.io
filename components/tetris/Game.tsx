@@ -13,18 +13,24 @@ import {
 } from '../../lib/tetris'
 
 export const Game: any = () => {
-  const initialShape = Math.floor(Math.random() * 27)
-  const initialColor = Math.floor(Math.random() * 6) + 1
-  const blockSize = 1
-  const [blockParams, setBlockParams] = useState({ color: initialColor, shape: initialShape })
+  const [blockParams, setBlockParams] = useState({ color: 1, shape: 0 })
   const [running, setRunning] = useState(false)
   const [position, setPosition] = useState({ x: 4, y: -blockShape[blockParams.shape].length })
   const [baseBoard, setBaseBoard] = useState(initialBoard)
   const [gameOver, setGameOver] = useState(false)
   const intervalRef = useRef()
   const updatedBaseBoard = updateBoard(baseBoard)
+  const blockSize = 1
+
+  const changeBlock = () => {
+    const randomColor = Math.floor(Math.random() * 6) + 1
+    const randomShape = Math.floor(Math.random() * 27)
+    setBlockParams({ color: randomColor, shape: randomShape })
+  }
+
   const addedNewBlockBoard = (currentBoard: number[][]) =>
     addNewBlockToBoard(currentBoard, position, blockParams)
+
   const canGoForward = (currentPosition: number, key: string) =>
     checkForward(currentPosition, key, position, blockParams.shape, baseBoard)
   const toggleRunning = () => setRunning(!running)
@@ -68,10 +74,7 @@ export const Game: any = () => {
       } else {
         setBaseBoard(addedNewBlockBoard(baseBoard))
         setPosition({ x: 4, y: 0 })
-        setBlockParams((b) => ({
-          color: b.color < 6 ? b.color + 1 : 1,
-          shape: b.shape < 24 ? b.shape + 4 : 27 - b.shape,
-        }))
+        changeBlock()
       }
     }
   }
