@@ -1,8 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react'
-import { GameOverSign } from './GameOverSign'
-import { Board } from './Board'
-import { BoardArea, BoardWrapper } from './Style'
-import { btnStyle } from '../../styled/Tetris'
+import { Boards } from './Boards'
+import { Buttons } from './Buttons'
 import {
   blockShape,
   initialBoard,
@@ -33,15 +31,6 @@ export const Game: any = () => {
 
   const canGoForward = (currentPosition: number, key: string) =>
     checkForward(currentPosition, key, position, blockParams.shape, baseBoard)
-  const toggleRunning = () => setRunning(!running)
-
-  const clearAll = () => {
-    clearInterval(intervalRef.current)
-    setRunning(false)
-    setGameOver(false)
-    setBaseBoard(initialBoard)
-    setPosition({ x: 4, y: -blockShape[blockParams.shape].length })
-  }
 
   const downHandler = ({ key }: any) => {
     switch (key) {
@@ -92,23 +81,24 @@ export const Game: any = () => {
     }
   }, [intervalProcessing])
 
+  const toggleRunning = () => setRunning(!running)
+
+  const clearAll = () => {
+    clearInterval(intervalRef.current)
+    setRunning(false)
+    setGameOver(false)
+    setBaseBoard(initialBoard)
+    setPosition({ x: 4, y: -blockShape[blockParams.shape].length })
+  }
+
   return (
     <div>
-      <BoardArea>
-        <BoardWrapper>
-          <Board currentBoard={baseBoard} />
-        </BoardWrapper>
-        <BoardWrapper>
-          <Board currentBoard={addedNewBlockBoard(initialBoard)} />
-        </BoardWrapper>
-        {gameOver ? <GameOverSign /> : null}
-      </BoardArea>
-      <button className='btn btn-primary' onClick={toggleRunning} style={btnStyle}>
-        {running ? 'Stop' : 'Start'}
-      </button>
-      <button className='btn btn-primary' onClick={clearAll} style={btnStyle}>
-        Clear
-      </button>
+      <Boards
+        baseBoard={baseBoard}
+        newBoard={addedNewBlockBoard(initialBoard)}
+        gameOver={gameOver}
+      />
+      <Buttons toggleRunning={toggleRunning} running={running} clearAll={clearAll} />
     </div>
   )
 }
