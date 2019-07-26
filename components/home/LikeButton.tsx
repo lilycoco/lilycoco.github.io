@@ -1,11 +1,20 @@
 import { IconWrapper, Icon, Num } from './Style'
 
-export const LikeButton = (props: { point: number; id: number; icon: string; onClick: any }) => {
+export const LikeButton = (props: { content: any; icon: string; onClick: any }) => {
+  const { content, icon } = props
+  const point = () => {
+    switch (icon) {
+      case 'like':
+        return content.like
+      case 'heart':
+        return content.heart
+    }
+  }
   return (
     <div>
-      <IconWrapper onClick={() => props.onClick(props.id)}>
-        <Icon src={{ icon: props.icon, num: props.point }} />
-        <Num>{props.point}</Num>
+      <IconWrapper onClick={() => props.onClick(props.icon, content.id)}>
+        <Icon src={{ icon: icon, num: point() }} />
+        <Num>{point()}</Num>
       </IconWrapper>
     </div>
   )

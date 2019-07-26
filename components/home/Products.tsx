@@ -10,6 +10,10 @@ const btnStyle: React.CSSProperties = {
 }
 
 export const Products: React.SFC<{ contents: Tron[]; onClick: any }> = (props) => {
+  const renderLikeButton = (icon: string, c: any) => (
+    <LikeButton content={c} icon={icon} onClick={(i: string, n: number) => props.onClick(i, n)} />
+  )
+
   return (
     <Ul>
       {props.contents.map((c) => (
@@ -20,18 +24,8 @@ export const Products: React.SFC<{ contents: Tron[]; onClick: any }> = (props) =
               <H1>{c.name}</H1>
               <Text>{c.text}</Text>
               <BtnWrapper>
-                <LikeButton
-                  point={c.like}
-                  id={c.id}
-                  icon={'like'}
-                  onClick={(i: number) => props.onClick('like', i)}
-                />
-                <LikeButton
-                  point={c.heart}
-                  id={c.id}
-                  icon={'heart'}
-                  onClick={(i: number) => props.onClick('heart', i)}
-                />
+                {renderLikeButton('like', c)}
+                {renderLikeButton('heart', c)}
                 <Link href={c.url}>
                   <a className='btn btn-primary' style={btnStyle}>
                     Play
