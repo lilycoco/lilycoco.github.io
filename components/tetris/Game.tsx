@@ -10,10 +10,13 @@ import {
   judgeGameOver,
 } from '../../lib/tetris'
 
-export const Game: any = () => {
+export const Game: React.ReactNode = () => {
   const [currentBlock, setCurrentBlock] = useState({ color: 1, shape: 0 })
   const [running, setRunning] = useState(false)
-  const [position, setPosition] = useState({ x: 4, y: -blockShape[currentBlock.shape].length })
+  const [currentBlockPosition, setCurrentBlockPosition] = useState({
+    x: 4,
+    y: -blockShape[currentBlock.shape].length,
+  })
   const [baseBoard, setBaseBoard] = useState(initialBoard)
   const [gameOver, setGameOver] = useState(false)
   const intervalRef = useRef()
@@ -27,21 +30,30 @@ export const Game: any = () => {
   }
 
   const addedNewBlockBoard = (currentBoard: number[][]) =>
-    addNewBlockToBoard(currentBoard, position, currentBlock)
+    addNewBlockToBoard(currentBoard, currentBlockPosition, currentBlock)
 
   const canGoForward = (currentPosition: number, key: string) =>
-    checkForward(currentPosition, key, position, currentBlock.shape, baseBoard)
+    checkForward(currentPosition, key, currentBlockPosition, currentBlock.shape, baseBoard)
 
   const downHandler = ({ key }: any) => {
     switch (key) {
       case 'ArrowDown':
-        setPosition((p) => ({ ...p, y: canGoForward(p.y, key) ? p.y + blockSize : p.y }))
+        setCurrentBlockPosition((p) => ({
+          ...p,
+          y: canGoForward(p.y, key) ? p.y + blockSize : p.y,
+        }))
         break
       case 'ArrowRight':
-        setPosition((p) => ({ ...p, x: canGoForward(p.x, key) ? p.x + blockSize : p.x }))
+        setCurrentBlockPosition((p) => ({
+          ...p,
+          x: canGoForward(p.x, key) ? p.x + blockSize : p.x,
+        }))
         break
       case 'ArrowLeft':
-        setPosition((p) => ({ ...p, x: canGoForward(p.x, key) ? p.x - blockSize : p.x }))
+        setCurrentBlockPosition((p) => ({
+          ...p,
+          x: canGoForward(p.x, key) ? p.x - blockSize : p.x,
+        }))
         break
       case 'ArrowUp':
         setCurrentBlock((b) => ({
@@ -57,12 +69,12 @@ export const Game: any = () => {
         setGameOver(true)
         setRunning(false)
       }
-      if (canGoForward(position.y, 'ArrowDown')) {
-        setPosition((position) => ({ ...position, y: position.y + blockSize }))
+      if (canGoForward(currentBlockPosition.y, 'ArrowDown')) {
+        setCurrentBlockPosition((p) => ({ ...p, y: p.y + blockSize }))
         updatedBaseBoard && setBaseBoard(updatedBaseBoard)
       } else {
         setBaseBoard(addedNewBlockBoard(baseBoard))
-        setPosition({ x: 4, y: 0 })
+        setCurrentBlockPosition({ x: 4, y: 0 })
         rotateCurrentBlock()
       }
     }
@@ -88,7 +100,7 @@ export const Game: any = () => {
     setRunning(false)
     setGameOver(false)
     setBaseBoard(initialBoard)
-    setPosition({ x: 4, y: -blockShape[currentBlock.shape].length })
+    setCurrentBlockPosition({ x: 4, y: -blockShape[currentBlock.shape].length })
   }
 
   return (
