@@ -48,11 +48,14 @@ export const IconWrapper = styled.div`
   cursor: pointer;
   width: 80px;
 `
-export const Icon = styled.img`
+export const Icon = styled.div<{ src: any }>`
   width: 27px;
   height: 27px;
   display: block;
   user-select: none;
+  background-size: cover;
+  background-image: url(${(p: any) =>
+    '/static/icon/' + p.src.icon + (p.src.num ? '_on.png' : '_off.png')});
   &:hover {
     width: 30px;
     height: 30px;

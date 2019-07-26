@@ -19,11 +19,11 @@ export const LikeButton = (props: { c: any; index: number; onClick: any }) => {
   return (
     <BtnWrapper>
       <IconWrapper onClick={() => props.onClick(props.index)}>
-        <Icon src={likeAction(c.like)} />
+        <Icon src={{ icon: 'like', num: c.like }} />
         <Num>{c.like}</Num>
       </IconWrapper>
       <IconWrapper onClick={() => props.onClick(props.index + 10)}>
-        <Icon src={heartAction(c.heart)} />
+        <Icon src={{ icon: 'heart', num: c.heart }} />
         <Num>{c.heart}</Num>
       </IconWrapper>
       <Link href={c.url}>
