@@ -1,9 +1,8 @@
 import { Tron } from '../models/Tron'
 
-export const contentsList: Tron[] = [
+const contentsList: Tron[] = [
   {
-    id: 1,
-    right: true,
+    id: 0,
     name: 'Space Invaders',
     text:
       'I developed this with jQuery and Canvas over about a week, 1 months later since when I started learning programming',
@@ -13,8 +12,7 @@ export const contentsList: Tron[] = [
     like: 0,
   },
   {
-    id: 2,
-    right: true,
+    id: 1,
     name: 'Tetris',
     text:
       'Probably you know this is the Tetris which is the game used to be very popular in the world. I also created this with jQuery only',
@@ -24,8 +22,7 @@ export const contentsList: Tron[] = [
     like: 0,
   },
   {
-    id: 3,
-    right: true,
+    id: 2,
     name: 'Mugen Sweeper',
     text:
       'This is unusual minesweeper which has unlimited field and enable to play with multiple players, developed with Node.js, Nuxt.js and Vue.js',
@@ -35,3 +32,5 @@ export const contentsList: Tron[] = [
     like: 0,
   },
 ]
+
+export const reversedContentsList = contentsList.reverse()

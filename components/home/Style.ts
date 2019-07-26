@@ -3,13 +3,13 @@ import styled from 'styled-components'
 export const Ul = styled.ul`
   list-style: none;
 `
-export const Li = styled.li<{ primary: boolean }>`
+export const Li = styled.li`
   margin: auto;
   display: flex;
   width: 80%;
   border-top: solid 1px #6e6e6e;
   padding: 50px;
-  flex-direction: ${(props) => (props.primary ? 'row-reverse' : 'row')};
+  flex-direction: row-reverse;
 `
 export const Img = styled.img`
   width: 40%;
