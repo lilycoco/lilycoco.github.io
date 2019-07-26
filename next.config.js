@@ -7,7 +7,6 @@ module.exports = withTypescript({
     return {
       '/': { page: '/' },
       '/home': { page: '/home' },
-      '/game': { page: '/game' },
       '/blog': { page: '/blog' },
       '/tetris': { page: '/tetris' },
       '/tictac': { page: '/tictac' },

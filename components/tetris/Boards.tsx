@@ -1,7 +1,6 @@
 import { GameOverSign } from './GameOverSign'
 import { Board } from './Board'
-import { BoardWrapper } from './Style'
-import { BoardArea } from './Style'
+import { BoardWrapper, BoardArea } from './Style'
 
 export const Boards: any = (props: { baseBoard: any; gameOver: boolean; newBoard: any }) => {
   return (
