@@ -5,7 +5,7 @@ import {
   blockShape,
   initialBoard,
   addNewBlockToBoard,
-  updateBoard,
+  DeleteALineOfBlockOnBoard,
   checkForward,
   judgeGameOver,
 } from '../../lib/tetris'
@@ -17,11 +17,10 @@ export const Game = () => {
     x: 4,
     y: -blockShape[currentBlock.shape].length,
   })
-
-  const [baseBoard, setBaseBoard] = useState(initialBoard)
+  const [currentBoard, setCurrentBoard] = useState(initialBoard)
   const [gameOver, setGameOver] = useState(false)
   const intervalRef = useRef()
-  const updatedBaseBoard = updateBoard(baseBoard)
+  const DeletedALineOfBlockBoard = DeleteALineOfBlockOnBoard(currentBoard)
   const blockSize = 1
 
   const rotateCurrentBlock = () => {
@@ -30,11 +29,11 @@ export const Game = () => {
     setCurrentBlock({ color: randomColor, shape: randomShape })
   }
 
-  const addedNewBlockBoard = (currentBoard: number[][]) =>
+  const addedNewBlockBoard = () =>
     addNewBlockToBoard(currentBoard, currentBlockPosition, currentBlock)
 
-  const canGoForward = (currentPosition: number, key: string) =>
-    checkForward(currentPosition, key, currentBlockPosition, currentBlock.shape, baseBoard)
+  const canGoForward = (positionWhenKeyDown: number, key: string) =>
+    checkForward(positionWhenKeyDown, key, currentBlockPosition, currentBlock.shape, currentBoard)
 
   const downHandler = ({ key }: any) => {
     switch (key) {
@@ -66,15 +65,15 @@ export const Game = () => {
 
   const intervalProcessing = () => {
     if (running) {
-      if (judgeGameOver(baseBoard)) {
+      if (judgeGameOver(currentBoard)) {
         setGameOver(true)
         setRunning(false)
       }
       if (canGoForward(currentBlockPosition.y, 'ArrowDown')) {
         setCurrentBlockPosition((p) => ({ ...p, y: p.y + blockSize }))
-        updatedBaseBoard && setBaseBoard(updatedBaseBoard)
+        DeletedALineOfBlockBoard && setCurrentBoard(DeletedALineOfBlockBoard)
       } else {
-        setBaseBoard(addedNewBlockBoard(baseBoard))
+        setCurrentBoard(addedNewBlockBoard())
         setCurrentBlockPosition({ x: 4, y: 0 })
         rotateCurrentBlock()
       }
@@ -100,17 +99,13 @@ export const Game = () => {
     clearInterval(intervalRef.current)
     setRunning(false)
     setGameOver(false)
-    setBaseBoard(initialBoard)
+    setCurrentBoard(initialBoard)
     setCurrentBlockPosition({ x: 4, y: -blockShape[currentBlock.shape].length })
   }
 
   return (
     <div>
-      <Boards
-        baseBoard={baseBoard}
-        newBoard={addedNewBlockBoard(initialBoard)}
-        gameOver={gameOver}
-      />
+      <Boards board={addedNewBlockBoard()} gameOver={gameOver} />
       <Buttons toggleRunning={toggleRunning} running={running} clearAll={clearAll} />
     </div>
   )

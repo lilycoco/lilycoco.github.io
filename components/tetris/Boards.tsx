@@ -2,14 +2,11 @@ import { GameOverSign } from './GameOverSign'
 import { Board } from './Board'
 import { BoardWrapper, BoardArea } from './Style'
 
-export const Boards: any = (props: { baseBoard: any; gameOver: boolean; newBoard: any }) => {
+export const Boards = (props: { board: number[][]; gameOver: boolean }) => {
   return (
     <BoardArea>
       <BoardWrapper>
-        <Board currentBoard={props.baseBoard} />
-      </BoardWrapper>
-      <BoardWrapper>
-        <Board currentBoard={props.newBoard} />
+        <Board currentBoard={props.board} />
       </BoardWrapper>
       {props.gameOver ? <GameOverSign /> : null}
     </BoardArea>
