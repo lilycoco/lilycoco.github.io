@@ -10,13 +10,14 @@ import {
   judgeGameOver,
 } from '../../lib/tetris'
 
-export const Game: React.ReactNode = () => {
+export const Game = () => {
   const [currentBlock, setCurrentBlock] = useState({ color: 1, shape: 0 })
   const [running, setRunning] = useState(false)
   const [currentBlockPosition, setCurrentBlockPosition] = useState({
     x: 4,
     y: -blockShape[currentBlock.shape].length,
   })
+
   const [baseBoard, setBaseBoard] = useState(initialBoard)
   const [gameOver, setGameOver] = useState(false)
   const intervalRef = useRef()
