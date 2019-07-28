@@ -3,7 +3,7 @@ import { useState, useEffect, useRef } from 'react'
 
 import { Board } from './Board'
 import { GameOverSign } from './GameOverSign'
-import { BoardArea, BoardWrapper } from './Style'
+import { BoardArea } from './Style'
 import { Buttons } from './Buttons'
 import {
   blockShape,
@@ -110,9 +110,7 @@ export const Game = () => {
   return (
     <div>
       <BoardArea>
-        <BoardWrapper>
-          <Board currentBoard={addedNewBlockBoard()} />
-        </BoardWrapper>
+        <Board currentBoard={addedNewBlockBoard()} />
         {gameOver ? <GameOverSign /> : null}
       </BoardArea>
       <Buttons toggleRunning={toggleRunning} running={running} clearAll={clearAll} />

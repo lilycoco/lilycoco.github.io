@@ -26,14 +26,12 @@ export const SwitchButton = (props: {
           Sort order
         </button>
       </div>
-      <ol>
-        <Moves
-          histories={props.histories}
-          asc={props.asc}
-          stepNumber={props.stepNumber}
-          onClick={(step: number) => props.jump(step)}
-        />
-      </ol>
+      <Moves
+        histories={props.histories}
+        asc={props.asc}
+        stepNumber={props.stepNumber}
+        onClick={(step: number) => props.jump(step)}
+      />
     </div>
   )
 }
