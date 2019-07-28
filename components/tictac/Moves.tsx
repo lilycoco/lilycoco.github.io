@@ -1,7 +1,7 @@
 import { SProps } from '../../models/Tictac'
 import { StepButton } from './Style'
 
-export const Moves = (props: SProps) => {
+export const Moves: any = (props: SProps) => {
   const key = [...props.histories.keys()]
   return key.map((step: number) => {
     !props.asc && (step = props.histories.length - step - 1)
