@@ -1,5 +1,3 @@
 import { GameOverFilter } from './Style'
 
-export const GameOverSign = () => {
-  return <GameOverFilter>Game Over</GameOverFilter>
-}
+export const GameOverSign = () => <GameOverFilter>Game Over</GameOverFilter>
