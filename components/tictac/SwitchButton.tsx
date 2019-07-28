@@ -1,8 +1,16 @@
-import { SProps } from '../../models/Tictac'
+import { WProps } from '../../models/Tictac'
 import { Moves } from './Moves'
 import { H2 } from './Style'
 
-export const SwitchButton = (props: SProps) => {
+export const SwitchButton = (props: {
+  onClick: () => void
+  histories: { [key: string]: string[] }[]
+  asc: boolean
+  winner: WProps | null
+  stepNumber: number
+  xIsNext: boolean
+  jump: (step: number) => void
+}) => {
   const status = () =>
     props.winner
       ? 'Winner: ' + props.winner.mark
