@@ -37,7 +37,7 @@ export const Game = () => {
   const canGoForward = (positionWhenKeyDown: number, key: string) =>
     checkForward(positionWhenKeyDown, key, currentBlockPosition, currentBlock.shape, currentBoard)
 
-  const downHandler = ({ key }: any) => {
+  const downHandler = ({ key }: KeyboardEvent) => {
     switch (key) {
       case 'ArrowDown':
         setCurrentBlockPosition((p) => ({

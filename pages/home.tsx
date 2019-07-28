@@ -6,14 +6,14 @@ import { reversedContentsList, addPoint } from '../lib/home'
 
 export default function Home() {
   const [content, setContent] = useState(reversedContentsList)
-  const addedPointContent: any = (icon: string, i: number) => setContent(addPoint(content, icon, i))
+  const addedPointContent = (icon: string, id: number) => setContent(addPoint(content, icon, id))
 
   return (
     <Layout>
       <MainTitle>What's New?</MainTitle>
       <Products
         contents={content}
-        onClick={(icon: string, i: number) => addedPointContent(icon, i)}
+        onClick={(icon: string, id: number) => addedPointContent(icon, id)}
       />
     </Layout>
   )
