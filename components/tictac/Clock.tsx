@@ -24,9 +24,5 @@ const Timer = (currentDate: number, winner: WProps | null) => {
 
 export const Clock = (props: { winner: WProps | null }) => {
   const timer = Timer(0, props.winner)
-  return (
-    <div>
-      <H2> {timer} sec has passed </H2>
-    </div>
-  )
+  return <H2> {timer} sec has passed </H2>
 }
