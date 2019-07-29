@@ -15,28 +15,21 @@ export const Board = (props: {
     return highlight
   }
 
-  const renderSquare = (i: number) => (
-    <Square value={props.squares[i]} onClick={() => props.onClick(i)} className={win(i)} />
-  )
-
   return (
     <div className='game-board'>
       <div>
-        <BoardRow>
-          {renderSquare(0)}
-          {renderSquare(1)}
-          {renderSquare(2)}
-        </BoardRow>
-        <BoardRow>
-          {renderSquare(3)}
-          {renderSquare(4)}
-          {renderSquare(5)}
-        </BoardRow>
-        <BoardRow>
-          {renderSquare(6)}
-          {renderSquare(7)}
-          {renderSquare(8)}
-        </BoardRow>
+        {[0, 3, 6].map((line) => (
+          <BoardRow key={line}>
+            {[line, line + 1, line + 2].map((block) => (
+              <Square
+                key={block}
+                value={props.squares[block]}
+                onClick={() => props.onClick(block)}
+                className={win(block)}
+              />
+            ))}
+          </BoardRow>
+        ))}
       </div>
     </div>
   )
