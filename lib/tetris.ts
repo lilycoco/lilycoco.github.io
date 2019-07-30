@@ -63,19 +63,17 @@ export const addNewBlockToBoard = (
   )
 
 export const deleteALineOfBlockOnBoard = (currentBoard: number[][]) => {
-  const filledAllRow: number[] = []
+  const filledRows: number[] = []
   currentBoard.map((row, index) => {
-    row.every((block: number) => block !== 0) && filledAllRow.push(index)
+    row.every((block: number) => block !== 0) && filledRows.push(index)
   })
-
   let refleshedBoard = currentBoard.slice()
-  if (filledAllRow.length) {
-    filledAllRow.map((row) => {
-      refleshedBoard.splice(row, 1)
+  if (filledRows.length) {
+    filledRows.map((rowIndex) => {
+      refleshedBoard.splice(rowIndex, 1)
       refleshedBoard.unshift(Array(10).fill(0))
     })
   }
-
   return refleshedBoard
 }
 
