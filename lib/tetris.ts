@@ -35,10 +35,12 @@ export const blockShape = [
   [[1, 0], [1, 1], [0, 1]], //26
   [[0, 1, 1], [1, 1, 0]], //27
 ]
+const hasBlock = 1
 export const blockSize = 30
 export const aBlock = 1
 export const boardWidth = 15
 export const boardHeight = 15
+export const initialX = Math.floor(boardWidth / 2)
 export const initialBoard = Array(boardHeight).fill(Array(boardWidth).fill(0))
 
 export const addNewBlockToBoard = (
@@ -56,7 +58,7 @@ export const addNewBlockToBoard = (
         blockIndex >= x &&
         currentBlock.length > lineIndex - y &&
         currentBlock[0].length > blockIndex - x &&
-        currentBlock[lineIndex - y][blockIndex - x] === 1
+        currentBlock[lineIndex - y][blockIndex - x] === hasBlock
       ) {
         return color
       } else {
@@ -74,7 +76,7 @@ export const deleteALineOfBlockOnBoard = (currentBoard: number[][]) => {
   if (filledRows.length) {
     filledRows.map((rowIndex) => {
       refleshedBoard.splice(rowIndex, 1)
-      refleshedBoard.unshift(Array(10).fill(0))
+      refleshedBoard.unshift(Array(boardWidth).fill(0))
     })
   }
   return refleshedBoard
@@ -89,7 +91,6 @@ export const checkForward = (
 ) =>
   !blockShape[currentShape].some((line, lineIndex) =>
     line.some((block, blockIndex) => {
-      const hasBlock = 1
       const aBlockDown = currentPosition + lineIndex + aBlock
       const aBlockRight = currentPosition + blockIndex + aBlock
       const { x, y } = position
@@ -117,7 +118,7 @@ export const checkForward = (
 
 export const judgeGameOver = (board: number[][]) => {
   for (let i = 0; i < 4; i++) {
-    for (let n = 4; n < 8; n++) {
+    for (let n = initialX - 2; n < initialX + 6; n++) {
       if (board[i][n]) {
         return true
       }

@@ -25,7 +25,7 @@ export const GameOverFilter = styled.div`
   background-color: rgb(0, 0, 0, 0.6);
   letter-spacing: 0.05em;
 `
-const blockColors = ['navy', 'darkmagenta', 'orangered', 'yellow', 'deeppink', 'limegreen']
+export const blockColors = ['navy', 'darkmagenta', 'orangered', 'yellow', 'deeppink', 'limegreen']
 export const Block = styled.div`
   width: ${blockSize}px;
   height: ${blockSize}px;

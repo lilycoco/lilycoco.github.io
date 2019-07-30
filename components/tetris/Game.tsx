@@ -3,11 +3,12 @@ import { useState, useEffect, useRef } from 'react'
 
 import { Board } from './Board'
 import { GameOverSign } from './GameOverSign'
-import { BoardArea } from './Style'
+import { BoardArea, blockColors } from './Style'
 import { Buttons } from './Buttons'
 import {
   blockShape,
   aBlock,
+  initialX,
   initialBoard,
   addNewBlockToBoard,
   deleteALineOfBlockOnBoard,
@@ -19,7 +20,7 @@ export const Game = () => {
   const [currentBlock, setCurrentBlock] = useState({ color: 1, shape: 0 })
   const [running, setRunning] = useState(false)
   const [currentBlockPosition, setCurrentBlockPosition] = useState({
-    x: 4,
+    x: initialX,
     y: -blockShape[currentBlock.shape].length,
   })
   const [currentBoard, setCurrentBoard] = useState(initialBoard)
@@ -27,8 +28,8 @@ export const Game = () => {
   const intervalRef = useRef()
 
   const rotateCurrentBlock = () => {
-    const randomColor = Math.floor(Math.random() * 6) + 1
-    const randomShape = Math.floor(Math.random() * 27)
+    const randomColor = Math.floor(Math.random() * blockColors.length) + 1
+    const randomShape = Math.floor(Math.random() * (blockShape.length - 1))
     setCurrentBlock({ color: randomColor, shape: randomShape })
   }
 
@@ -82,7 +83,7 @@ export const Game = () => {
         } else {
           setCurrentBoard(addedNewBlockBoard())
         }
-        setCurrentBlockPosition({ x: 4, y: 0 })
+        setCurrentBlockPosition({ x: initialX, y: 0 })
         rotateCurrentBlock()
       }
     }
@@ -108,7 +109,7 @@ export const Game = () => {
     setRunning(false)
     setGameOver(false)
     setCurrentBoard(initialBoard)
-    setCurrentBlockPosition({ x: 4, y: -blockShape[currentBlock.shape].length })
+    setCurrentBlockPosition({ x: initialX, y: -blockShape[currentBlock.shape].length })
   }
 
   return (
