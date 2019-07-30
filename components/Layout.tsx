@@ -7,7 +7,7 @@ interface LayoutProps {
 }
 
 const MainContent = styled.main`
-  padding: 75px 24px;
+  padding: 75px 24px 30px;
 `
 
 export const Layout = ({ children }: LayoutProps) => (

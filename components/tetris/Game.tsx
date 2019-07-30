@@ -24,7 +24,6 @@ export const Game = () => {
   const [currentBoard, setCurrentBoard] = useState(initialBoard)
   const [gameOver, setGameOver] = useState(false)
   const intervalRef = useRef()
-  const deletedALineOfBlockBoard = deleteALineOfBlockOnBoard(currentBoard)
   const blockSize = 1
 
   const rotateCurrentBlock = () => {
@@ -35,6 +34,8 @@ export const Game = () => {
 
   const addedNewBlockBoard = () =>
     addNewBlockToBoard(currentBoard, currentBlockPosition, currentBlock)
+
+  const deletedALineOfBlockBoard = deleteALineOfBlockOnBoard(addedNewBlockBoard())
 
   const canGoForward = (positionWhenKeyDown: number, key: string) =>
     checkForward(positionWhenKeyDown, key, currentBlockPosition, currentBlock.shape, currentBoard)
@@ -75,9 +76,12 @@ export const Game = () => {
       }
       if (canGoForward(currentBlockPosition.y, 'ArrowDown')) {
         setCurrentBlockPosition((p) => ({ ...p, y: p.y + blockSize }))
-        deletedALineOfBlockBoard && setCurrentBoard(deletedALineOfBlockBoard)
       } else {
-        setCurrentBoard(addedNewBlockBoard())
+        if (deletedALineOfBlockBoard) {
+          setCurrentBoard(deletedALineOfBlockBoard)
+        } else {
+          setCurrentBoard(addedNewBlockBoard())
+        }
         setCurrentBlockPosition({ x: 4, y: 0 })
         rotateCurrentBlock()
       }
