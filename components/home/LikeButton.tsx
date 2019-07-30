@@ -17,11 +17,9 @@ export const LikeButton = (props: {
     return 0
   }
   return (
-    <div>
-      <IconWrapper onClick={() => props.onClick(props.icon, content.id)}>
-        <Icon src={{ icon: icon, num: point() }} />
-        <Num>{point()}</Num>
-      </IconWrapper>
-    </div>
+    <IconWrapper onClick={() => props.onClick(props.icon, content.id)}>
+      <Icon src={{ icon: icon, num: point() }} />
+      <Num>{point()}</Num>
+    </IconWrapper>
   )
 }
