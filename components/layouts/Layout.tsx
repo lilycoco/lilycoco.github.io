@@ -1,14 +1,10 @@
 import React from 'react'
 import { Header } from './Header'
-import styled from 'styled-components'
+import { MainContent } from './Style'
 
 interface LayoutProps {
   children: React.ReactNode
 }
-
-const MainContent = styled.main`
-  padding: 75px 24px 30px;
-`
 
 export const Layout = ({ children }: LayoutProps) => (
   <div>
