@@ -1,10 +1,11 @@
 import styled from 'styled-components'
+import { blockSize, boardWidth, boardHeight } from '../../lib/tetris'
 
 export const BoardArea = styled.div`
   position: relative;
-  width: 300px;
+  width: ${blockSize * boardWidth}px;
+  height: ${blockSize * boardHeight}px;
   background-color: rgb(15, 15, 27);
-  height: 600px;
 `
 export const BoardWrapper = styled.div`
   position: absolute;
@@ -18,16 +19,16 @@ export const GameOverFilter = styled.div`
   padding: 35px 25px;
   position: absolute;
   width: 100%;
+  height: 100%;
   top: 0px;
   left: 0px;
   background-color: rgb(0, 0, 0, 0.6);
-  height: 100%;
   letter-spacing: 0.05em;
 `
 const blockColors = ['navy', 'darkmagenta', 'orangered', 'yellow', 'deeppink', 'limegreen']
 export const Block = styled.div`
-  width: 30px;
-  height: 30px;
+  width: ${blockSize}px;
+  height: ${blockSize}px;
   border: 1px solid rgba(0, 0, 0, 0.253);
   border-collapse: collapse;
   text-align: center;

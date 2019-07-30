@@ -7,6 +7,7 @@ import { BoardArea } from './Style'
 import { Buttons } from './Buttons'
 import {
   blockShape,
+  aBlock,
   initialBoard,
   addNewBlockToBoard,
   deleteALineOfBlockOnBoard,
@@ -24,7 +25,6 @@ export const Game = () => {
   const [currentBoard, setCurrentBoard] = useState(initialBoard)
   const [gameOver, setGameOver] = useState(false)
   const intervalRef = useRef()
-  const blockSize = 1
 
   const rotateCurrentBlock = () => {
     const randomColor = Math.floor(Math.random() * 6) + 1
@@ -45,19 +45,19 @@ export const Game = () => {
       case 'ArrowDown':
         setCurrentBlockPosition((p) => ({
           ...p,
-          y: canGoForward(p.y, key) ? p.y + blockSize : p.y,
+          y: canGoForward(p.y, key) ? p.y + aBlock : p.y,
         }))
         break
       case 'ArrowRight':
         setCurrentBlockPosition((p) => ({
           ...p,
-          x: canGoForward(p.x, key) ? p.x + blockSize : p.x,
+          x: canGoForward(p.x, key) ? p.x + aBlock : p.x,
         }))
         break
       case 'ArrowLeft':
         setCurrentBlockPosition((p) => ({
           ...p,
-          x: canGoForward(p.x, key) ? p.x - blockSize : p.x,
+          x: canGoForward(p.x, key) ? p.x - aBlock : p.x,
         }))
         break
       case 'ArrowUp':
@@ -75,7 +75,7 @@ export const Game = () => {
         setRunning(false)
       }
       if (canGoForward(currentBlockPosition.y, 'ArrowDown')) {
-        setCurrentBlockPosition((p) => ({ ...p, y: p.y + blockSize }))
+        setCurrentBlockPosition((p) => ({ ...p, y: p.y + aBlock }))
       } else {
         if (deletedALineOfBlockBoard) {
           setCurrentBoard(deletedALineOfBlockBoard)
