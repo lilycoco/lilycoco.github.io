@@ -6,21 +6,19 @@ import { Buttons } from './Buttons'
 export const Products: React.SFC<{
   contents: Tron[]
   onClick: (icon: string, id: number) => void
-}> = (props) => {
-  return (
-    <Ul>
-      {props.contents.map((item) => (
-        <Li key={item.id}>
-          <Img src={item.imgSrc} />
-          <Content>
-            <TextWrapper>
-              <H1>{item.name}</H1>
-              <Text>{item.text}</Text>
-              <Buttons item={item} onClick={props.onClick} />
-            </TextWrapper>
-          </Content>
-        </Li>
-      ))}
-    </Ul>
-  )
-}
+}> = (props) => (
+  <Ul>
+    {props.contents.map((item) => (
+      <Li key={item.id}>
+        <Img src={item.imgSrc} />
+        <Content>
+          <TextWrapper>
+            <H1>{item.name}</H1>
+            <Text>{item.text}</Text>
+            <Buttons item={item} onClick={props.onClick} />
+          </TextWrapper>
+        </Content>
+      </Li>
+    ))}
+  </Ul>
+)
