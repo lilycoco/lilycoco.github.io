@@ -1,6 +1,5 @@
 import * as React from 'react'
 import { useState, useEffect, useRef } from 'react'
-
 import { Board } from './Board'
 import { GameOverSign } from './GameOverSign'
 import { BoardArea, blockColors } from './Style'
