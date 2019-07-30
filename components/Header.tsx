@@ -1,5 +1,6 @@
 import styled from 'styled-components'
 import { Navbar, Nav, NavDropdown } from 'react-bootstrap'
+import { reversedContentsList } from '../lib/home'
 
 const Img = styled.img`
   display: block;
@@ -38,14 +39,9 @@ export const Header = () => (
         <Nav.Link href='/home'>Home</Nav.Link>
         <Nav.Link href='/blog'>Blog</Nav.Link>
         <NavDropdown title='Play Game' id='basic-nav-dropdown' style={nav}>
-          <NavDropDownItem href='https://lilycoco-spaceinvaders.netlify.com/'>
-            Space Invaders
-          </NavDropDownItem>
-          <NavDropDownItem href='https://lilycoco-tetris.netlify.com/'>Tetris</NavDropDownItem>
-          <NavDropDownItem href='https://mugensweeper.netlify.com/'>Mugen Sweeper</NavDropDownItem>
-          <NavDropdown.Divider />
-          <NavDropDownItem href='/tictac'>Tic Tac Toe</NavDropDownItem>
-          <NavDropDownItem href='/tetris'>Tetris with React</NavDropDownItem>
+          {reversedContentsList.map((column) => (
+            <NavDropDownItem href={column.url}>{column.name}</NavDropDownItem>
+          ))}
         </NavDropdown>
       </Nav>
       <SocialIcon href='https://github.com/lilycoco' src='/static/icon/github.png' />

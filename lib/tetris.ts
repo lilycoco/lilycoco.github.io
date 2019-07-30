@@ -62,20 +62,19 @@ export const addNewBlockToBoard = (
     }),
   )
 
-export const updateBoard = (currentBoard: number[][]) => {
-  const findDeleteRow = currentBoard
-    .slice()
-    .reverse()
-    .findIndex((line): boolean => line.every((block: number) => block !== 0))
-
-  if (findDeleteRow >= 0) {
-    let refleshedBoard = currentBoard.slice()
-    refleshedBoard.splice(19 - findDeleteRow, 1)
-    refleshedBoard.unshift(Array(10).fill(0))
-    return refleshedBoard
-  } else {
-    return null
+export const deleteALineOfBlockOnBoard = (currentBoard: number[][]) => {
+  const filledRows: number[] = []
+  currentBoard.map((row, index) => {
+    row.every((block: number) => block !== 0) && filledRows.push(index)
+  })
+  let refleshedBoard = currentBoard.slice()
+  if (filledRows.length) {
+    filledRows.map((rowIndex) => {
+      refleshedBoard.splice(rowIndex, 1)
+      refleshedBoard.unshift(Array(10).fill(0))
+    })
   }
+  return refleshedBoard
 }
 
 export const checkForward = (

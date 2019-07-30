@@ -25,7 +25,7 @@ export const GameOverFilter = styled.div`
   letter-spacing: 0.05em;
 `
 const blockColors = ['navy', 'darkmagenta', 'orangered', 'yellow', 'deeppink', 'limegreen']
-export const Block = styled.div<{ color: any }>`
+export const Block = styled.div`
   width: 30px;
   height: 30px;
   border: 1px solid rgba(0, 0, 0, 0.253);
@@ -34,10 +34,10 @@ export const Block = styled.div<{ color: any }>`
   box-sizing: border-box;
   color: white;
   line-height: 30px;
-  ${(props: any) =>
-    props.color
+  ${(p: { [key: string]: number }) =>
+    p.color
       ? {
-          backgroundColor: blockColors[props.color - 1],
+          backgroundColor: blockColors[p.color - 1],
           border: '5px outset rgba(255, 255, 255, 0.568)',
         }
       : {

@@ -1,6 +1,10 @@
 import { btnStyle } from '../../styled/Tetris'
 
-export const Buttons: any = (props: { toggleRunning: any; running: boolean; clearAll: any }) => {
+export const Buttons = (props: {
+  toggleRunning: () => void
+  running: boolean
+  clearAll: () => void
+}) => {
   return (
     <div>
       <button className='btn btn-primary' onClick={props.toggleRunning} style={btnStyle}>

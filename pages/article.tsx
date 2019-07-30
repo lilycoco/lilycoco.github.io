@@ -2,8 +2,9 @@ import { withRouter } from 'next/router'
 import { Layout } from '../components/Layout'
 import Markdown from 'react-markdown'
 
-const Article = withRouter((props: { router: any; query: any }) => (
+const Article = withRouter((props: { router: { query: { id: string } } }) => (
   <Layout>
+    {console.log(props.router)}
     <h1>{props.router.query.id}</h1>
     <div className='markdown'>
       <Markdown

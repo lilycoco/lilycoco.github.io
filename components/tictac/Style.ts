@@ -11,10 +11,13 @@ export const H2 = styled.h2`
   font-size: 20px;
   margin-top: 15px;
 `
-export const StepButton = styled.button<{ onClick: any; stepNumber: number; step: number }>`
-  font-weight: ${(props: any) => (props.stepNumber === props.step ? 'bold' : null)};
+export const StepButton = styled.button<{ onClick: () => void; stepNumber: number; step: number }>`
+  font-weight: ${(props) => (props.stepNumber === props.step ? 'bold' : null)};
 `
-export const SquareButton = styled.button<{ highlight: string | undefined | null; onClick: any }>`
+export const SquareButton = styled.button<{
+  highlight: string | null
+  onClick: React.MouseEventHandler
+}>`
   border: 1px solid #999;
   float: left;
   font-size: 24px;
@@ -26,7 +29,7 @@ export const SquareButton = styled.button<{ highlight: string | undefined | null
   padding: 0;
   text-align: center;
   width: 34px;
-  background: ${(props: any) => (props.highlight ? props.highlight : '#fff')};
+  background: ${(props) => (props.highlight ? props.highlight : '#fff')};
   &:focus {
     outline: none;
     background: #ddd;

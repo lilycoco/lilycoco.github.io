@@ -1,6 +1,11 @@
 import { IconWrapper, Icon, Num } from './Style'
+import { Tron } from '../../models/Tron'
 
-export const LikeButton = (props: { content: any; icon: string; onClick: any }) => {
+export const LikeButton = (props: {
+  content: Tron
+  icon: string
+  onClick: (icon: string, id: number) => void
+}) => {
   const { content, icon } = props
   const point = () => {
     switch (icon) {
@@ -9,6 +14,7 @@ export const LikeButton = (props: { content: any; icon: string; onClick: any }) 
       case 'heart':
         return content.heart
     }
+    return 0
   }
   return (
     <div>

@@ -1,5 +1,5 @@
 export interface EProps {
-  className: 'highlight' | null | undefined
+  className: string | null
   onClick: React.MouseEventHandler
   value: string
 }
@@ -7,14 +7,4 @@ export interface EProps {
 export interface WProps {
   mark?: string
   numbers?: number[]
-}
-
-export interface SProps {
-  onClick?: any
-  histories: any
-  asc: boolean
-  winner?: WProps | null
-  stepNumber: number
-  xIsNext?: boolean
-  jump?: any
 }

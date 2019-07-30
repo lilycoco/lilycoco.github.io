@@ -9,9 +9,12 @@ const btnStyle: React.CSSProperties = {
   width: '70px',
 }
 
-export const Products: React.SFC<{ contents: Tron[]; onClick: any }> = (props) => {
-  const renderLikeButton = (icon: string, c: any) => (
-    <LikeButton content={c} icon={icon} onClick={(i: string, n: number) => props.onClick(i, n)} />
+export const Products: React.SFC<{
+  contents: Tron[]
+  onClick: (icon: string, id: number) => void
+}> = (props) => {
+  const renderLikeButton = (icon: string, c: Tron) => (
+    <LikeButton content={c} icon={icon} onClick={(i: string, id: number) => props.onClick(i, id)} />
   )
 
   return (

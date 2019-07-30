@@ -4,7 +4,7 @@ import { Button } from 'react-bootstrap'
 import { Layout } from '../components/Layout'
 import Link from 'next/link'
 
-export default class CoverPage extends React.Component<{ contents: any }> {
+export default class CoverPage extends React.Component<{}> {
   public render() {
     return (
       <Layout>
