@@ -62,7 +62,7 @@ export const addNewBlockToBoard = (
     }),
   )
 
-export const DeleteALineOfBlockOnBoard = (currentBoard: number[][]) => {
+export const deleteALineOfBlockOnBoard = (currentBoard: number[][]) => {
   const findDeleteRow = currentBoard
     .slice()
     .reverse()

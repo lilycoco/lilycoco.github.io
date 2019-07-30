@@ -9,7 +9,7 @@ import {
   blockShape,
   initialBoard,
   addNewBlockToBoard,
-  DeleteALineOfBlockOnBoard,
+  deleteALineOfBlockOnBoard,
   checkForward,
   judgeGameOver,
 } from '../../lib/tetris'
@@ -24,7 +24,7 @@ export const Game = () => {
   const [currentBoard, setCurrentBoard] = useState(initialBoard)
   const [gameOver, setGameOver] = useState(false)
   const intervalRef = useRef()
-  const DeletedALineOfBlockBoard = DeleteALineOfBlockOnBoard(currentBoard)
+  const deletedALineOfBlockBoard = deleteALineOfBlockOnBoard(currentBoard)
   const blockSize = 1
 
   const rotateCurrentBlock = () => {
@@ -75,7 +75,7 @@ export const Game = () => {
       }
       if (canGoForward(currentBlockPosition.y, 'ArrowDown')) {
         setCurrentBlockPosition((p) => ({ ...p, y: p.y + blockSize }))
-        DeletedALineOfBlockBoard && setCurrentBoard(DeletedALineOfBlockBoard)
+        deletedALineOfBlockBoard && setCurrentBoard(deletedALineOfBlockBoard)
       } else {
         setCurrentBoard(addedNewBlockBoard())
         setCurrentBlockPosition({ x: 4, y: 0 })
