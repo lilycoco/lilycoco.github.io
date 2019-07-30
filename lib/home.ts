@@ -13,7 +13,7 @@ const contentsList: Tron[] = [
   },
   {
     id: 1,
-    name: 'Tetris(jQuery)',
+    name: 'Tetris (jQuery)',
     text:
       'Probably you know this is the Tetris which is the game used to be very popular in the world. I also created this with jQuery only',
     url: 'https://lilycoco-tetris.netlify.com/',
@@ -42,7 +42,7 @@ const contentsList: Tron[] = [
   },
   {
     id: 4,
-    name: 'Tetris(React)',
+    name: 'Tetris (React)',
     text: 'It is my first product with React and TypeScript.',
     url: '/tetris/',
     imgSrc: '/static/pic/tetris2.png',

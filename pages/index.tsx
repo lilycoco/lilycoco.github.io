@@ -1,7 +1,7 @@
 import * as React from 'react'
 import { Cover, Opacity, TytleWrapper, Title, Text } from '../components/index/Style'
 import { Button } from 'react-bootstrap'
-import { Layout } from '../components/Layout'
+import { Layout } from '../components/layouts/Layout'
 import Link from 'next/link'
 
 export default class CoverPage extends React.Component<{}> {

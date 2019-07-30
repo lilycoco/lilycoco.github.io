@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { Products } from '../components/home/Products'
 import { MainTitle } from '../styled/Page'
-import { Layout } from '../components/Layout'
+import { Layout } from '../components/layouts/Layout'
 import { reversedContentsList, addPoint } from '../lib/home'
 
 export default function Home() {

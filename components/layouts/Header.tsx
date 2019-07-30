@@ -1,23 +1,7 @@
-import styled from 'styled-components'
 import { Navbar, Nav, NavDropdown } from 'react-bootstrap'
-import { reversedContentsList } from '../lib/home'
-
-const Img = styled.img`
-  display: block;
-  width: 24px;
-  height: 24px;
-  object-fit: cover;
-`
-const nav = {
-  display: 'flex',
-  alignItems: 'center',
-}
-
-const NavDropDownItem = (props: { href: string; children: string }) => (
-  <NavDropdown.Item href={props.href} target='_blank'>
-    {props.children}
-  </NavDropdown.Item>
-)
+import { reversedContentsList } from '../../lib/home'
+import { navStyle } from '../../styled/Header'
+import { Img, Span } from './Style'
 
 const SocialIcon = (props: { href: string; src: string }) => (
   <Nav.Link href={props.href} target='_blank' style={{ padding: '8px' }}>
@@ -27,20 +11,22 @@ const SocialIcon = (props: { href: string; src: string }) => (
 
 export const Header = () => (
   <Navbar bg='light' fixed='top' expand='lg' variant='light'>
-    <Navbar.Brand href='/home' style={nav}>
-      <span style={{ paddingRight: '3px' }}>
+    <Navbar.Brand href='/home' style={navStyle}>
+      <Span>
         <Img src='/static/icon/water_lily.png' />
-      </span>
+      </Span>
       Lilycoco
     </Navbar.Brand>
     <Navbar.Toggle aria-controls='basic-navbar-nav' />
     <Navbar.Collapse id='basic-navbar-nav'>
-      <Nav className='mr-auto' style={nav}>
+      <Nav className='mr-auto' style={navStyle}>
         <Nav.Link href='/home'>Home</Nav.Link>
         <Nav.Link href='/blog'>Blog</Nav.Link>
-        <NavDropdown title='Play Game' id='basic-nav-dropdown' style={nav}>
+        <NavDropdown title='Play Game' id='basic-nav-dropdown' style={navStyle}>
           {reversedContentsList.map((column) => (
-            <NavDropDownItem href={column.url}>{column.name}</NavDropDownItem>
+            <NavDropdown.Item href={column.url} target='_blank'>
+              {column.name}
+            </NavDropdown.Item>
           ))}
         </NavDropdown>
       </Nav>
