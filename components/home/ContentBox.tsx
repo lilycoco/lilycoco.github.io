@@ -1,4 +1,4 @@
-import { Content, TextWrapper, H1, Text } from './Style'
+import { Content, TextWrapper, ProductName, Text } from './Style'
 import { Buttons } from './Buttons'
 import { ProductConstructor } from '../../models/Home'
 
@@ -8,7 +8,7 @@ export const ContentBox = (props: {
 }) => (
   <Content>
     <TextWrapper>
-      <H1>{props.item.name}</H1>
+      <ProductName>{props.item.name}</ProductName>
       <Text>{props.item.text}</Text>
       <Buttons item={props.item} onClick={props.onClick} />
     </TextWrapper>

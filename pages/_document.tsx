@@ -34,10 +34,6 @@ export default class MyDocument extends Document {
             rel='stylesheet'
             href='https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css'
           />
-          <link
-            rel='stylesheet'
-            href='https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css'
-          />
         </Head>
         <body>
           <Main />

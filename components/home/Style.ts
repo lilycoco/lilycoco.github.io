@@ -29,8 +29,7 @@ export const TextWrapper = styled.div`
   color: #37548f;
   background-color: #F9F9F9;
 `
-export const H1 = styled.h1`
-  font-size: 2em;
+export const ProductName = styled.h2`
   margin-bottom: 20px;
 `
 export const Text = styled.div`

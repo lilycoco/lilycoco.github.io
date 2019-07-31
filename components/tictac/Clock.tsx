@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { WinnerCondition } from '../../models/Tictac'
-import { H2 } from './Style'
+import { H4 } from './Style'
 
 const startTime = Date.now()
 const Timer = (currentDate: number, winner: WinnerCondition | null) => {
@@ -24,5 +24,5 @@ const Timer = (currentDate: number, winner: WinnerCondition | null) => {
 
 export const Clock = (props: { winner: WinnerCondition | null }) => {
   const timer = Timer(0, props.winner)
-  return <H2> {timer} sec has passed </H2>
+  return <H4> {timer} sec has passed </H4>
 }

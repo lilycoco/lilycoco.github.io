@@ -1,21 +1,16 @@
-import Markdown from 'react-markdown'
+import * as React from 'react'
+import ReactMarkdown from 'react-markdown'
 import { withRouter } from 'next/router'
+import { title, text } from '../../text/blog_1'
 
-export const Text = withRouter((props: { router: { query: { id: string } } }) => (
+export const TextPreviewer = withRouter((props: { router: { query: { id: string } } }) => (
   <div>
-    <h1>{props.router.query.id}</h1>
+    <h1>
+      {props.router.query.id}
+      {title}
+    </h1>
     <div className='markdown'>
-      <Markdown
-        source={`
-This is our blog post.
-Yes. We can have a [link](/link).
-And we can have a title as well.
-
-### This is a title
-
-And here's the content.
-     `}
-      />
+      <ReactMarkdown source={text} />
     </div>
     <style>{`
       .markdown {
@@ -33,6 +28,7 @@ And here's the content.
           text-transform: uppercase;
         }
       }
+      
     `}</style>
   </div>
 ))

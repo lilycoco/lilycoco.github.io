@@ -22,7 +22,7 @@ export const TytleWrapper = styled.div`
   height: 200px;
   color: #37548f;
 `
-export const Title = styled.h1`
+export const Title = styled.p`
   font-size: 45px;
   margin: 20px;
   font-weight: bold;
