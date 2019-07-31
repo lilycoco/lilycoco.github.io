@@ -4,6 +4,8 @@ import { Board } from './Board'
 import { GameOverSign } from './GameOverSign'
 import { BoardArea, blockColors } from './Style'
 import { Buttons } from './Buttons'
+import { MainContents } from '../Style'
+
 import {
   blockShape,
   aBlock,
@@ -112,12 +114,12 @@ export const Game = () => {
   }
 
   return (
-    <div>
+    <MainContents>
       <BoardArea>
         <Board currentBoard={addedNewBlockBoard()} />
         {gameOver ? <GameOverSign /> : null}
       </BoardArea>
       <Buttons toggleRunning={toggleRunning} running={running} clearAll={clearAll} />
-    </div>
+    </MainContents>
   )
 }

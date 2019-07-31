@@ -3,6 +3,7 @@ import { Board } from './Board'
 import { SwitchButton } from './SwitchButton'
 import { Clock } from './Clock'
 import { calculateWinner } from '../../lib/tictac'
+import { MainContents } from '../Style'
 
 export const Game = () => {
   const [histories, setHistories] = useState([{ squares: Array(9).fill(null) }])
@@ -33,7 +34,7 @@ export const Game = () => {
   }
 
   return (
-    <div>
+    <MainContents>
       <Board squares={squares} onClick={(i: number) => putXorO(i)} winner={winner} />
       <Clock winner={winner} />
       <SwitchButton
@@ -45,6 +46,6 @@ export const Game = () => {
         xIsNext={xIsNext}
         jump={(step: number) => jumpTo(step)}
       />
-    </div>
+    </MainContents>
   )
 }
