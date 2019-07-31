@@ -6,4 +6,5 @@ export interface ProductConstructor {
   imgSrc: string
   heart: number
   like: number
+  iconImg: string
 }
