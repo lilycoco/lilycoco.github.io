@@ -1,6 +1,6 @@
 import * as React from 'react'
-import { MainTitle } from '../styled/Page'
 import { Layout } from '../components/layouts/Layout'
+import { MainTitle } from '../styled/Page'
 import { BlogList } from '../components/blog/BlogList'
 
 export default function Blog() {

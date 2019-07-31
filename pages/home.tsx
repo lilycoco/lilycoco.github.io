@@ -1,7 +1,7 @@
 import * as React from 'react'
-import { Products } from '../components/home/Products'
-import { MainTitle } from '../styled/Page'
 import { Layout } from '../components/layouts/Layout'
+import { MainTitle } from '../styled/Page'
+import { Products } from '../components/home/Products'
 
 export default function Home() {
   return (

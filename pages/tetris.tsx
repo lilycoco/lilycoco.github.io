@@ -1,7 +1,7 @@
-import React from 'react'
+import * as React from 'react'
 import { Layout } from '../components/layouts/Layout'
-import { Game } from '../components/tetris/Game'
 import { MainTitle } from '../styled/Page'
+import { Game } from '../components/tetris/Game'
 
 export default function Tetris() {
   return (
