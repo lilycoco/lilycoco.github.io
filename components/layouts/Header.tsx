@@ -24,9 +24,7 @@ export const Header = () => (
         <Nav.Link href='/blog'>Blog</Nav.Link>
         <NavDropdown title='Play Game' id='basic-nav-dropdown' style={navStyle}>
           {reversedContentsList.map((column) => (
-            <NavDropdown.Item href={column.url} target='_blank'>
-              {column.name}
-            </NavDropdown.Item>
+            <NavDropdown.Item href={column.url}>{column.name}</NavDropdown.Item>
           ))}
         </NavDropdown>
       </Nav>

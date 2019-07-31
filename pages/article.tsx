@@ -1,42 +1,13 @@
-import { withRouter } from 'next/router'
+import * as React from 'react'
+import { MainTitle } from '../styled/Page'
 import { Layout } from '../components/layouts/Layout'
-import Markdown from 'react-markdown'
+import { Text } from '../components/article/Text'
 
-const Article = withRouter((props: { router: { query: { id: string } } }) => (
-  <Layout>
-    {console.log(props.router)}
-    <h1>{props.router.query.id}</h1>
-    <div className='markdown'>
-      <Markdown
-        source={`
-This is our blog post.
-Yes. We can have a [link](/link).
-And we can have a title as well.
-
-### This is a title
-
-And here's the content.
-     `}
-      />
-    </div>
-    <style>{`
-      .markdown {
-        font-family: 'Arial';
-        a {
-          text-decoration: none;
-          color: blue;
-        }
-        a:hover {
-          opacity: 0.6;
-        }
-        h3 {
-          margin: 0;
-          padding: 0;
-          text-transform: uppercase;
-        }
-      }
-    `}</style>
-  </Layout>
-))
-
-export default Article
+export default function Article() {
+  return (
+    <Layout>
+      <MainTitle>My Blog</MainTitle>
+      <Text />
+    </Layout>
+  )
+}
