@@ -4,7 +4,7 @@ export interface EProps {
   value: string
 }
 
-export interface WProps {
-  mark?: string
-  numbers?: number[]
+export interface WinnerCondition {
+  mark: string
+  numbers: number[]
 }

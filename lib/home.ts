@@ -72,3 +72,13 @@ export const addPoint = (content: ProductConstructor[], icon: string, i: number)
     }
     return c
   })
+
+export const countLikePoint = (content: ProductConstructor, icon: string) => {
+  switch (icon) {
+    case 'like':
+      return content.like
+    case 'heart':
+      return content.heart
+  }
+  return 0
+}

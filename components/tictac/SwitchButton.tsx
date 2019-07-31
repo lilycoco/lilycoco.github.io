@@ -1,4 +1,4 @@
-import { WProps } from '../../models/Tictac'
+import { WinnerCondition } from '../../models/Tictac'
 import { Moves } from './Moves'
 import { H2 } from './Style'
 
@@ -6,7 +6,7 @@ export const SwitchButton = (props: {
   onClick: () => void
   histories: { [key: string]: string[] }[]
   asc: boolean
-  winner: WProps | null
+  winner: WinnerCondition | null
   stepNumber: number
   xIsNext: boolean
   jump: (step: number) => void
@@ -26,12 +26,7 @@ export const SwitchButton = (props: {
           Sort order
         </button>
       </div>
-      <Moves
-        histories={props.histories}
-        asc={props.asc}
-        stepNumber={props.stepNumber}
-        onClick={(step: number) => props.jump(step)}
-      />
+      <Moves {...props} onClick={(step: number) => props.jump(step)} />
     </div>
   )
 }

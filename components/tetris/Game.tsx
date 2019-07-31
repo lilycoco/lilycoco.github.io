@@ -5,7 +5,6 @@ import { GameOverSign } from './GameOverSign'
 import { BoardArea, blockColors } from './Style'
 import { Buttons } from './Buttons'
 import { MainContents } from '../Style'
-
 import {
   blockShape,
   aBlock,

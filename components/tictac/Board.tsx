@@ -1,11 +1,11 @@
 import { Square } from './Square'
-import { WProps } from '../../models/Tictac'
+import { WinnerCondition } from '../../models/Tictac'
 import { BoardRow } from './Style'
 
 export const Board = (props: {
   squares: string[]
   onClick: (i: number) => void
-  winner: WProps | null
+  winner: WinnerCondition | null
 }) => {
   const win = (i: number): string | null => {
     let highlight = null

@@ -4,7 +4,7 @@ import { reversedProductList } from '../../../lib/home'
 import { SocialIcon } from './SocialIcon'
 import { NavIcon } from '../Style'
 
-export const HeaderNavCollapse = () => (
+export const NavberCollapse = () => (
   <Navbar.Collapse id='basic-navbar-nav'>
     <Nav className='mr-auto' style={navStyle}>
       <Nav.Link href='/home'>Home</Nav.Link>

@@ -1,7 +1,7 @@
 import { Navbar } from 'react-bootstrap'
 import { navStyle } from '../../../styled/Header'
 import { Icon, Span } from '../Style'
-import { HeaderNavCollapse } from './NavberCollapse'
+import { NavberCollapse } from './NavberCollapse'
 
 export const Header = () => (
   <Navbar bg='light' fixed='top' expand='lg' variant='light'>
@@ -12,6 +12,6 @@ export const Header = () => (
       Lilycoco
     </Navbar.Brand>
     <Navbar.Toggle aria-controls='basic-navbar-nav' />
-    <HeaderNavCollapse />
+    <NavberCollapse />
   </Navbar>
 )

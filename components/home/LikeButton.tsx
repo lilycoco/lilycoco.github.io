@@ -1,5 +1,6 @@
 import { IconWrapper, Icon, Num } from './Style'
 import { ProductConstructor } from '../../models/Home'
+import { countLikePoint } from '../../lib/home'
 
 export const LikeButton = (props: {
   content: ProductConstructor
@@ -7,19 +8,10 @@ export const LikeButton = (props: {
   onClick: (icon: string, id: number) => void
 }) => {
   const { content, icon } = props
-  const point = () => {
-    switch (icon) {
-      case 'like':
-        return content.like
-      case 'heart':
-        return content.heart
-    }
-    return 0
-  }
   return (
-    <IconWrapper onClick={() => props.onClick(props.icon, content.id)}>
-      <Icon src={{ icon: icon, num: point() }} />
-      <Num>{point()}</Num>
+    <IconWrapper onClick={() => props.onClick(icon, content.id)}>
+      <Icon src={{ icon: icon, num: countLikePoint(content, icon) }} />
+      <Num>{countLikePoint(content, icon)}</Num>
     </IconWrapper>
   )
 }
