@@ -1,4 +1,4 @@
 export const btnStyle: React.CSSProperties = {
-  marginLeft: '40%',
+  marginLeft: 'auto',
   width: '70px',
 }
