@@ -1,8 +1,8 @@
 import { IconWrapper, Icon, Num } from './Style'
-import { Tron } from '../../models/Tron'
+import { ProductConstructor } from '../../models/Home'
 
 export const LikeButton = (props: {
-  content: Tron
+  content: ProductConstructor
   icon: string
   onClick: (icon: string, id: number) => void
 }) => {

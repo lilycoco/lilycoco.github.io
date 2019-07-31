@@ -1,6 +1,6 @@
-import { Tron } from '../models/Tron'
+import { ProductConstructor } from '../models/Home'
 
-const contentsList: Tron[] = [
+const productList: ProductConstructor[] = [
   {
     id: 0,
     name: 'Space Invaders',
@@ -10,6 +10,7 @@ const contentsList: Tron[] = [
     imgSrc: '/static/pic/invaders.png',
     heart: 0,
     like: 0,
+    iconImg: '/static/icon/invaders.png',
   },
   {
     id: 1,
@@ -20,6 +21,7 @@ const contentsList: Tron[] = [
     imgSrc: '/static/pic/tetris.png',
     heart: 0,
     like: 0,
+    iconImg: '/static/icon/tetris3.png',
   },
   {
     id: 2,
@@ -30,6 +32,7 @@ const contentsList: Tron[] = [
     imgSrc: '/static/pic/mugen.png',
     heart: 0,
     like: 0,
+    iconImg: '/static/icon/bomb.png',
   },
   {
     id: 3,
@@ -39,6 +42,7 @@ const contentsList: Tron[] = [
     imgSrc: '/static/pic/tictac.png',
     heart: 0,
     like: 0,
+    iconImg: '/static/icon/tictac.png',
   },
   {
     id: 4,
@@ -48,12 +52,13 @@ const contentsList: Tron[] = [
     imgSrc: '/static/pic/tetris2.png',
     heart: 0,
     like: 0,
+    iconImg: '/static/icon/tetris.png',
   },
 ]
 
-export const reversedContentsList = contentsList.reverse()
+export const reversedProductList = productList.reverse()
 
-export const addPoint = (content: Tron[], icon: string, i: number) =>
+export const addPoint = (content: ProductConstructor[], icon: string, i: number) =>
   content.map((c) => {
     if (c.id === i) {
       switch (icon) {

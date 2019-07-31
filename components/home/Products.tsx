@@ -2,10 +2,10 @@ import * as React from 'react'
 import { useState } from 'react'
 import { Ul, Li, Img } from './Style'
 import { ContentBox } from './ContentBox'
-import { reversedContentsList, addPoint } from '../../lib/home'
+import { reversedProductList, addPoint } from '../../lib/home'
 
 export const Products = () => {
-  const [content, setContent] = useState(reversedContentsList)
+  const [content, setContent] = useState(reversedProductList)
   const addedPointContent = (icon: string, id: number) => setContent(addPoint(content, icon, id))
 
   return (

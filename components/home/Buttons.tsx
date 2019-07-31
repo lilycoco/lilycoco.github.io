@@ -2,11 +2,14 @@ import Link from 'next/link'
 import { btnStyle } from '../../styled/Home'
 import { BtnWrapper } from './Style'
 import { LikeButton } from './LikeButton'
-import { Tron } from '../../models/Tron'
+import { ProductConstructor } from '../../models/Home'
 
-export const Buttons = (props: { item: Tron; onClick: (icon: string, id: number) => void }) => {
+export const Buttons = (props: {
+  item: ProductConstructor
+  onClick: (icon: string, id: number) => void
+}) => {
   const { item } = props
-  const renderLikeButton = (icon: string, item: Tron) => (
+  const renderLikeButton = (icon: string, item: ProductConstructor) => (
     <LikeButton
       content={item}
       icon={icon}

@@ -1,7 +1,8 @@
 import { Navbar, Nav, NavDropdown } from 'react-bootstrap'
 import { navStyle } from '../../../styled/Header'
-import { reversedContentsList } from '../../../lib/home'
+import { reversedProductList } from '../../../lib/home'
 import { SocialIcon } from './SocialIcon'
+import { NavIcon } from '../Style'
 
 export const HeaderNavCollapse = () => (
   <Navbar.Collapse id='basic-navbar-nav'>
@@ -9,8 +10,9 @@ export const HeaderNavCollapse = () => (
       <Nav.Link href='/home'>Home</Nav.Link>
       <Nav.Link href='/blog'>Blog</Nav.Link>
       <NavDropdown title='Play Game' id='basic-nav-dropdown' style={navStyle}>
-        {reversedContentsList.map((column) => (
+        {reversedProductList.map((column) => (
           <NavDropdown.Item key={column.id} href={column.url}>
+            <NavIcon src={column.iconImg} />
             {column.name}
           </NavDropdown.Item>
         ))}

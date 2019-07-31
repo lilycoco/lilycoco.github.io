@@ -1,8 +1,11 @@
 import { Content, TextWrapper, H1, Text } from './Style'
 import { Buttons } from './Buttons'
-import { Tron } from '../../models/Tron'
+import { ProductConstructor } from '../../models/Home'
 
-export const ContentBox = (props: { item: Tron; onClick: (icon: string, id: number) => void }) => (
+export const ContentBox = (props: {
+  item: ProductConstructor
+  onClick: (icon: string, id: number) => void
+}) => (
   <Content>
     <TextWrapper>
       <H1>{props.item.name}</H1>

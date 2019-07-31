@@ -1,4 +1,4 @@
-export interface Tron {
+export interface ProductConstructor {
   id: number
   name: string
   text: string
