@@ -1,4 +1,4 @@
-import { btnStyle } from '../../styled/Tetris'
+import { btnStyle } from '../../style/Tetris'
 
 export const Buttons = (props: {
   toggleRunning: () => void

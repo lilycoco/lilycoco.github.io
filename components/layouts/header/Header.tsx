@@ -1,5 +1,5 @@
 import { Navbar } from 'react-bootstrap'
-import { navStyle } from '../../../styled/Header'
+import { navStyle } from '../../../style/Header'
 import { Icon, Span } from '../Style'
 import { NavberCollapse } from './NavberCollapse'
 

@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import { btnStyle } from '../../styled/Home'
+import { btnStyle } from '../../style/Home'
 import { BtnWrapper } from './Style'
 import { LikeButton } from './LikeButton'
 import { ProductConstructor } from '../../models/Home'

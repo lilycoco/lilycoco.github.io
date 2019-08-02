@@ -1,5 +1,5 @@
 import { Navbar, Nav, NavDropdown } from 'react-bootstrap'
-import { navStyle } from '../../../styled/Header'
+import { navStyle } from '../../../style/Header'
 import { reversedProductList } from '../../../lib/home'
 import { SocialIcon } from './SocialIcon'
 import { NavIcon } from '../Style'
