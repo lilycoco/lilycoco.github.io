@@ -1,9 +1,5 @@
 [
-  {
-    "href": "20190801-test",
-    "title": "3 Next.jsを使って簡単なブログを作りました",
-    "date": "20190801"
-  },
+  { "href": "20190801-test", "title": "Next.js + MDX", "date": "20190801" },
   { "href": "20190701-sample", "title": "styled-bootstrap-components", "date": "20190701" },
   { "href": "20180901-example", "title": "TypeScript Deep Dive", "date": "20180901" }
 ]
