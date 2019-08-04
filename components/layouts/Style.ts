@@ -18,3 +18,9 @@ export const Span = styled.span`
 export const MainContent = styled.main`
   padding: 75px 24px 30px;
 `
+export const FooterWrapper = styled.div`
+  text-align: center;
+  max-width: 500px;
+  margin: 30px auto;
+  font-size: 0.8rem;
+`
