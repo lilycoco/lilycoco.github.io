@@ -1,11 +1,16 @@
 import styled from 'styled-components'
 import { blockSize, boardWidth, boardHeight } from '../../lib/tetris'
 
+export const ButtonWrapper = styled.div`
+  margin: 0 auto;
+  max-width: 400px;
+`
 export const BoardArea = styled.div`
   position: relative;
   width: ${blockSize * boardWidth}px;
   height: ${blockSize * boardHeight}px;
   background-color: rgb(15, 15, 27);
+  margin: 0 auto;
 `
 export const BoardWrapper = styled.div`
   position: absolute;

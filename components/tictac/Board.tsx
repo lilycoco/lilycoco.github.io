@@ -1,6 +1,6 @@
 import { Square } from './Square'
 import { WinnerCondition } from '../../models/Tictac'
-import { BoardRow } from './Style'
+import { BoardRow, BoardWrapper } from './Style'
 
 export const Board = (props: {
   squares: string[]
@@ -16,7 +16,7 @@ export const Board = (props: {
   }
 
   return (
-    <div className='game-board'>
+    <BoardWrapper className='game-board'>
       <div>
         {[0, 3, 6].map((line) => (
           <BoardRow key={line}>
@@ -31,6 +31,6 @@ export const Board = (props: {
           </BoardRow>
         ))}
       </div>
-    </div>
+    </BoardWrapper>
   )
 }

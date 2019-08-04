@@ -2,6 +2,7 @@ import * as React from 'react'
 import { useState, useEffect } from 'react'
 import moment from 'moment'
 import Link from 'next/link'
+import { BackButton, ArticleWrapper } from './Style'
 
 export const MarkDownPreviewer = ({ posts }: any) => {
   const [BlogArticle, setBlogArticle] = useState(<div></div>)
@@ -10,7 +11,7 @@ export const MarkDownPreviewer = ({ posts }: any) => {
   }, [])
 
   return (
-    <div>
+    <ArticleWrapper>
       <article className='post'>
         <div className='center'>
           <h1>{posts.title}</h1>
@@ -19,11 +20,11 @@ export const MarkDownPreviewer = ({ posts }: any) => {
         <div className='divider'></div>
         {BlogArticle}
       </article>
-      <div className='page-navigation code'>
+      <BackButton className='page-navigation code'>
         <Link href='/blog'>
-          <a title='back to index'>Index</a>
+          <a title='back to index'>Back</a>
         </Link>
-      </div>
-    </div>
+      </BackButton>
+    </ArticleWrapper>
   )
 }

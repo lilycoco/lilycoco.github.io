@@ -7,8 +7,8 @@ export const BoardRow = styled.div`
     display: table;
   }
 `
-export const H4 = styled.h4`
-  margin-top: 15px;
+export const BoardWrapper = styled.div`
+  margin: 30px;
 `
 export const StepButton = styled.button<{ onClick: () => void; stepNumber: number; step: number }>`
   font-weight: ${(props) => (props.stepNumber === props.step ? 'bold' : null)};
@@ -33,4 +33,10 @@ export const SquareButton = styled.button<{
     outline: none;
     background: #ddd;
   }
+`
+export const GameWrapper = styled.div`
+  display: flex;
+`
+export const SwitchButtonWrapper = styled.div`
+  margin: 0 30px;
 `
