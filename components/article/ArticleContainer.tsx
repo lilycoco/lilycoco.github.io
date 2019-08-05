@@ -2,10 +2,11 @@ import * as React from 'react'
 import { BackButton, ArticleWrapper } from './Style'
 import Link from 'next/link'
 import { MarkDownPreviewer } from './MarkDownPreviewer'
+import { BlogContent } from '../../models/Blog'
 
-export const ArticleContainer = ({ posts }: any) => (
+export const ArticleContainer = (props: { posts: BlogContent }) => (
   <ArticleWrapper>
-    <MarkDownPreviewer posts={posts} />
+    <MarkDownPreviewer posts={props.posts} />
     <BackButton className='page-navigation code'>
       <Link href='/blog'>
         <a title='back to index'>Back</a>

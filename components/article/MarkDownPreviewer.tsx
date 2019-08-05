@@ -2,18 +2,19 @@ import * as React from 'react'
 import moment from 'moment'
 import MarkdownIt from 'markdown-it'
 import { Divider } from '../Style'
+import { BlogContent } from '../../models/Blog'
 
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const hightlightPlugin = require('markdown-it-highlightjs')
 const md = MarkdownIt({ linkify: true }).use(hightlightPlugin)
 
-export const MarkDownPreviewer = ({ posts }: any) => (
+export const MarkDownPreviewer = (props: { posts: BlogContent }) => (
   <article className='post'>
     <div className='center'>
-      <h1>{posts.title}</h1>
-      <time className='code'>{moment(posts.date).format('MMMM DD, Y')}</time>
+      <h1>{props.posts.title}</h1>
+      <time className='code'>{moment(props.posts.date).format('MMMM DD, Y')}</time>
     </div>
     <Divider />
-    <div className='markdown' dangerouslySetInnerHTML={{ __html: md.render(posts.html) }} />
+    <div className='markdown' dangerouslySetInnerHTML={{ __html: md.render(props.posts.html) }} />
   </article>
 )

@@ -2,8 +2,9 @@ import Link from 'next/link'
 import moment from 'moment'
 import { BlogTitle, Year } from './Style'
 import { Divider } from '../Style'
+import { BlogConfig } from '../../models/Blog'
 
-export const BlogLink = (props: { post: any; prev: any }) => {
+export const BlogLink = (props: { post: BlogConfig; prev: BlogConfig }) => {
   const { post, prev } = props
   const year = post.date.substr(0, 4)
   const prevYear = prev ? prev.date.substr(0, 4) : null

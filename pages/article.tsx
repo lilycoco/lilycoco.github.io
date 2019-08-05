@@ -5,18 +5,19 @@ import { getBlogContent } from '../lib/blog'
 import { ArticleContainer } from '../components/article/ArticleContainer'
 import { withRouter } from 'next/router'
 import fm from 'front-matter'
+import { BlogFrontMatterResult, BlogContent } from '../models/Blog'
 
-const Article = (props: any) => (
+const Article = (props: BlogContent) => (
   <Layout>
     <MainTitle>Blog</MainTitle>
     <ArticleContainer posts={props} />
   </Layout>
 )
 
-const getInitialProps = async ({ query }: any) => {
-  const fname = `${query.id}.md`
+const getInitialProps = async (props: { query: { id: string } }) => {
+  const fname = `${props.query.id}.md`
   const post: any = await getBlogContent(fname)
-  const meta: any = fm(post)
+  const meta: BlogFrontMatterResult<any> = fm(post)
   return {
     title: meta.attributes.title,
     date: fname.split('-')[0],

@@ -3,8 +3,9 @@ import { Layout } from '../components/layouts/Layout'
 import { MainTitle } from '../components/Style'
 import { getBlogLists } from '../lib/blog'
 import { BlogList } from '../components/blog/BlogList'
+import { BlogConfig } from '../models/Blog'
 
-const Blog = (props: { posts: any }) => {
+const Blog = (props: { posts: BlogConfig[] }) => {
   return (
     <Layout>
       <MainTitle>Blog</MainTitle>

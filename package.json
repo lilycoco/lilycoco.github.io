@@ -19,7 +19,6 @@
     "@types/node": "12.0.10",
     "@types/react": "16.8.22",
     "@types/react-dom": "16.8.4",
-    "@zeit/next-sass": "^1.0.1",
     "@zeit/next-typescript": "^1.1.1",
     "bootstrap": "^4.3.1",
     "css-loader": "^1.0.0",
@@ -30,7 +29,6 @@
     "markdown-it-highlightjs": "^3.0.0",
     "moment": "^2.24.0",
     "next": "^8.1.0",
-    "node-sass": "^4.12.0",
     "react": "^16.8.6",
     "react-bootstrap": "^1.0.0-beta.10",
     "react-dom": "^16.8.6",
@@ -85,8 +83,5 @@
   },
   "_moduleAliases": {
     "~": "src"
-  },
-  "node": {
-    "fs": "empty"
   }
 }
