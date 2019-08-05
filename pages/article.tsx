@@ -8,7 +8,7 @@ import fm from 'front-matter'
 
 const Article = (props: any) => (
   <Layout>
-    <MainTitle>My Blog</MainTitle>
+    <MainTitle>Blog</MainTitle>
     <ArticleContainer posts={props} />
   </Layout>
 )

@@ -1,9 +1,10 @@
+/* eslint-disable @typescript-eslint/no-var-requires */
 /* eslint-disable prettier/prettier */
-// eslint-disable-next-line @typescript-eslint/no-var-requires
 const withTypescript = require('@zeit/next-typescript')
-const withMDX = require('@next/mdx')({
-  extension: /\.(md|mdx)$/,
-})
+const withSass = require('@zeit/next-sass')
+// const withMDX = require('@next/mdx')({
+//   extension: /\.(md|mdx)$/,
+// })
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const fs = require('fs');
 
@@ -23,12 +24,13 @@ const getRoutes = async () => {
   }, pathMap);
 };
 
-
-module.exports = withMDX(
-  withTypescript({
+module.exports = 
+withTypescript(
+  withSass({
     poweredByHeader: false,
-    pageExtensions: ['js','jsx','ts', 'tsx', 'md', 'mdx'],
+    pageExtensions: ['js','jsx','ts', 'tsx'],
     exportPathMap: getRoutes,
+    cssModules: true,
     webpack: (config, { isServer }) => {
       // Fixes npm packages that depend on `fs` module
       if (!isServer) {
@@ -37,7 +39,7 @@ module.exports = withMDX(
         }
       }
       return config
-    }
+    },
   })
 );
 

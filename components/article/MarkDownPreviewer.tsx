@@ -3,8 +3,7 @@ import moment from 'moment'
 import MarkdownIt from 'markdown-it'
 import { Divider } from '../Style'
 
-/* eslint-disable @typescript-eslint/no-var-requires */
-/* eslint-disable prettier/prettier */
+// eslint-disable-next-line @typescript-eslint/no-var-requires
 const hightlightPlugin = require('markdown-it-highlightjs')
 const md = MarkdownIt({ linkify: true }).use(hightlightPlugin)
 

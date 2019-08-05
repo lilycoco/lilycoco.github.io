@@ -34,6 +34,10 @@ export default class MyDocument extends Document {
             rel='stylesheet'
             href='https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css'
           />
+          <link
+            rel='stylesheet'
+            href='//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/styles/default.min.css'
+          />
         </Head>
         <body>
           <Main />

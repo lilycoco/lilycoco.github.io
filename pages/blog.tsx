@@ -7,7 +7,7 @@ import { BlogList } from '../components/blog/BlogList'
 const Blog = (props: { posts: any }) => {
   return (
     <Layout>
-      <MainTitle>My Blog</MainTitle>
+      <MainTitle>Blog</MainTitle>
       <BlogList posts={props.posts} />
     </Layout>
   )
