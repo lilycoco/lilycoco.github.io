@@ -1,7 +1,6 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 /* eslint-disable prettier/prettier */
 const withTypescript = require('@zeit/next-typescript')
-const withSass = require('@zeit/next-sass')
 // const withMDX = require('@next/mdx')({
 //   extension: /\.(md|mdx)$/,
 // })
@@ -25,8 +24,7 @@ const getRoutes = async () => {
 };
 
 module.exports = 
-withTypescript(
-  withSass({
+  withTypescript({
     poweredByHeader: false,
     pageExtensions: ['js','jsx','ts', 'tsx'],
     exportPathMap: getRoutes,
@@ -41,5 +39,4 @@ withTypescript(
       return config
     },
   })
-);
 

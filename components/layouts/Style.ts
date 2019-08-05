@@ -16,7 +16,7 @@ export const Span = styled.span`
   padding-right: 3px;
 `
 export const MainContent = styled.main`
-  padding: 75px 24px 30px;
+  // padding: 75px 24px 30px;
 `
 export const FooterWrapper = styled.div`
   text-align: center;

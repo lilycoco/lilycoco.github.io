@@ -2,21 +2,13 @@ import React from 'react'
 import { Header } from './header/Header'
 import { MainContent } from './Style'
 import { Footer } from './footer/Footer'
-interface LayoutProps {
-  children: React.ReactNode
-}
+import { LayoutProps } from '../../models/Layouts'
 
 export const Layout = ({ children }: LayoutProps) => (
+  // export const Layout: React.SFC<LayoutProps> = ({ children }) => (
   <div>
     <Header />
     <MainContent>{children}</MainContent>
     <Footer />
   </div>
 )
-
-// export const Layout: React.SFC<LayoutProps> = ({ children }) => (
-//   <div>
-//     <Header />
-//     <MainContent>{children}</MainContent>
-//   </div>
-// )
