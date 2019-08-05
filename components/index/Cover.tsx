@@ -1,10 +1,10 @@
-import { CoverImage } from './Style'
+import { JumboTron, CoverImage, JumboTronHeading, JumboTronContainer } from './Style'
 
 export const Cover = () => (
   <CoverImage>
-    <section className='jumbotron text-center'>
-      <div className='container'>
-        <h1 className='jumbotron-heading'>Welcome to my page!</h1>
+    <JumboTron className='jumbotron text-center'>
+      <JumboTronContainer className='container'>
+        <JumboTronHeading className='jumbotron-heading'>Welcome to my page!</JumboTronHeading>
         <p className='lead'>
           This is Lilycoco's website, who is a React.js, Node.js and TypeScript developer.
         </p>
@@ -13,17 +13,10 @@ export const Cover = () => (
             Explore More
           </a>
         </p>
-      </div>
-    </section>
+      </JumboTronContainer>
+    </JumboTron>
     <style>
       {`
-    .jumbotron {
-      padding-top: 3rem;
-      padding-bottom: 3rem;
-      margin-bottom: 0;
-      background: rgba(255, 255, 255, 0.3);
-      border-radius:0;
-    }
     @media (min-width: 768px) {
       .jumbotron {
         padding-top: 6rem;
@@ -32,13 +25,6 @@ export const Cover = () => (
     }
     .jumbotron p:last-child {
       margin-bottom: 0;
-    }
-    .jumbotron-heading {
-      font-weight: 400;
-    }
-    .jumbotron .container {
-      max-width: 40rem;
-      color: #1e376d;
     }
     `}
     </style>

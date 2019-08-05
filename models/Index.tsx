@@ -7,6 +7,7 @@ export interface ProductConstructor {
   heart: number
   like: number
   iconImg: string
+  date: string
 }
 
 export interface ProductConfig {

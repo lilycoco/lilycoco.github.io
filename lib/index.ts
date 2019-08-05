@@ -11,6 +11,7 @@ const productList: ProductConstructor[] = [
     heart: 0,
     like: 0,
     iconImg: '/static/icon/invaders.png',
+    date: '20180801',
   },
   {
     id: 1,
@@ -22,6 +23,7 @@ const productList: ProductConstructor[] = [
     heart: 0,
     like: 0,
     iconImg: '/static/icon/tetris3.png',
+    date: '20181001',
   },
   {
     id: 2,
@@ -33,6 +35,7 @@ const productList: ProductConstructor[] = [
     heart: 0,
     like: 0,
     iconImg: '/static/icon/bomb.png',
+    date: '20190201',
   },
   {
     id: 3,
@@ -43,6 +46,7 @@ const productList: ProductConstructor[] = [
     heart: 0,
     like: 0,
     iconImg: '/static/icon/tictac.png',
+    date: '20190701',
   },
   {
     id: 4,
@@ -53,6 +57,7 @@ const productList: ProductConstructor[] = [
     heart: 0,
     like: 0,
     iconImg: '/static/icon/tetris.png',
+    date: '20190801',
   },
 ]
 
