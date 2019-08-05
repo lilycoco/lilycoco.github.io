@@ -1,7 +1,7 @@
 import * as React from 'react'
 import { useState } from 'react'
 import Link from 'next/link'
-import { Card, CardColumns } from 'react-bootstrap'
+import { Card } from 'react-bootstrap'
 import { reversedProductList, addPoint } from '../../lib/home'
 import { btnStyle } from '../../style/Home'
 import { ProductConstructor } from '../../models/Home'
@@ -19,25 +19,32 @@ export const ProductCard = () => {
     />
   )
   return (
-    <CardColumns>
-      {content.map((item) => (
-        <Card key={item.id} style={{ width: '18rem' }} bg='light'>
-          <Card.Img variant='top' src={item.imgSrc} />
-          <Card.Body>
-            <Card.Title>{item.name}</Card.Title>
-            <Card.Text>{item.text}</Card.Text>
-            <BtnWrapper>
-              {renderLikeButton('like', item)}
-              {renderLikeButton('heart', item)}
-              <Link href={item.url}>
-                <a className='btn btn-primary' style={btnStyle}>
-                  Play
-                </a>
-              </Link>
-            </BtnWrapper>
-          </Card.Body>
-        </Card>
-      ))}
-    </CardColumns>
+    <div className='album py-5 bg-light'>
+      <div className='container'>
+        <div className='row'>
+          {content.map((item) => (
+            <div key={item.id} className='col-md-4'>
+              <div className='card mb-4 shadow-sm'>
+                <Card.Img variant='top' src={item.imgSrc} />
+                <Card.Body>
+                  <Card.Title>{item.name}</Card.Title>
+                  <Card.Text>{item.text}</Card.Text>
+                  <BtnWrapper>
+                    {renderLikeButton('like', item)}
+                    {renderLikeButton('heart', item)}
+                    <Link href={item.url}>
+                      <a className='btn btn-primary' style={btnStyle}>
+                        Play
+                      </a>
+                    </Link>
+                  </BtnWrapper>
+                  <small className='text-muted'>9 mins</small>
+                </Card.Body>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
   )
 }

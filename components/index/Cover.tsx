@@ -14,8 +14,9 @@ export const Cover = () => (
           </a>
         </p>
       </div>
-      <style>
-        {`
+    </section>
+    <style>
+      {`
     .jumbotron {
       padding-top: 3rem;
       padding-bottom: 3rem;
@@ -40,7 +41,6 @@ export const Cover = () => (
       color: #1e376d;
     }
     `}
-      </style>
-    </section>
+    </style>
   </CoverImage>
 )

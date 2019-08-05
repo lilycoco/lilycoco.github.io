@@ -39,6 +39,7 @@ export const Text = styled.div`
 export const BtnWrapper = styled.div`
   display: flex;
   align-items: center;
+  justify-content: between;
 `
 export const IconWrapper = styled.div`
   display: flex;
