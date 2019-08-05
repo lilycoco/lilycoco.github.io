@@ -5,7 +5,7 @@ import { NavberCollapse } from './NavberCollapse'
 
 export const Header = () => (
   <Navbar bg='light' expand='lg' variant='light'>
-    <Navbar.Brand href='/home' style={navStyle}>
+    <Navbar.Brand href='/' style={navStyle}>
       <Span>
         <Icon src='/static/icon/water_lily.png' />
       </Span>

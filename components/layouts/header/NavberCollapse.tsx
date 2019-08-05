@@ -1,13 +1,13 @@
 import { Navbar, Nav, NavDropdown } from 'react-bootstrap'
 import { navStyle } from '../../../style/Header'
-import { reversedProductList } from '../../../lib/home'
+import { reversedProductList } from '../../../lib/index'
 import { SocialIcon } from './SocialIcon'
 import { NavIcon } from '../Style'
 
 export const NavberCollapse = () => (
   <Navbar.Collapse id='basic-navbar-nav'>
     <Nav className='mr-auto' style={navStyle}>
-      <Nav.Link href='/home'>Home</Nav.Link>
+      <Nav.Link href='/'>Home</Nav.Link>
       <Nav.Link href='/blog'>Blog</Nav.Link>
       <NavDropdown title='Play Game' id='basic-nav-dropdown' style={navStyle}>
         {reversedProductList.map((column) => (

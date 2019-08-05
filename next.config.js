@@ -10,7 +10,6 @@ const fs = require('fs');
 const getRoutes = async () => {
   const pathMap = {
     '/': { page: '/' },
-    '/home': { page: '/home' },
     '/blog': { page: '/blog' },
     '/tetris': { page: '/tetris' },
     '/tictac': { page: '/tictac' },

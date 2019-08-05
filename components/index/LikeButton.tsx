@@ -1,6 +1,6 @@
 import { IconWrapper, Icon, Num } from './Style'
-import { ProductConfig } from '../../models/Home'
-import { countLikePoint } from '../../lib/home'
+import { ProductConfig } from '../../models/Index'
+import { countLikePoint } from '../../lib/index'
 
 export const LikeButton = ({ item, icon, onClick }: ProductConfig) => (
   <IconWrapper onClick={() => onClick(icon, item.id)}>

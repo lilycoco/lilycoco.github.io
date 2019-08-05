@@ -9,7 +9,7 @@ export const Cover = () => (
           This is Lilycoco's website, who is a React.js, Node.js and TypeScript developer.
         </p>
         <p>
-          <a href='/home' className='btn btn-primary my-2'>
+          <a href='/index' className='btn btn-primary my-2'>
             Explore More
           </a>
         </p>
@@ -34,7 +34,7 @@ export const Cover = () => (
       margin-bottom: 0;
     }
     .jumbotron-heading {
-      font-weight: 300;
+      font-weight: 400;
     }
     .jumbotron .container {
       max-width: 40rem;

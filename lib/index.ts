@@ -1,4 +1,4 @@
-import { ProductConstructor } from '../models/Home'
+import { ProductConstructor } from '../models/Index'
 
 const productList: ProductConstructor[] = [
   {
