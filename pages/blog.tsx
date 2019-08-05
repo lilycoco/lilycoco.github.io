@@ -1,8 +1,8 @@
 import * as React from 'react'
 import { Layout } from '../components/layouts/Layout'
 import { MainTitle } from '../components/Style'
-import { BlogList } from '../components/blog/BlogList'
 import { getBlogLists } from '../lib/blog'
+import { BlogList } from '../components/blog/BlogList'
 
 const Blog = (props: { posts: any }) => {
   return (

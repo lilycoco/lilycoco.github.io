@@ -27,7 +27,7 @@ const getRoutes = async () => {
 module.exports = withMDX(
   withTypescript({
     poweredByHeader: false,
-    pageExtensions: ['ts', 'tsx', 'md', 'mdx'],
+    pageExtensions: ['js','jsx','ts', 'tsx', 'md', 'mdx'],
     exportPathMap: getRoutes,
     webpack: (config, { isServer }) => {
       // Fixes npm packages that depend on `fs` module

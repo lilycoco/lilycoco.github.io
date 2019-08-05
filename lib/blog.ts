@@ -16,12 +16,12 @@ const readFile = (path: string, opts = 'utf8') => {
 }
 
 const getBlogListsFromFs = async () => {
-  const json: any = await readFile('./static/blog.json')
+  const json: any = await readFile('static/blog.json')
   return JSON.parse(json)
 }
 
 const getBlogListsFromServer = async () => {
-  const res = await fetch('./static/blog.json')
+  const res = await fetch('/static/blog.json')
   return await res.json()
 }
 

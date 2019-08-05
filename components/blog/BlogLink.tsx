@@ -1,6 +1,6 @@
 import Link from 'next/link'
 import moment from 'moment'
-import { BlogTitle, Year } from './Style'
+import { BlogTitle, Year, Border } from './Style'
 
 export const BlogLink = (props: { post: any; prev: any }) => {
   const { post, prev } = props
@@ -12,10 +12,9 @@ export const BlogLink = (props: { post: any; prev: any }) => {
         year !== prevYear ? (
           <div>
             <Year className='code'>{year}</Year>
-            <div style={{ border: 'solid 0.5px #6e6e6e' }} />
+            <Border />
           </div>
         ) : null)()}
-
       <BlogTitle>
         <div className='title'>
           <Link as={'/blog/' + post.href} href={`/article?id=${post.href}`}>

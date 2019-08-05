@@ -1,30 +1,19 @@
 import * as React from 'react'
-import { useState, useEffect } from 'react'
 import moment from 'moment'
-import Link from 'next/link'
-import { BackButton, ArticleWrapper } from './Style'
+import MarkdownIt from 'markdown-it'
 
-export const MarkDownPreviewer = ({ posts }: any) => {
-  const [BlogArticle, setBlogArticle] = useState(<div></div>)
-  useEffect(() => {
-    setBlogArticle(require('../../static/blog/' + posts.fname).default)
-  }, [])
+/* eslint-disable @typescript-eslint/no-var-requires */
+/* eslint-disable prettier/prettier */
+const hightlightPlugin = require('markdown-it-highlightjs')
+const md = MarkdownIt({ linkify: true }).use(hightlightPlugin)
 
-  return (
-    <ArticleWrapper>
-      <article className='post'>
-        <div className='center'>
-          <h1>{posts.title}</h1>
-          <time className='code'>{moment(posts.date).format('MMMM DD, Y')}</time>
-        </div>
-        <div className='divider'></div>
-        {BlogArticle}
-      </article>
-      <BackButton className='page-navigation code'>
-        <Link href='/blog'>
-          <a title='back to index'>Back</a>
-        </Link>
-      </BackButton>
-    </ArticleWrapper>
-  )
-}
+export const MarkDownPreviewer = ({ posts }: any) => (
+  <article className='post'>
+    <div className='center'>
+      <h1>{posts.title}</h1>
+      <time className='code'>{moment(posts.date).format('MMMM DD, Y')}</time>
+    </div>
+    <div className='divider'></div>
+    <div className='markdown' dangerouslySetInnerHTML={{ __html: md.render(posts.html) }} />
+  </article>
+)
