@@ -1,6 +1,7 @@
 import Link from 'next/link'
 import moment from 'moment'
-import { BlogTitle, Year, Border } from './Style'
+import { BlogTitle, Year } from './Style'
+import { Divider } from '../Style'
 
 export const BlogLink = (props: { post: any; prev: any }) => {
   const { post, prev } = props
@@ -12,7 +13,7 @@ export const BlogLink = (props: { post: any; prev: any }) => {
         year !== prevYear ? (
           <div>
             <Year className='code'>{year}</Year>
-            <Border />
+            <Divider />
           </div>
         ) : null)()}
       <BlogTitle>

@@ -9,3 +9,7 @@ export const MainContents = styled.div`
   max-width: 500px;
   margin: 0 auto;
 `
+export const Divider = styled.div`
+  border: solid 0.5px #6e6e6e;
+  margin: 10px 0 30px 0;
+`

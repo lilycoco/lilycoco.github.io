@@ -1,6 +1,7 @@
 import * as React from 'react'
 import moment from 'moment'
 import MarkdownIt from 'markdown-it'
+import { Divider } from '../Style'
 
 /* eslint-disable @typescript-eslint/no-var-requires */
 /* eslint-disable prettier/prettier */
@@ -13,7 +14,7 @@ export const MarkDownPreviewer = ({ posts }: any) => (
       <h1>{posts.title}</h1>
       <time className='code'>{moment(posts.date).format('MMMM DD, Y')}</time>
     </div>
-    <div className='divider'></div>
+    <Divider />
     <div className='markdown' dangerouslySetInnerHTML={{ __html: md.render(posts.html) }} />
   </article>
 )
