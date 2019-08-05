@@ -4,9 +4,9 @@ import Link from 'next/link'
 import { MarkDownPreviewer } from './MarkDownPreviewer'
 import { BlogContent } from '../../models/Blog'
 
-export const ArticleContainer = (props: { posts: BlogContent }) => (
+export const ArticleContainer = ({ posts }: { posts: BlogContent }) => (
   <ArticleWrapper>
-    <MarkDownPreviewer posts={props.posts} />
+    <MarkDownPreviewer posts={posts} />
     <BackButton className='page-navigation code'>
       <Link href='/blog'>
         <a title='back to index'>Back</a>

@@ -5,10 +5,10 @@ import { getBlogLists } from '../lib/blog'
 import { BlogList } from '../components/blog/BlogList'
 import { BlogConfig } from '../models/Blog'
 
-const Blog = (props: { posts: BlogConfig[] }) => (
+const Blog = ({ posts }: { posts: BlogConfig[] }) => (
   <Layout>
     <MainTitle>Blog</MainTitle>
-    <BlogList posts={props.posts} />
+    <BlogList posts={posts} />
   </Layout>
 )
 

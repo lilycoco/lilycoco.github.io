@@ -14,8 +14,8 @@ const Article = (props: BlogContent) => (
   </Layout>
 )
 
-const getInitialProps = async (props: { query: { id: string } }) => {
-  const fname = `${props.query.id}.md`
+const getInitialProps = async ({ query }: { query: { id: string } }) => {
+  const fname = `${query.id}.md`
   const post: any = await getBlogContent(fname)
   const meta: BlogFrontMatterResult<any> = fm(post)
   return {

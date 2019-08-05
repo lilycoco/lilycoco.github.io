@@ -8,3 +8,9 @@ export interface ProductConstructor {
   like: number
   iconImg: string
 }
+
+export interface ProductConfig {
+  item: ProductConstructor
+  icon?: any | string
+  onClick: (icon: string, id: number) => void
+}

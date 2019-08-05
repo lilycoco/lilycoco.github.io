@@ -8,13 +8,11 @@ import { BlogContent } from '../../models/Blog'
 const hightlightPlugin = require('markdown-it-highlightjs')
 const md = MarkdownIt({ linkify: true }).use(hightlightPlugin)
 
-export const MarkDownPreviewer = (props: { posts: BlogContent }) => (
+export const MarkDownPreviewer = ({ posts }: { posts: BlogContent }) => (
   <article className='post'>
-    <div className='center'>
-      <h1>{props.posts.title}</h1>
-      <time className='code'>{moment(props.posts.date).format('MMMM DD, Y')}</time>
-    </div>
+    <h1>{posts.title}</h1>
+    <time className='code'>{moment(posts.date).format('MMMM DD, Y')}</time>
     <Divider />
-    <div className='markdown' dangerouslySetInnerHTML={{ __html: md.render(props.posts.html) }} />
+    <div className='markdown' dangerouslySetInnerHTML={{ __html: md.render(posts.html) }} />
   </article>
 )

@@ -19,7 +19,7 @@ const Timer = (currentDate: number, winner: WinnerCondition | null) => {
   return date
 }
 
-export const Clock = (props: { winner: WinnerCondition | null }) => {
-  const timer = Timer(0, props.winner)
+export const Clock = ({ winner }: { winner: WinnerCondition | null }) => {
+  const timer = Timer(0, winner)
   return <h4> {timer} sec </h4>
 }

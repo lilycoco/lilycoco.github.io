@@ -10,11 +10,9 @@ export const CoverImage = () => (
         <Text>
           This is Lilycoco's website, who is a React.js, Node.js and TypeScript developer.
         </Text>
-        <p>
-          <Link href='/home'>
-            <Button variant='primary'>Explore More</Button>
-          </Link>
-        </p>
+        <Link href='/home'>
+          <Button variant='primary'>Explore More</Button>
+        </Link>
       </TytleWrapper>
     </Opacity>
   </Cover>
