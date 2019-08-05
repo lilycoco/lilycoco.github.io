@@ -15,9 +15,7 @@ export const NavIcon = styled.img`
 export const Span = styled.span`
   padding-right: 3px;
 `
-export const MainContent = styled.main`
-  // padding: 75px 24px 30px;
-`
+export const MainContent = styled.main``
 export const FooterWrapper = styled.div`
   text-align: center;
   max-width: 500px;
