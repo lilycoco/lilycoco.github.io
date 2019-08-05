@@ -13,11 +13,9 @@ const Timer = (currentDate: number, winner: WinnerCondition | null) => {
       clearInterval(timerID)
     }
   })
-
   if (winner) {
     clearInterval(timerID)
   }
-
   return date
 }
 

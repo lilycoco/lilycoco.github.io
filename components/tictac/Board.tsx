@@ -17,20 +17,18 @@ export const Board = (props: {
 
   return (
     <BoardWrapper className='game-board'>
-      <div>
-        {[0, 3, 6].map((line) => (
-          <BoardRow key={line}>
-            {[line, line + 1, line + 2].map((block) => (
-              <Square
-                key={block}
-                value={props.squares[block]}
-                onClick={() => props.onClick(block)}
-                className={win(block)}
-              />
-            ))}
-          </BoardRow>
-        ))}
-      </div>
+      {[0, 3, 6].map((line) => (
+        <BoardRow key={line}>
+          {[line, line + 1, line + 2].map((block) => (
+            <Square
+              key={block}
+              value={props.squares[block]}
+              onClick={() => props.onClick(block)}
+              className={win(block)}
+            />
+          ))}
+        </BoardRow>
+      ))}
     </BoardWrapper>
   )
 }

@@ -1,4 +1,4 @@
-import { WinnerCondition, SwichButtonConfig } from '../models/Tictac'
+import { WinnerCondition, ButtonsConfig } from '../models/Tictac'
 
 export const calculateWinner = (squares: string[]): WinnerCondition | null => {
   const lines = [
@@ -16,7 +16,7 @@ export const calculateWinner = (squares: string[]): WinnerCondition | null => {
   )
   return line ? { mark: squares[line[0]], numbers: line } : null
 }
-export const judgeGameStatus = (props: SwichButtonConfig) =>
+export const judgeGameStatus = (props: ButtonsConfig) =>
   props.winner
     ? 'Winner: ' + props.winner.mark
     : props.stepNumber < 9

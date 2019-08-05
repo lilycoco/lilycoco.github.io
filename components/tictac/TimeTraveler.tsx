@@ -1,11 +1,7 @@
 import { StepButton } from './Style'
+import { TimeTravelersConfig } from '../../models/Tictac'
 
-export const Moves = (props: {
-  onClick: (step: number) => void
-  histories: { [key: string]: string[] }[]
-  asc: boolean
-  stepNumber: number
-}) => {
+export const TimeTraveler = (props: TimeTravelersConfig) => {
   const key = [...props.histories.keys()]
   return (
     <ol>

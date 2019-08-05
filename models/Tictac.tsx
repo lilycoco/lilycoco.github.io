@@ -1,15 +1,9 @@
-export interface EProps {
-  className: string | null
-  onClick: React.MouseEventHandler
-  value: string
-}
-
 export interface WinnerCondition {
   mark: string
   numbers: number[]
 }
 
-export interface SwichButtonConfig {
+export interface ButtonsConfig {
   onClick: () => void
   histories: { [key: string]: string[] }[]
   asc: boolean
@@ -17,4 +11,11 @@ export interface SwichButtonConfig {
   stepNumber: number
   xIsNext: boolean
   jump: (step: number) => void
+}
+
+export interface TimeTravelersConfig {
+  onClick: (step: number) => void
+  histories: { [key: string]: string[] }[]
+  asc: boolean
+  stepNumber: number
 }

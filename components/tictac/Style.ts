@@ -37,6 +37,6 @@ export const SquareButton = styled.button<{
 export const GameWrapper = styled.div`
   display: flex;
 `
-export const SwitchButtonWrapper = styled.div`
+export const ButtonWrapper = styled.div`
   margin: 0 30px;
 `
