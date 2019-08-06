@@ -1,12 +1,14 @@
 import * as React from 'react'
 import { useState, useEffect, useRef } from 'react'
-
 import { Board } from './Board'
 import { GameOverSign } from './GameOverSign'
-import { BoardArea } from './Style'
+import { BoardArea, blockColors } from './Style'
 import { Buttons } from './Buttons'
+import { MainContents } from '../Style'
 import {
   blockShape,
+  aBlock,
+  initialX,
   initialBoard,
   addNewBlockToBoard,
   deleteALineOfBlockOnBoard,
@@ -18,17 +20,16 @@ export const Game = () => {
   const [currentBlock, setCurrentBlock] = useState({ color: 1, shape: 0 })
   const [running, setRunning] = useState(false)
   const [currentBlockPosition, setCurrentBlockPosition] = useState({
-    x: 4,
+    x: initialX,
     y: -blockShape[currentBlock.shape].length,
   })
   const [currentBoard, setCurrentBoard] = useState(initialBoard)
   const [gameOver, setGameOver] = useState(false)
   const intervalRef = useRef()
-  const blockSize = 1
 
   const rotateCurrentBlock = () => {
-    const randomColor = Math.floor(Math.random() * 6) + 1
-    const randomShape = Math.floor(Math.random() * 27)
+    const randomColor = Math.floor(Math.random() * blockColors.length) + 1
+    const randomShape = Math.floor(Math.random() * (blockShape.length - 1))
     setCurrentBlock({ color: randomColor, shape: randomShape })
   }
 
@@ -45,19 +46,19 @@ export const Game = () => {
       case 'ArrowDown':
         setCurrentBlockPosition((p) => ({
           ...p,
-          y: canGoForward(p.y, key) ? p.y + blockSize : p.y,
+          y: canGoForward(p.y, key) ? p.y + aBlock : p.y,
         }))
         break
       case 'ArrowRight':
         setCurrentBlockPosition((p) => ({
           ...p,
-          x: canGoForward(p.x, key) ? p.x + blockSize : p.x,
+          x: canGoForward(p.x, key) ? p.x + aBlock : p.x,
         }))
         break
       case 'ArrowLeft':
         setCurrentBlockPosition((p) => ({
           ...p,
-          x: canGoForward(p.x, key) ? p.x - blockSize : p.x,
+          x: canGoForward(p.x, key) ? p.x - aBlock : p.x,
         }))
         break
       case 'ArrowUp':
@@ -75,14 +76,14 @@ export const Game = () => {
         setRunning(false)
       }
       if (canGoForward(currentBlockPosition.y, 'ArrowDown')) {
-        setCurrentBlockPosition((p) => ({ ...p, y: p.y + blockSize }))
+        setCurrentBlockPosition((p) => ({ ...p, y: p.y + aBlock }))
       } else {
         if (deletedALineOfBlockBoard) {
           setCurrentBoard(deletedALineOfBlockBoard)
         } else {
           setCurrentBoard(addedNewBlockBoard())
         }
-        setCurrentBlockPosition({ x: 4, y: 0 })
+        setCurrentBlockPosition({ x: initialX, y: 0 })
         rotateCurrentBlock()
       }
     }
@@ -108,16 +109,16 @@ export const Game = () => {
     setRunning(false)
     setGameOver(false)
     setCurrentBoard(initialBoard)
-    setCurrentBlockPosition({ x: 4, y: -blockShape[currentBlock.shape].length })
+    setCurrentBlockPosition({ x: initialX, y: -blockShape[currentBlock.shape].length })
   }
 
   return (
-    <div>
+    <MainContents>
       <BoardArea>
         <Board currentBoard={addedNewBlockBoard()} />
         {gameOver ? <GameOverSign /> : null}
       </BoardArea>
       <Buttons toggleRunning={toggleRunning} running={running} clearAll={clearAll} />
-    </div>
+    </MainContents>
   )
 }

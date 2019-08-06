@@ -36,7 +36,7 @@ export default class MyDocument extends Document {
           />
           <link
             rel='stylesheet'
-            href='https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css'
+            href='//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/styles/default.min.css'
           />
         </Head>
         <body>

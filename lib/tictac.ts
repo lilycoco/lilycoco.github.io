@@ -1,6 +1,6 @@
-import { WProps } from '../models/Tictac'
+import { WinnerCondition, ButtonsConfig } from '../models/Tictac'
 
-export const calculateWinner = (squares: string[]): WProps | null => {
+export const calculateWinner = (squares: string[]): WinnerCondition | null => {
   const lines = [
     [0, 1, 2],
     [3, 4, 5],
@@ -16,3 +16,9 @@ export const calculateWinner = (squares: string[]): WProps | null => {
   )
   return line ? { mark: squares[line[0]], numbers: line } : null
 }
+export const judgeGameStatus = (props: ButtonsConfig) =>
+  props.winner
+    ? 'Winner: ' + props.winner.mark
+    : props.stepNumber < 9
+    ? 'Next player: ' + (props.xIsNext ? 'X' : 'O')
+    : 'Draw'

@@ -1,33 +1,60 @@
 import styled from 'styled-components'
 
-export const Cover = styled.div`
+export const CoverImage = styled.div`
   background-image: url('/static/pic/monet_water_lilies.jpg');
-  height: 800px;
   background-position: center center;
   background-repeat: no-repeat;
   background-attachment: fixed;
+  background-position: bottom;
   background-size: cover;
 `
-export const Opacity = styled.div`
-  background: rgba(255, 255, 255, 0.3);
-  height: 800px;
+export const BtnWrapper = styled.div`
   display: flex;
-  justify-content: flex-end;
   align-items: center;
+  justify-content: between;
+  margin: 20px 0;
 `
-export const TytleWrapper = styled.div`
-  width: 600px;
+export const IconWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  cursor: pointer;
+  width: 70px;
+`
+export const Icon = styled.div<{ src: { [key: string]: string | number } }>`
+  width: 27px;
+  height: 27px;
+  display: block;
+  user-select: none;
+  background-size: cover;
+  background-image: url(${(p) =>
+    '/static/icon/' + p.src.icon + (p.src.num ? '_on.png' : '_off.png')});
+  &:hover {
+    width: 30px;
+    height: 30px;
+  }
+`
+export const Num = styled.div`
+  font-size: 23px;
   text-align: center;
-  margin: auto;
-  height: 200px;
-  color: #37548f;
+  width: 35px;
+  user-select: none;
 `
-export const Title = styled.h1`
-  font-size: 45px;
-  margin: 20px;
-  font-weight: bold;
+export const DeployDate = styled.small`
+  text-align: right;
+  display: block;
 `
-export const Text = styled.div`
-  font-size: 15px;
-  margin: 10px 0 30px;
+export const JumboTron = styled.section`
+  padding-top: 3rem;
+  padding-bottom: 3rem;
+  margin-bottom: 0;
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 0;
+`
+export const JumboTronHeading = styled.h1`
+  font-weight: 400;
+`
+export const JumboTronContainer = styled.div`
+  max-width: 40rem;
+  color: #1e376d;
 `

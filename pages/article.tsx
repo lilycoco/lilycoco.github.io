@@ -1,42 +1,29 @@
+import * as React from 'react'
+import { Layout } from '../components/layouts/Layout'
+import { MainTitle } from '../components/Style'
+import { getBlogContent } from '../lib/blog'
+import { ArticleContainer } from '../components/article/ArticleContainer'
 import { withRouter } from 'next/router'
-import { Layout } from '../components/Layout'
-import Markdown from 'react-markdown'
+import fm from 'front-matter'
+import { BlogFrontMatterResult, BlogContent } from '../models/Blog'
 
-const Article = withRouter((props: { router: { query: { id: string } } }) => (
+const Article = (props: BlogContent) => (
   <Layout>
-    {console.log(props.router)}
-    <h1>{props.router.query.id}</h1>
-    <div className='markdown'>
-      <Markdown
-        source={`
-This is our blog post.
-Yes. We can have a [link](/link).
-And we can have a title as well.
-
-### This is a title
-
-And here's the content.
-     `}
-      />
-    </div>
-    <style>{`
-      .markdown {
-        font-family: 'Arial';
-        a {
-          text-decoration: none;
-          color: blue;
-        }
-        a:hover {
-          opacity: 0.6;
-        }
-        h3 {
-          margin: 0;
-          padding: 0;
-          text-transform: uppercase;
-        }
-      }
-    `}</style>
+    <MainTitle>Blog</MainTitle>
+    <ArticleContainer posts={props} />
   </Layout>
-))
+)
 
-export default Article
+const getInitialProps = async ({ query }: { query: { id: string } }) => {
+  const fname = `${query.id}.md`
+  const post: any = await getBlogContent(fname)
+  const meta: BlogFrontMatterResult<any> = fm(post)
+  return {
+    title: meta.attributes.title,
+    date: fname.split('-')[0],
+    html: meta.body,
+  }
+}
+
+Article.getInitialProps = getInitialProps
+export default withRouter(Article)

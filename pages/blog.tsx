@@ -1,17 +1,21 @@
 import * as React from 'react'
-import { MainTitle } from '../styled/Page'
-import { Layout } from '../components/Layout'
-import { ArticleLink } from '../components/blog/ArticleLink'
+import { Layout } from '../components/layouts/Layout'
+import { MainTitle } from '../components/Style'
+import { getBlogLists } from '../lib/blog'
+import { BlogList } from '../components/blog/BlogList'
+import { BlogConfig } from '../models/Blog'
 
-export default function Blog() {
-  return (
-    <Layout>
-      <MainTitle>My Blog</MainTitle>
-      <ul>
-        <ArticleLink id={1} title='Hello Next.js' />
-        <ArticleLink id={2} title='Learn Next.js is awesome' />
-        <ArticleLink id={3} title='Deploy apps with Zeit' />
-      </ul>
-    </Layout>
-  )
+const Blog = ({ posts }: { posts: BlogConfig[] }) => (
+  <Layout>
+    <MainTitle>Blog</MainTitle>
+    <BlogList posts={posts} />
+  </Layout>
+)
+
+const getInitialProps = async () => {
+  const posts = await getBlogLists()
+  return { posts }
 }
+
+Blog.getInitialProps = getInitialProps
+export default Blog
