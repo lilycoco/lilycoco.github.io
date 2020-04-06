@@ -5,7 +5,7 @@ const productList: ProductConstructor[] = [
     id: 0,
     name: 'Space Invaders',
     text:
-      'I developed this with jQuery and Canvas over about a week, 1 months later since when I started learning programming',
+      'I developed this using jQuery and Canvas over about a week, 1 months later since when I started learning programming',
     url: '//lilycoco-spaceinvaders.netlify.com/',
     imgSrc: '/static/pic/invaders.png',
     heart: 0,
@@ -17,7 +17,7 @@ const productList: ProductConstructor[] = [
     id: 1,
     name: 'Tetris (jQuery)',
     text:
-      'Probably you know this is the Tetris which is the game used to be very popular in the world. I also created this with jQuery only',
+      'I learned a lot through developing Tetris, such as algorithm, functional, and basic design.',
     url: '//lilycoco-tetris.netlify.com/',
     imgSrc: '/static/pic/tetris.png',
     heart: 0,
@@ -40,7 +40,8 @@ const productList: ProductConstructor[] = [
   {
     id: 3,
     name: 'Tic Tac Toe',
-    text: 'It is my first product with React and TypeScript.',
+    text:
+      'Actually it was just a tutorial of React, but I added TypeScript and Hooks for practice.',
     url: '/tictac/',
     imgSrc: '/static/pic/tictac.png',
     heart: 0,
@@ -51,13 +52,26 @@ const productList: ProductConstructor[] = [
   {
     id: 4,
     name: 'Tetris (React)',
-    text: 'It is my first product with React and TypeScript.',
+    text:
+      'I redeveloped Tetris using React and TypeScript 1 year after I developed Tetris with jQuery. Found out how I was wrong before and lots of improvement.',
     url: '/tetris/',
     imgSrc: '/static/pic/tetris2.png',
     heart: 0,
     like: 0,
     iconImg: '/static/icon/tetris.png',
     date: '20190801',
+  },
+  {
+    id: 5,
+    name: 'Happy dog devices for Happy dogs',
+    text:
+      'This is my first product using Unity. I created it with amazing team mates at Gloval Game Jam 2020.',
+    url: '//josiahp.itch.io/happy-dog-devices-for-happy-dogs',
+    imgSrc: '/static/pic/happy_dog.png',
+    heart: 0,
+    like: 0,
+    iconImg: '/static/icon/happy_dog.png',
+    date: '20200201',
   },
 ]
 
