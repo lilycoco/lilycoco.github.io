@@ -36,7 +36,7 @@ export default class MyDocument extends Document {
           />
           <link
             rel='stylesheet'
-            href='//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/styles/default.min.css'
+            href='https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/styles/default.min.css'
           />
         </Head>
         <body>
