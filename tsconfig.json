@@ -1,8 +1,9 @@
 {
   "compilerOptions": {
     "baseUrl": ".",
-    "paths": { "*": ["types/*"] },
-    /* Basic Options */
+    "paths": {
+      "*": ["types/*"]
+    },
     "outDir": "./build",
     "target": "esnext",
     "incremental": true,
@@ -13,10 +14,7 @@
     "module": "esnext",
     "isolatedModules": true,
     "jsx": "preserve",
-    "noEmit": true,
     "lib": ["es2019", "dom", "dom.iterable", "esnext"],
-
-    /* Strict Type-Checking Options */
     "strict": true,
     "noImplicitAny": true,
     "strictNullChecks": true,
@@ -25,21 +23,16 @@
     "strictPropertyInitialization": true,
     "noImplicitThis": true,
     "alwaysStrict": true,
-
-    /* Additional Checks */
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true,
-
-    /* Module Resolution Options */
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
     "forceConsistentCasingInFileNames": true,
     "moduleResolution": "node",
     "resolveJsonModule": true,
-
-    /* Source Map Options */
-    "sourceMap": true
+    "sourceMap": true,
+    "noEmit": true
   },
   "exclude": ["node_modules", "next.config.js", "webpack.config.js", "out", ".next", "server.js"],
   "include": ["**/*.ts", "**/*.tsx"]

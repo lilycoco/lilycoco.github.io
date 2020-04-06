@@ -3,7 +3,6 @@ import { Layout } from '../components/layouts/Layout'
 import { MainTitle } from '../components/Style'
 import { getBlogContent } from '../lib/blog'
 import { ArticleContainer } from '../components/article/ArticleContainer'
-import { withRouter } from 'next/router'
 import fm from 'front-matter'
 import { BlogFrontMatterResult, BlogContent } from '../models/Blog'
 
@@ -26,4 +25,4 @@ const getInitialProps = async ({ query }: { query: { id: string } }) => {
 }
 
 Article.getInitialProps = getInitialProps
-export default withRouter(Article)
+export default Article
