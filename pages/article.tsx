@@ -25,4 +25,5 @@ const getInitialProps = async ({ query }: { query: { id: string } }) => {
 }
 
 Article.getInitialProps = getInitialProps
+
 export default Article
