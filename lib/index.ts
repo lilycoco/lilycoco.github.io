@@ -63,6 +63,18 @@ const productList: ProductConstructor[] = [
   },
   {
     id: 5,
+    name: 'Cup Ramen Timer',
+    text:
+      'This is a fun game to play while waiting for your cup noodles to be ready!',
+    url: '//lilycoco-minigames.netlify.app',
+    imgSrc: '/static/pic/cup_ramen.png',
+    heart: 0,
+    like: 0,
+    iconImg: '/static/icon/noodles.png',
+    date: '20191101',
+  },
+  {
+    id: 6,
     name: 'Happy dog devices for Happy dogs',
     text:
       'This is my first product using Unity. I created it with amazing team mates at Gloval Game Jam 2020.',
@@ -73,6 +85,7 @@ const productList: ProductConstructor[] = [
     iconImg: '/static/icon/balloon-dog.png',
     date: '20200201',
   },
+
 ]
 
 export const reversedProductList = productList.reverse()
