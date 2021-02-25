@@ -1,3 +1,4 @@
+import React from 'react'
 import { Layout } from '../components/layouts/Layout'
 import { MainTitle } from '../components/Style'
 import { getBlogLists } from '../lib/blog'
