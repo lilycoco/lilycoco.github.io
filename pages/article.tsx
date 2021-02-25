@@ -1,4 +1,3 @@
-import * as React from 'react'
 import { Layout } from '../components/layouts/Layout'
 import { MainTitle } from '../components/Style'
 import { getBlogContent } from '../lib/blog'

@@ -1,7 +1,6 @@
 // サーバーサイド側 (Node.js側) でのみ実行される。
 // https://nextjs.org/docs/#custom-document
 
-import React from 'react'
 import Document, { Head, Main, NextScript } from 'next/document'
 import { ServerStyleSheet } from 'styled-components'
 
