@@ -1,0 +1,11 @@
+{
+  "ignores": [
+    "bootstrap",
+    "typescript",
+    "@next/mdx",
+    "@types/jest",
+    "@types/react-dom",
+    "types/styled-jsx"
+  ],
+  "skip-missing": true
+}

@@ -70,7 +70,7 @@ const productList: ProductConstructor[] = [
     imgSrc: '/static/pic/happy_dog.png',
     heart: 0,
     like: 0,
-    iconImg: '/static/icon/happy_dog.png',
+    iconImg: '/static/icon/balloon-dog.png',
     date: '20200201',
   },
 ]
