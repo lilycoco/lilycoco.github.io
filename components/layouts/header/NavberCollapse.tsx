@@ -7,8 +7,7 @@ import { NavIcon } from '../Style'
 export const NavberCollapse = () => (
   <Navbar.Collapse id='basic-navbar-nav'>
     <Nav className='mr-auto' style={navStyle}>
-      <Nav.Link href='/'>Home</Nav.Link>
-      <Nav.Link href='/blog'>Blog</Nav.Link>
+      <Nav.Link href='https://lilycoco.hatenablog.com'>Blog</Nav.Link>
       <NavDropdown title='Play Game' id='basic-nav-dropdown' style={navStyle}>
         {reversedProductList.map((column) => (
           <NavDropdown.Item key={column.id} href={column.url}>
