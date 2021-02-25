@@ -31,8 +31,7 @@
     "forceConsistentCasingInFileNames": true,
     "moduleResolution": "node",
     "resolveJsonModule": true,
-    "sourceMap": true,
-    "noEmit": true
+    "sourceMap": true
   },
   "exclude": ["node_modules", "next.config.js", "webpack.config.js", "out", ".next", "server.js"],
   "include": ["**/*.ts", "**/*.tsx"]
