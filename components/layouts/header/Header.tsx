@@ -1,7 +1,11 @@
 import { Navbar } from "react-bootstrap";
 import { Icon, Span } from "../Style";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faGithub, faTwitter } from "@fortawesome/free-brands-svg-icons";
+import {
+  faGithub,
+  faTwitter,
+  faLinkedin,
+} from "@fortawesome/free-brands-svg-icons";
 import { Nav } from "react-bootstrap";
 
 export const Header = () => (
@@ -23,6 +27,12 @@ export const Header = () => (
         </Nav.Link>
         <Nav.Link href="https://github.com/lilycoco" target="_blank">
           <FontAwesomeIcon icon={faGithub} size="lg" />
+        </Nav.Link>
+        <Nav.Link
+          href="https://www.linkedin.com/in/ryoko-kawashima/"
+          target="_blank"
+        >
+          <FontAwesomeIcon icon={faLinkedin} size="lg" />
         </Nav.Link>
         <Nav.Link
           href="https://www.codewars.com/users/lilycoco"

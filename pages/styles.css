@@ -5,7 +5,7 @@
 body {
   font-family: Helvetica, "游ゴシック", "Yu Gothic", YuGothic, HiraKakuProN-W3,
     "メイリオ", Meiryo, sans-serif;
-  /* font-size: 14px; */
+  font-size: 0.875rem;
   color: #333;
   line-height: 1.9;
   text-align: left;

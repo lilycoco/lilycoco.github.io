@@ -5,7 +5,7 @@ const productList: ProductConstructor[] = [
     id: 0,
     name: "Space Invaders",
     text:
-      "I developed this using jQuery and Canvas over about a week, 1 months later since when I started learning programming",
+      "I developed this using jQuery and Canvas over about a week, 1 months later since when I started learning programming \n\n 私が初めて作ったゲームです。音も出ます。",
     url: "//lilycoco-spaceinvaders.netlify.com/",
     imgSrc: "/static/pic/invaders.png",
     heart: 0,
@@ -17,7 +17,7 @@ const productList: ProductConstructor[] = [
     id: 1,
     name: "Tetris (jQuery)",
     text:
-      "I learned a lot through developing Tetris, such as algorithm, functional, and basic design.",
+      "I learned a lot through developing Tetris, such as algorithm, functional, and basic design. 私にプログラミングの楽しさを教えてくれた思い出のテトリスです。",
     url: "//lilycoco-tetris.netlify.com/",
     imgSrc: "/static/pic/tetris.png",
     heart: 0,
@@ -29,7 +29,7 @@ const productList: ProductConstructor[] = [
     id: 2,
     name: "Mugen Sweeper",
     text:
-      "This is unusual minesweeper which has unlimited field and enable to play with multiple players, developed with Node.js, Nuxt.js and Vue.js",
+      "This is unusual minesweeper which has unlimited field and enable to play with multiple players, developed with Node.js, Nuxt.js and Vue.js. \n\n G's Academyの卒業制作で作成した無限に画面が広がるマインスイーパーです。",
     url: "//mugensweeper.netlify.com/",
     imgSrc: "/static/pic/mugen.png",
     heart: 0,
@@ -41,7 +41,7 @@ const productList: ProductConstructor[] = [
     id: 3,
     name: "Tic Tac Toe",
     text:
-      "Actually it was just a tutorial of React, but I added TypeScript and Hooks for practice.",
+      "Actually it was just a tutorial of React, but I added TypeScript and Hooks for practice. \n React、TypeScriptを習得するために作ったゲームです。",
     url: "/tictac/",
     imgSrc: "/static/pic/tictac.png",
     heart: 0,
@@ -53,7 +53,7 @@ const productList: ProductConstructor[] = [
     id: 4,
     name: "Tetris (React)",
     text:
-      "I redeveloped Tetris using React and TypeScript 1 year after I developed Tetris with jQuery. Found out how I was wrong before and lots of improvement.",
+      "I redeveloped Tetris using React and TypeScript 1 year after I developed Tetris with jQuery. Found out how I was wrong before and lots of improvement. \n 以前jQueryで作ったテトリスをReact, TypeScriptで書き直しました。",
     url: "/tetris/",
     imgSrc: "/static/pic/tetris2.png",
     heart: 0,
@@ -65,7 +65,7 @@ const productList: ProductConstructor[] = [
     id: 5,
     name: "Cup Ramen Timer",
     text:
-      "This is a fun game to play while waiting for your cup noodles to be ready!",
+      "This is a fun game to play while waiting for your cup noodles to be ready! \n 六本木にあるライブコーディングが楽しめるBar、Hacker's Barでアルバイトしていた時にお客さんからリクエストされて作ったスマホ用ゲームです。※商用利用でないため著作権の許可は頂いておりません。怒られたら消します。",
     url: "//lilycoco-minigames.netlify.app",
     imgSrc: "/static/pic/cup_ramen.png",
     heart: 0,
@@ -77,13 +77,25 @@ const productList: ProductConstructor[] = [
     id: 6,
     name: "Happy dog devices for Happy dogs",
     text:
-      "This is my first product using Unity. I created it with amazing team mates at Gloval Game Jam 2020.",
+      "This is my first product using Unity. I created it with amazing team mates at Gloval Game Jam 2020. \n Gloval Game Jam という国際的なゲーム開発イベントで海外のメンバーと2日間で開発したゲームです。",
     url: "//josiahp.itch.io/happy-dog-devices-for-happy-dogs",
     imgSrc: "/static/pic/happy_dog.png",
     heart: 0,
     like: 0,
     iconImg: "/static/icon/balloon-dog.png",
     date: "20200201",
+  },
+  {
+    id: 7,
+    name: "Track Test",
+    text:
+      "現在フロントエンジニアとして、エンジニアのプログラミングスキルを測るWebアプリの開発をしています。",
+    url: "//tracks.run/products/test/",
+    imgSrc: "/static/pic/track-test.png",
+    heart: 0,
+    like: 0,
+    iconImg: "/static/icon/balloon-dog.png",
+    date: "20220101",
   },
 ];
 
