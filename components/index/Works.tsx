@@ -11,16 +11,14 @@ export const Works = () => {
   return (
     <div className="">
       <Heading title="Works" id="area-works" />
-      <div className="container">
-        <div className="row">
-          {content.map((item) => (
-            <ProductCard
-              key={item.id}
-              item={item}
-              onClick={(i: string, id: number) => addedPointContent(i, id)}
-            />
-          ))}
-        </div>
+      <div className="flex flex-wrap px-40">
+        {content.map((item) => (
+          <ProductCard
+            key={item.id}
+            item={item}
+            onClick={(i: string, id: number) => addedPointContent(i, id)}
+          />
+        ))}
       </div>
     </div>
   );

@@ -1,7 +1,11 @@
-export const NavberCollapse = () => (
+export const StickyHeader = () => (
   <div
-    className="w-full justify-end text-sm gap-8 flex px-8 pt-8"
-    style={{ fontFamily: "Lato, sans-serif" }}
+    className="w-full justify-end text-sm gap-8 flex px-28 py-10 sticky top-0"
+    style={{
+      fontFamily: "Lato, sans-serif",
+      textShadow:
+        "#fff 5px 0 1px, #fff 5px 0 10px, #fff 5px 0 10px, #fff 5px 0 10px, #fff 5px 0 10px",
+    }}
   >
     <div>
       <a href="#area-about">About</a>
