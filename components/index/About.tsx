@@ -10,7 +10,8 @@ export const About = () => {
         <div className="py-2">
           <img src="/static/pic/profile-pic.jpeg" className="w-24 h-auto"></img>
         </div>
-        <div className="w-96 text-sm">
+        <div className="text-sm max-w-md">
+          <p className="pb-3">lilycoco / Ryoko</p>
           <p className="pb-3">
             Joined a credit card company as a new graduate. For about four
             years, I was engaged in a variety of work including media review,
