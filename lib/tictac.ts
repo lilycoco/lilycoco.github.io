@@ -1,4 +1,4 @@
-import { WinnerCondition, ButtonsConfig } from '../models/Tictac'
+import { WinnerCondition, ButtonsConfig } from "../models/Tictac";
 
 export const calculateWinner = (squares: string[]): WinnerCondition | null => {
   const lines = [
@@ -10,15 +10,18 @@ export const calculateWinner = (squares: string[]): WinnerCondition | null => {
     [2, 5, 8],
     [0, 4, 8],
     [2, 4, 6],
-  ]
+  ];
   const line = lines.find(
-    (i) => squares[i[0]] && squares[i[0]] === squares[i[1]] && squares[i[0]] === squares[i[2]],
-  )
-  return line ? { mark: squares[line[0]], numbers: line } : null
-}
+    (i) =>
+      squares[i[0]] &&
+      squares[i[0]] === squares[i[1]] &&
+      squares[i[0]] === squares[i[2]],
+  );
+  return line ? { mark: squares[line[0]], numbers: line } : null;
+};
 export const judgeGameStatus = (props: ButtonsConfig) =>
   props.winner
-    ? 'Winner: ' + props.winner.mark
+    ? "Winner: " + props.winner.mark
     : props.stepNumber < 9
-    ? 'Next player: ' + (props.xIsNext ? 'X' : 'O')
-    : 'Draw'
+    ? "Next player: " + (props.xIsNext ? "X" : "O")
+    : "Draw";

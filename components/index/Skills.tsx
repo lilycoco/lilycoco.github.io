@@ -4,7 +4,7 @@ import { Heading } from "./Heading";
 
 export const Skills = () => {
   return (
-    <div className="">
+    <div className="pb-32">
       <Heading title="Skills" id="area-skills" />
       <div className="flex w-full justify-center gap-10">
         <div className="text-sm text-center">

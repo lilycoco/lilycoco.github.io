@@ -1,7 +1,7 @@
-import { MainContents } from '../Style'
-import { ListWrapper } from './Style'
-import { BlogLink } from './BlogLink'
-import { BlogConfig } from '../../models/Blog'
+import { MainContents } from "../Style";
+import { ListWrapper } from "./Style";
+import { BlogLink } from "./BlogLink";
+import { BlogConfig } from "../../models/Blog";
 
 export const BlogList = ({ posts }: { posts: BlogConfig[] }) => (
   <MainContents>
@@ -11,4 +11,4 @@ export const BlogList = ({ posts }: { posts: BlogConfig[] }) => (
       ))}
     </ListWrapper>
   </MainContents>
-)
+);

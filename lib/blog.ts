@@ -1,51 +1,52 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/no-var-requires */
 /* eslint-disable prettier/prettier */
-const fs = require('fs')
+const fs = require("fs");
 
-const readFile = (path: string, opts = 'utf8') => {
+const readFile = (path: string, opts = "utf8") => {
   return new Promise((res, rej) => {
     fs.readFile(path, opts, (err: any, data: any) => {
       if (err) {
-        console.log(err)
-        rej(err)
+        console.log(err);
+        rej(err);
       } else {
-        res(data)
+        res(data);
       }
-    })
-  })
-}
+    });
+  });
+};
 
 const getBlogListsFromFs = async () => {
-  const json: any = await readFile('static/blog.json')
-  return JSON.parse(json)
-}
+  const json: any = await readFile("static/blog.json");
+  return JSON.parse(json);
+};
 
 const getBlogListsFromServer = async () => {
-  const res = await fetch('/static/blog.json')
-  return await res.json()
-}
+  const res = await fetch("/static/blog.json");
+  return await res.json();
+};
 
 export async function getBlogLists() {
-  if (typeof window !== 'undefined') {
-    return getBlogListsFromServer()
+  if (typeof window !== "undefined") {
+    return getBlogListsFromServer();
   } else {
-    return getBlogListsFromFs()
+    return getBlogListsFromFs();
   }
 }
 
 const getBlogContentFromFs = async (fname: string) => {
-  return await readFile(`static/blog/${fname}`)
-}
+  return await readFile(`static/blog/${fname}`);
+};
 
 const getBlogContentFromServer = async (fname: string) => {
-  const res = await fetch(`/static/blog/${fname}`)
-  return await res.text()
-}
+  const res = await fetch(`/static/blog/${fname}`);
+  return await res.text();
+};
 
 export async function getBlogContent(fname: string) {
-  if (typeof window !== 'undefined') {
-    return getBlogContentFromServer(fname)
+  if (typeof window !== "undefined") {
+    return getBlogContentFromServer(fname);
   } else {
-    return getBlogContentFromFs(fname)
+    return getBlogContentFromFs(fname);
   }
 }

@@ -1,3 +1,4 @@
+/* eslint-disable no-irregular-whitespace */
 import * as React from "react";
 
 import { Heading } from "./Heading";

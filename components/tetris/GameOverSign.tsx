@@ -1,3 +1,3 @@
-import { GameOverFilter } from './Style'
+import { GameOverFilter } from "./Style";
 
-export const GameOverSign = () => <GameOverFilter>Game Over</GameOverFilter>
+export const GameOverSign = () => <GameOverFilter>Game Over</GameOverFilter>;

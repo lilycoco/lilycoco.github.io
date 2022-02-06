@@ -6,6 +6,7 @@ import { About } from "../components/index/About";
 import { Skills } from "../components/index/Skills";
 import { Awords } from "../components/index/Awords";
 
+// eslint-disable-next-line @typescript-eslint/ban-types
 export default class CoverPage extends React.Component<{}> {
   public render() {
     return (

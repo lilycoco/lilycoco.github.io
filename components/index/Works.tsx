@@ -9,9 +9,9 @@ export const Works = () => {
   const addedPointContent = (icon: string, id: number) =>
     setContent(addPoint(content, icon, id));
   return (
-    <div className="">
+    <div className="pb-32">
       <Heading title="Works" id="area-works" />
-      <div className="flex flex-wrap px-40">
+      <div className="flex flex-wrap px-40 gap-8 justify-center">
         {content.map((item) => (
           <ProductCard
             key={item.id}

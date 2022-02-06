@@ -4,7 +4,7 @@ export const StickyHeader = () => (
     style={{
       fontFamily: "Lato, sans-serif",
       textShadow:
-        "#fff 5px 0 1px, #fff 5px 0 10px, #fff 5px 0 10px, #fff 5px 0 10px, #fff 5px 0 10px",
+        "#fff 5px 0 10px, #fff 5px 0 10px, #fff 5px 0 10px, #fff 5px 0 10px, #fff 5px 0 10px",
     }}
   >
     <div>
