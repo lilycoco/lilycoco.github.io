@@ -1,6 +1,6 @@
 {
   "css.validate": false,
-  "editor.formatOnSave": false,
+  // "editor.formatOnSave": false,
   "[json]": {
     "editor.formatOnSave": true
   },
@@ -8,5 +8,5 @@
     "source.fixAll.stylelint": true,
     "source.fixAll.eslint": true
   },
-  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "editor.defaultFormatter": "esbenp.prettier-vscode"
 }
