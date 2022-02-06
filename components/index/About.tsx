@@ -18,13 +18,13 @@ export const About = () => {
             sales promotion planning, and customer support. One day, while on my
             way to work, I was injured in a traffic accident which tooks five
             months for recovery and decided to live my life that I would not
-            regret no matter when I died. After that, she went to the
-            Philippines and Australia to study English for about a year. After
-            returning to Japan, I started working for a foreign PR company and
-            enrolled in a programming school, where he studied 40 hours a week
-            and graduated with the highest score in technical skills. I'm
-            currently working as a front-end engineer and product owner at
-            Givery Inc.
+            regret no matter when I died. After that, I went to the Philippines
+            and Australia to study English for about a year. After returning to
+            Japan, I started working for a foreign PR company and enrolled in a
+            programming school at the same time, then I kept studying 40 hours a
+            week for 6 months and graduated with the highest score in technical
+            skills. I'm currently working as a front-end engineer and product
+            owner at Givery Inc.
           </p>
           <p>
             新卒でクレジットカード会社へ入社。約４年間媒体の校閲、販売促進企画、カスタマーサポートなど様々な業務に従事する。ある日出勤途中に交通事故で全治5ヶ月の怪我を負い、「いつ死んでも後悔しない人生にしよう」と決意。
