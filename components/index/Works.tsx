@@ -9,7 +9,7 @@ export const Works = () => {
   const addedPointContent = (icon: string, id: number) =>
     setContent(addPoint(content, icon, id));
   return (
-    <div className="pb-32">
+    <div className="px-3 pb-32">
       <Heading title="Works" id="area-works" />
       <div className=" max-w-5xl m-auto">
         <div className="flex flex-wrap gap-10 justify-center">

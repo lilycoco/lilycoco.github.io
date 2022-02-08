@@ -6,7 +6,7 @@ import { Nav } from "react-bootstrap";
 
 export const Awords = () => {
   return (
-    <div className="pb-40">
+    <div className="px-3 pb-40">
       <Heading title="Awords" id="area-awords" />
       <div className="max-w-lg m-auto">
         <Nav.Link

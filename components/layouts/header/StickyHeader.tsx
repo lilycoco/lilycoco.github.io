@@ -1,6 +1,6 @@
 export const StickyHeader = () => (
   <div
-    className="w-full justify-end text-sm gap-8 flex px-28 py-10 sticky top-0"
+    className="w-full justify-end text-sm gap-8 flex sm:px-28 py-10 sticky top-0 flex-wrap"
     style={{
       fontFamily: "Lato, sans-serif",
       textShadow:
@@ -19,7 +19,7 @@ export const StickyHeader = () => (
     <div>
       <a href="#area-awords">Awords</a>
     </div>
-    <div>
+    <div className="pr-3">
       <a target="_blank" href="https://lilycoco.hatenablog.com">
         Blog
       </a>

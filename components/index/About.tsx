@@ -4,11 +4,14 @@ import { Heading } from "./Heading";
 
 export const About = () => {
   return (
-    <div className="pb-32 pt-20">
+    <div className="px-3 pb-32 pt-20">
       <Heading title="About" id="area-about" />
       <div className="flex w-full justify-center gap-10">
         <div className="py-2">
-          <img src="/static/pic/profile-pic.jpeg" className="w-24 h-auto"></img>
+          <img
+            src="/static/pic/profile-pic.jpeg"
+            className="w-24 h-auto min-w-[5rem]"
+          ></img>
         </div>
         <div className="text-sm max-w-md">
           <p className="pb-3">lilycoco / Ryoko</p>

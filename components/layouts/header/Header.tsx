@@ -10,10 +10,10 @@ import { Nav } from "react-bootstrap";
 
 export const Header = () => (
   <div className="w-full">
-    <div className="flex w-full justify-between pt-10 px-20">
+    <div className="flex w-full justify-between pt-10 pl-3 pr-1">
       <Navbar.Brand
         href="/"
-        className="flex items-center"
+        className="flex items-center sm:pl-20"
         style={{ fontFamily: "cursive" }}
       >
         <Span>
@@ -21,7 +21,7 @@ export const Header = () => (
         </Span>
         Lilycoco
       </Navbar.Brand>
-      <div className="flex items-center">
+      <div className="flex items-center sm:pr-20">
         <Nav.Link href="https://twitter.com/llccr27" target="_blank">
           <FontAwesomeIcon icon={faTwitter} size="lg" />
         </Nav.Link>
