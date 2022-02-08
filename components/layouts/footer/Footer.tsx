@@ -1,5 +1,5 @@
 export const Footer = () => (
-  <div className="footer w-full text-center py-8 text-xs">
+  <div className="py-8 w-full text-xs text-center">
     <span className="block">© 2022 lilycoco</span>
   </div>
 );

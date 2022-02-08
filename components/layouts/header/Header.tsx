@@ -10,7 +10,7 @@ import { Nav } from "react-bootstrap";
 
 export const Header = () => (
   <div className="w-full">
-    <div className="flex w-full justify-between pt-10 pl-3 pr-1">
+    <div className="flex justify-between pt-10 pr-1 pl-3 w-full">
       <Navbar.Brand
         href="/"
         className="flex items-center sm:pl-20"
@@ -38,7 +38,7 @@ export const Header = () => (
           href="https://www.codewars.com/users/lilycoco"
           target="_blank"
         >
-          <img src="/static/icon/codewars2.webp" className="w-5 h-5 block" />
+          <img src="/static/icon/codewars2.webp" className="block w-5 h-5" />
         </Nav.Link>
       </div>
     </div>

@@ -1,6 +1,6 @@
 export const StickyHeader = () => (
   <div
-    className="w-full justify-end text-sm gap-8 flex sm:px-28 py-10 sticky top-0 flex-wrap"
+    className="flex sticky top-0 flex-wrap gap-8 justify-end py-10 w-full text-sm sm:px-28"
     style={{
       fontFamily: "Lato, sans-serif",
       textShadow:
