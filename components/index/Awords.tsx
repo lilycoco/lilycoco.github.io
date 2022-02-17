@@ -8,9 +8,9 @@ export const Awords = () => {
   return (
     <div className="px-3 pb-40">
       <Heading title="Awords" id="area-awords" />
-      <div className="max-w-lg m-auto">
+      <div className="m-auto max-w-lg">
         <Nav.Link
-          href="https://routexstartups.com/event-report/epsonhacktrek1/"
+          href="https://routexstartups.com/event-report/epsonhacktrek1-2"
           target="_blank"
         >
           <div className="flex gap-3 pb-3 hover:underline">
