@@ -7,17 +7,15 @@ import { Skills } from "../components/index/Skills";
 import { Awords } from "../components/index/Awords";
 
 // eslint-disable-next-line @typescript-eslint/ban-types
-export default class CoverPage extends React.Component<{}> {
-  public render() {
-    return (
-      <Layout>
-        <Cover src="/static/pic/header-image.jpg" />
-        <About />
-        <Skills />
-        <Works />
-        <Awords />
-        <Cover src="/static/pic/footer-image.jpeg" />
-      </Layout>
-    );
-  }
-}
+const CoverPage: React.FC = () => (
+  <Layout>
+    <Cover src="/static/pic/header-image.jpg" />
+    <About />
+    <Skills />
+    <Works />
+    <Awords />
+    <Cover src="/static/pic/footer-image.jpeg" />
+  </Layout>
+);
+
+export default CoverPage;
